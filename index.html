@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="main.css">
         <script type="text/javascript" src="mancala.js"></script>
         <script type="text/javascript" src="play_game.js"></script>
+		<script type="text/javascript" src="body.js"></script>
 		<style type='text/css'>
             span {
                 text-decoration:underline;
@@ -51,6 +52,25 @@
 		</div>
 		<div id="Page3" class="page" style="display:none">
 			<p>Options</p>
+			<table class="options">
+				<tr>
+					<td>
+						<p>Please choose background</p>
+					</td>
+				</tr>
+				<tr>
+				<div class="back">
+					<td>
+					<a href="options.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+					<img src="optionsthumbnail.jpg" border="1"></a>
+					<a href="kitten.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+					<img src="kittenthumbnail.jpg" border="1"></a>
+					<a href="anim.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+					<img src="animthumbnail.jpg" border="1"></a>
+					</td>
+				</div>
+				</tr>
+			</table>
 		</div>
 
 		<div class="footer">
