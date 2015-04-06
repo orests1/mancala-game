@@ -1,5 +1,16 @@
 var play_game = function (game) {
     var board;
+	var myRadioValue;
+	
+	function radioValue(jqRadioButton){
+		if (jqRadioButton.length) {
+			myRadioValue = jqRadioButton.val();
+		}
+		else {
+			myRadioValue = 0;
+		}
+	}
+
 	
     var init = function () {
         board = game.init(show_turn, show_winner);
@@ -60,3 +71,12 @@ function show(elementID) {
 	// then show the requested page
 	ele.style.display = 'block';
 };
+
+
+$(document).ready(function(){
+	
+	$('input[name=Difficulty]').click(function() {
+		alert($('input[name=Difficulty]:checked').val());
+	});
+
+});
