@@ -25,7 +25,8 @@ var game = (function () {
         player,
         count,
         inc,
-        zero;
+        zero, //leaves zero beans in the clicked pot
+		getRandom;
 
     init = function (turn_cb, win_cb) {
         /*    12 11 10 9  8  7         PLAYER 1               */
@@ -51,7 +52,18 @@ var game = (function () {
             c = count(board, index),
             i = index,
             p = player(index);
+		
 
+		if (p==0 && index>P0_MANCALA) {
+			alert(p);
+			b = board;
+			return b;
+/*		} else if (p==1) {
+			alert("Wrong player");
+			b = board;
+			return b; */
+		} else {
+	
         var next_index = function (index, player) {
             var mancala = [P0_MANCALA, P1_MANCALA],
                 i = index;
@@ -82,10 +94,12 @@ var game = (function () {
         if (is_players_mancala(i,p)) {
             turn(p);
             return b;
-        };
+        }
+		
 
         turn(next_player(p));
         return b;
+		}
     };
 
     get_result = function (board) {
@@ -156,7 +170,10 @@ var game = (function () {
     };
 
     player = function (index) {
-        return (index<P0_MANCALA) ? 0 : 1;
+		if (index<P0_MANCALA) {
+			return 0;
+		} else if (index > P0_MANCALA && index < P1_MANCALA)
+			return 1;
     };
 
     count = function (board, index) {
@@ -180,4 +197,8 @@ var game = (function () {
         init: init,
         play: play
     };
+	
+	function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
 } ());
