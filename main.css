@@ -21,3 +21,8 @@ table {
 	padding:0px;
 }
 
+.options tr td {
+	padding:0px;
+	padding-right:5px;
+}
+
