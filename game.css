@@ -3,10 +3,17 @@
 }
 
 #gameboard, th, td {
+	margin-top:200px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 25px;
-	border: 2px ridge;
-	padding: 25px;
-	background-color: #AAAAAA;
+	padding: 29px;
+
 }
+
+#gameboard {
+	padding: 0px;
+	background-image: url("board.png");
+	background-repeat: no-repeat;
+}
+

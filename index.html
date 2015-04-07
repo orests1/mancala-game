@@ -3,8 +3,10 @@
     <head>
         <title>Mancala</title>
 		<link rel="stylesheet" type="text/css" href="game.css">
+		<link rel="stylesheet" type="text/css" href="main.css">
         <script type="text/javascript" src="mancala.js"></script>
         <script type="text/javascript" src="play_game.js"></script>
+		<script type="text/javascript" src="body.js"></script>
 		<style type='text/css'>
             span {
                 text-decoration:underline;
@@ -16,7 +18,7 @@
     <body>
 		
     <div class="container">    
-		
+
 		
 		
 		
@@ -49,16 +51,36 @@
 			Main Menu
 		</div>
 		<div id="Page3" class="page" style="display:none">
-			Options
+			<p>Options</p>
+			<table class="options">
+				<tr>
+					<td>
+						<p>Please choose background</p>
+					</td>
+				</tr>
+				<tr>
+				<div class="back">
+					<td>
+					<a href="options.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+					<img src="optionsthumbnail.jpg" border="1"></a>
+					<a href="kitten.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+					<img src="kittenthumbnail.jpg" border="1"></a>
+					<a href="anim.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+					<img src="animthumbnail.jpg" border="1"></a>
+					</td>
+				</div>
+				</tr>
+			</table>
 		</div>
-		
-		
+
+		<div class="footer">
 		<p>
 			
             <span onclick="show('Page1');">Game</span>, 
             <span onclick="show('Page2');">Main</span>, 
             <span onclick="show('Page3');">Options</span>.
 		</p>
+		</div>
 		
 		
 		

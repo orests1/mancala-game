@@ -1,0 +1,23 @@
+body {
+	margin-left: auto;
+	margin-right: auto;
+	background: url("options.jpg");
+	background-repeat: no-repeat;
+    background-position: top;
+}
+
+
+.footer { 
+	position:absolute;
+    width:100%;
+    bottom:0px;
+}
+
+table {
+	text-align:center;
+	margin-top: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	padding:0px;
+}
+
