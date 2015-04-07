@@ -4,6 +4,7 @@ body {
 	background: url("options.jpg");
 	background-repeat: no-repeat;
     background-position: top;
+	z-index: 0;
 }
 
 
@@ -11,14 +12,21 @@ body {
 	position:absolute;
     width:100%;
     bottom:0px;
+	text-align:center;
+}
+
+td {
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 table {
+	margin-top:50px;
 	text-align:center;
-	margin-top: 150px;
 	margin-left: auto;
 	margin-right: auto;
-	padding:0px;
+	padding-right:10px;
+	padding-left:10px;
 }
 
 .options tr td {
@@ -26,3 +34,6 @@ table {
 	padding-right:5px;
 }
 
+.page1 {
+	margin-top: 100px;
+}
