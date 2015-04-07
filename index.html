@@ -1,109 +1,448 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <title>Mancala</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="game.css">
-		<link rel="stylesheet" type="text/css" href="main.css">
-        <script type="text/javascript" src="mancala.js"></script>
-        <script type="text/javascript" src="play_game.js"></script>
-		<script type="text/javascript" src="main.js"></script>
+<head>
 
-		<style type='text/css'>
-            span {
-                text-decoration:underline;
-                color:blue;
-                cursor:pointer;
+    <meta name="description" content="Mancala is a PC-Game written in HTML and JavaScript">
+    <meta name="author" content="Lutz Tautenhahn">
+    <meta name="keywords" content="Game, Mancala, JavaScript">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Mancala</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <style type="text/css">
+        input {
+            background-color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        select {
+            background-color: #eeddaa;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    </style>
+    <script language="JavaScript">
+        var i, j, IsOver = true, I_Sel, J_Sel, N_Mov, IsStart0, Start, Size = 4, MoveCount;
+        Level = new Array(2);
+        Fld = new Array(2);
+        for (i = 0; i < 2; i++)
+            Fld[i] = new Array(7);
+        for (i = 0; i < 2; i++) {
+            for (j = 0; j < 7; j++)
+                Fld[i][j] = new Array(7);
+        }
+
+        Pic = new Array(12);
+        for (i = 0; i < 12; i++) {
+            Pic[i] = new Image();
+            Pic[i].src = i + ".png";
+        }
+
+        IsStart0 = false;
+        Level[0] = 1;
+        Level[1] = 0;
+
+        function Init() {
+            var ii, jj;
+            for (ii = 0; ii < 2; ii++) {
+                Fld[ii][0][0] = 0;
+                for (jj = 1; jj < 7; jj++)
+                    Fld[ii][jj][0] = Size;
             }
-        </style>
-	</head>
-    <body>
-		
-    <div class="container">    
+            if (IsStart0) Start = 0;
+            else Start = 1;
+            I_Sel = -1;
+            J_Sel = -1;
+            MoveCount = 0;
+            UpdateMoveCount();
+            for (ii = 0; ii < 2; ii++) {
+                for (jj = 0; jj < 7; jj++)
+                    RefreshFld(ii, jj);
+            }
+            IsMoving = false;
+            IsOver = false;
+        }
 
-		
-		
-		
-		
-		<div id="Page1" class="page" style="">
-			<h1 id="turn">Go!</h1>
-			<h1 id="results"></h1>
-			<table id="gameboard">
-				<tr>
-					<td id="cell13" rowspan="2"></td>
-					<td id="cell12"></td>
-					<td id="cell11"></td>
-					<td id="cell10"></td>
-					<td id="cell9"></td>
-					<td id="cell8"></td>
-					<td id="cell7"></td>
-					<td id="cell6" rowspan="2"></td>
-				</tr>
-				<tr>
-					<td id="cell0"></td>
-					<td id="cell1"></td>
-					<td id="cell2"></td>
-					<td id="cell3"></td>
-					<td id="cell4"></td>
-					<td id="cell5"></td>
-				</tr>
-			</table>
-		</div>
-		
-		
-		<div id="Page2" class="page" style="display:none">
-			Main Menu
-		</div>
-		
-		
-		<div id="Page3" class="page" style="display:none">
-			<p>Options</p>
-			<table class="options">
-				<tr>
-					<td>
-						<p>Background</p>
-					</td>
-				<div class="back">
-					<td>
-					<a href="options.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-					<img src="optionsthumbnail.jpg" border="1"></a>
-					<a href="kitten.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-					<img src="kittenthumbnail.jpg" border="1"></a>
-					<a href="anim.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-					<img src="animthumbnail.jpg" border="1"></a>
-					</td>
-				</div>
-				</tr>
-				<tr>
-					<td>
-						<p>Computer</p>
-					</td>
-					<td>
-						<form action="">
-							<input type="radio" name="Difficulty" value="1">Easy
-							<input type="radio" name="Difficulty" value="2">Medium
-							<input type="radio" name="Difficulty" value="3">Hard
-						</form>
-					</td>
-				</tr>
-			</table>
-		</div>
+        function SetLevel(nn, mm) {
+            Level[nn] = parseInt(mm);
+        }
 
-		<div class="footer">
-		<p>
-			
-            <span onclick="show('Page1');">Game</span>, 
-            <span onclick="show('Page2');">Main</span>, 
-            <span onclick="show('Page3');">Options</span>.
-		</p>
-		</div>
-		
-		
-		
-        <script type="text/javascript">
-			var player = play_game(game); 
-			window.onload = player.init;
-		</script>
+        function SetStart(nn) {
+            IsStart0 = 1 - nn;
+        }
+
+        function SetSize(ss) {
+            Size = parseInt(ss);
+        }
+
+        function Timer() {
+            if (IsOver) return;
+            var mmove = (MoveCount + Start) % 2;
+            if (IsMoving) {
+                if (N_Mov < 0) {
+                    N_Mov = Fld[I_Sel][J_Sel][0];
+                    Fld[I_Sel][J_Sel][0] = 0;
+                    RefreshFld(I_Sel, J_Sel);
+                    return;
+                }
+                if (N_Mov > 0) {
+                    J_Sel--;
+                    if ((J_Sel == 0) && (mmove != I_Sel)) J_Sel--;
+                    if (J_Sel < 0) { J_Sel = 6; I_Sel = 1 - I_Sel; }
+                    Fld[I_Sel][J_Sel][0]++;
+                    RefreshFld(I_Sel, J_Sel);
+                    N_Mov--;
+                    return;
+                }
+                else {
+                    if ((I_Sel == mmove) && (J_Sel == 0)) {
+                        IsMoving = false;
+                        OverTest();
+                        return;
+                    }
+                    if ((Fld[I_Sel][J_Sel][0] == 1) && (I_Sel == mmove) && (J_Sel != 0)) {
+                        Fld[I_Sel][0][0] += Fld[I_Sel][J_Sel][0] + Fld[1 - I_Sel][7 - J_Sel][0];
+                        Fld[I_Sel][J_Sel][0] = 0;
+                        Fld[1 - I_Sel][7 - J_Sel][0] = 0;
+                        RefreshFld(I_Sel, 0);
+                        RefreshFld(I_Sel, J_Sel);
+                        RefreshFld(1 - I_Sel, 7 - J_Sel);
+                        return;
+                    }
+                    MoveCount++;
+                    UpdateMoveCount();
+                    IsMoving = false;
+                    OverTest();
+                }
+                return;
+            }
+            var ll = Level[mmove] + 1;
+            if (ll > 1) GetBestMove(mmove, 1, ll);
+        }
+
+        function MakeVirtualMove(mmove, tt, kk) {
+            var ii, jj, ll, mm, nn;
+            for (ii = 0; ii < 2; ii++) {
+                for (jj = 0; jj < 7; jj++)
+                    Fld[ii][jj][tt] = Fld[ii][jj][tt - 1];
+            }
+            ii = mmove;
+            jj = kk;
+            nn = Fld[ii][jj][tt];
+            Fld[ii][jj][tt] = 0;
+            while (nn > 0) {
+                jj--;
+                if ((jj == 0) && (ii != mmove)) jj--;
+                if (jj < 0) { jj = 6; ii = 1 - ii; }
+                Fld[ii][jj][tt]++;
+                nn--;
+            }
+            if ((Fld[ii][jj][tt] == 1) && (ii == mmove) && (jj != 0)) {
+                Fld[ii][0][tt] += Fld[ii][jj][tt] + Fld[1 - ii][7 - jj][tt];
+                Fld[ii][jj][tt] = 0;
+                Fld[1 - ii][7 - jj][tt] = 0;
+            }
+            for (ll = 0; ll < 2; ll++) {
+                nn = 0;
+                for (mm = 1; mm < 7; mm++) nn += Fld[ll][mm][tt];
+                if (nn == 0) {
+                    for (mm = 1; mm < 7; mm++)
+                        Fld[1 - ll][0][tt] += Fld[1 - ll][mm][tt];
+                }
+            }
+            if ((ii == mmove) && (jj == 0)) return (1);
+            return (-1);
+        }
+
+        function GetBestMove(mmove, tt, ll) {
+            var ii, jj, jj_best, vv, vv_best = -1000, mm = mmove, mm1 = 1 - mmove, tt1 = tt + 1;
+            if (tt == ll) return (Fld[mmove][0][tt - 1] - Fld[1 - mmove][0][tt - 1] - Math.random());
+            for (jj = 1; jj < 7; jj++) {
+                if (Fld[mmove][jj][tt - 1] > 0) {
+                    if (MakeVirtualMove(mm, tt, jj) > 0)
+                        vv = GetBestMove(mm, tt1, ll);
+                    else
+                        vv = -GetBestMove(mm1, tt1, ll);
+                    if (vv_best <= vv) {
+                        vv_best = vv;
+                        jj_best = jj;
+                    }
+                }
+            }
+            if (tt > 1) {
+                if (vv_best > -1000) return (vv_best);
+                return (Fld[mmove][0][tt - 1] - Fld[1 - mmove][0][tt - 1] - Math.random());
+            }
+            I_Sel = mmove;
+            J_Sel = jj_best;
+            N_Mov = -1;
+            IsMoving = true;
+        }
+
+        function OverTest() {
+            var ii, jj, nn;
+            IsOver = false;
+            for (ii = 0; ii < 2; ii++) {
+                nn = 0;
+                for (jj = 1; jj < 7; jj++)
+                    nn += Fld[ii][jj][0];
+                if (nn == 0) IsOver = true;
+            }
+            if (!IsOver) return;
+            for (ii = 0; ii < 2; ii++) {
+                for (jj = 1; jj < 7; jj++) {
+                    Fld[ii][0][0] += Fld[ii][jj][0];
+                    Fld[ii][jj][0] = 0;
+                }
+            }
+            if (Fld[0][0][0] == Fld[1][0][0]) setTimeout("alert(\"Game over !\\nIt's a draw !\")", 100);
+            else {
+                if (Fld[0][0][0] > Fld[1][0][0])
+                    setTimeout("alert(\"Game over !\\nThe player at top has won !\")", 100);
+                else
+                    setTimeout("alert(\"Game over !\\nThe player at bottom has won !\")", 100);
+            }
+            for (ii = 0; ii < 2; ii++) {
+                for (jj = 0; jj < 7; jj++)
+                    RefreshFld(ii, jj);
+            }
+        }
+
+        function MouseDown(ii, jj) {
+            if (IsOver) return;
+            if (IsMoving) return;
+            var mmove = (MoveCount + Start) % 2;
+            if (Level[mmove] > 0) return;
+            if (mmove != ii) return;
+            if (Fld[ii][jj][0] == 0) return;
+            I_Sel = ii;
+            J_Sel = jj;
+            N_Mov = -1;
+            IsMoving = true;
+        }
+
+        function RefreshFld(ii, jj) {
+            var oo = eval("document.OptionsForm.i" + ii + jj);
+            oo.value = Fld[ii][jj][0];
+            var nn = Fld[ii][jj][0];
+            if (nn > 10) nn = 10 + nn % 2;
+            if ((ii == 0) || (jj == 0)) document.images[7 * ii + jj].src = Pic[nn].src;
+            else document.images[14 - jj].src = Pic[nn].src;
+        }
+
+        function UpdateMoveCount() {
+            if ((MoveCount + Start) % 2 == 1) {
+                document.images[14].src = Pic[0].src;
+                document.images[15].src = Pic[1].src;
+            }
+            else {
+                document.images[14].src = Pic[1].src;
+                document.images[15].src = Pic[0].src;
+            }
+        }
+
+        function Help() {
+            alert("Mancala is an ancient African game. There" +
+              "\nexist many variations with slightly different rules." +
+              "\nEach player owns the mancala on his right" +
+              "\nside and the six small bowls closest to him." +
+              "\nA player starts by taking all the beans from" +
+              "\none of his small bowls and drops one bean" +
+              "\ninto the next bowl on the right, continuing around" +
+              "\nthe board counterclockwise until he has no more" +
+              "\nbeans to drop. If a player reaches his own" +
+              "\nmancala, he drops a bean into it, but he never" +
+              "\ndrops a bean into the opponents' mancala." +
+              "\nThe player with the most beans in his mancala wins." +
+              "\nThe following are the so-called Egyptian rules:" +
+              "\nIf a player drops the last bean from his hand into his" +
+              "\nmancala, he gets to move again. If a player drops the" +
+              "\nlast bean into one of the empty bowls on his side," +
+              "\nhe takes that bean, and all the beans in the" +
+              "\nopponent's bowl directly across and puts them in" +
+              "\nhis mancala. The game ends when one player no" +
+              "\nlonger has beans in his small bowls. The other player" +
+              "\ntakes all remaining beans into his own mancala.");
+        }
+
+        function Resize() {
+            if (navigator.appName == "Netscape") history.go(0);
+        }
+    </script>
+
+
+    <style type='text/css'>
+        span {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        // show the given page, hide the rest
+        function show(elementID) {
+            // try to find the requested page and alert if it's not found
+            var ele = document.getElementById(elementID);
+            if (!ele) {
+                alert("no such element");
+                return;
+            }
+
+            // get all pages, loop through them and hide them
+            var pages = document.getElementsByClassName('page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].style.display = 'none';
+            }
+
+            // then show the requested page
+            ele.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+
+
+    <div id="Page1" class="page" style="display:none" onresize="javascript:Resize()" align=center>
+
+
+
+        <form name="OptionsForm">
+            <script language="JavaScript">
+                document.open();
+                if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) < 5))
+                    document.writeln("<table noborder><tr><td><table border cellpadding=20 cellspacing=20>");
+                else
+                    document.writeln("<table noborder><tr><td background='boarddefinitive.png'><table noborder cellpadding=5 cellspacing=2>");
+                document.close();
+            </script>
+            <tr>
+                <th width=80>&nbsp;<input name="i00" readonly size=4></th>
+                <th width=68><input name="i01" readonly size=3></th>
+                <th width=67><input name="i02" readonly size=3></th>
+                <th width=66><input name="i03" readonly size=3></th>
+                <th width=66><input name="i04" readonly size=3></th>
+                <th width=67><input name="i05" readonly size=3></th>
+                <th width=68><input name="i06" readonly size=3></th>
+
+                </th>
+            </tr>
+			    <tr class="space"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+            <tr>
+                <td rowspan=3 align=right><img src="mancala0.gif" border=0></td>
+                <td align=right><img src="mancala0.gif" border=0 onmousedown="MouseDown(0,1)"></td>
+                <td align=right><img src="mancala0.gif" border=0 onmousedown="MouseDown(0,2)"></td>
+                <td align=middle><img src="mancala0.gif" border=0 onmousedown="MouseDown(0,3)"></td>
+                <td align=middle><img src="mancala0.gif" border=0 onmousedown="MouseDown(0,4)"></td>
+                <td align=rigth><img src="mancala0.gif" border=0 onmousedown="MouseDown(0,5)"></td>
+                <td align=right><img src="mancala0.gif" border=0 onmousedown="MouseDown(0,6)"></td>
+                <td rowspan=3 align=left><img src="mancala0.gif" border=0></td>
+            </tr>
+						    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+	
+            <tr>
+                <td align=left><img src="mancala0.gif" border=0 onmousedown="MouseDown(1,6)"></td>
+                <td align=left><img src="mancala0.gif" border=0 onmousedown="MouseDown(1,5)"></td>
+                <td align=middle><img src="mancala0.gif" border=0 onmousedown="MouseDown(1,4)"></td>
+                <td align=middle><img src="mancala0.gif" border=0 onmousedown="MouseDown(1,3)"></td>
+                <td align=right><img src="mancala0.gif" border=0 onmousedown="MouseDown(1,2)"></td>
+                <td align=right><img src="mancala0.gif" border=0 onmousedown="MouseDown(1,1)"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <th>
+
+                <th><input name="i16" readonly size=3></th>
+                <th><input name="i15" readonly size=3></th>
+                <th><input name="i14" readonly size=3></th>
+                <th><input name="i13" readonly size=3></th>
+                <th><input name="i12" readonly size=3></th>
+                <th><input name="i11" readonly size=3></th>
+                <th><input name="i10" readonly size=4>&nbsp;</th>
+            </tr></table>
+            </td>
+            <td valign=middle>
+                <img src="mancala0.gif"><br><img src="mancala0.gif">
+            </td>
+            </tr>
+            </table>
+            <table noborder cellpadding=4 cellspacing=1>
+                <tr>
+
+                    <th><input type=button value="New" onclick="javascript:Init()"></th>
+                    <th><input type=button value="Help" onclick="javascript:Help()"></th>
+                </tr>
+            </table>
+        </form>
+
+
+
+
+
+
+    </div>
+
+    <div id="Page3" class="page" style="">
+        <table class="options">
+            <tr>
+                <td>
+                    <p>Background</p>
+                </td>
+                <div class="back">
+                    <td>
+                        <a href="options.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                            <img src="optionsthumbnail.jpg" border="1">
+                        </a>
+                        <a href="kitten.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                            <img src="kittenthumbnail.jpg" border="1">
+                        </a>
+                        <a href="anim.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                            <img src="animthumbnail.jpg" border="1">
+                        </a>
+                    </td>
+                </div>
+            </tr>
+            <tr>
+                <td>
+                    <p>Computer</p>
+                </td>
+                <td>
+                    <form action="">
+                        <input type="radio" name="Difficulty" value="1"checked="checked" onchange="SetLevel(1, this.options[selectedIndex].value)">Easy
+                        <input type="radio" name="Difficulty" value="3" onchange="SetLevel(1, this.options[selectedIndex].value)">Medium
+                        <input type="radio" name="Difficulty" value="5" onchange="SetLevel(1, this.options[selectedIndex].value)">Hard
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+	
+	<div class="footer">
+	    <p>
+        Show page
+        <span onclick="show('Page1');">Game</span>,
+        <span onclick="show('Page3');">Options</span>.
+    </p>
 	</div>
-	</body>
-</html>
+    <script language="JavaScript">
+	SetStart(1);
+	SetSize(4);
+	SetLevel(1,0);
+	SetLevel(0,1);
+        Init();
+        setInterval("Timer()", 100);
+    </script>
+</body>
+</html>											
