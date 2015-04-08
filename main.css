@@ -39,17 +39,14 @@ table {
 }
 
 .options td {
-	padding-left: 40px;
-	padding-right: 40px;
+
 }
 
 .avatar {
-	height: 100px;
 }
 
 .avatar img	{
 	border:solid 1px red; 
-	margin:10px;
 }
 
 .avatar .selected{
@@ -91,4 +88,8 @@ table.choose {
 #layer2 {
 	border: 1 solid;
 	border-color: black;
+}
+
+.gap {
+	width: 100px;
 }
