@@ -1,109 +1,61 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Mancala</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="game.css">
-		<link rel="stylesheet" type="text/css" href="main.css">
-        <script type="text/javascript" src="mancala.js"></script>
-        <script type="text/javascript" src="play_game.js"></script>
-		<script type="text/javascript" src="main.js"></script>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-		<style type='text/css'>
-            span {
-                text-decoration:underline;
-                color:blue;
-                cursor:pointer;
-            }
-        </style>
-	</head>
-    <body>
-		
-    <div class="container">    
+<head>
+<meta content="en-gb" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <link rel="stylesheet" type="text/css" href="main.css">
+<title>Mancala</title>
+<style type="text/css">
+.auto-style1 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.auto-style2 {
+	border-width: 0px;
+}
+</style>
+<script type="text/javascript">
+<!--
+function FP_swapImg() {//v1.0
+ var doc=document,args=arguments,elm,n; doc.$imgSwaps=new Array(); for(n=2; n<args.length;
+ n+=2) { elm=FP_getObjectByID(args[n]); if(elm) { doc.$imgSwaps[doc.$imgSwaps.length]=elm;
+ elm.$src=elm.src; elm.src=args[n+1]; } }
+}
 
-		
-		
-		
-		
-		<div id="Page1" class="page" style="">
-			<h1 id="turn">Go!</h1>
-			<h1 id="results"></h1>
-			<table id="gameboard">
-				<tr>
-					<td id="cell13" rowspan="2"></td>
-					<td id="cell12"></td>
-					<td id="cell11"></td>
-					<td id="cell10"></td>
-					<td id="cell9"></td>
-					<td id="cell8"></td>
-					<td id="cell7"></td>
-					<td id="cell6" rowspan="2"></td>
-				</tr>
-				<tr>
-					<td id="cell0"></td>
-					<td id="cell1"></td>
-					<td id="cell2"></td>
-					<td id="cell3"></td>
-					<td id="cell4"></td>
-					<td id="cell5"></td>
-				</tr>
-			</table>
-		</div>
-		
-		
-		<div id="Page2" class="page" style="display:none">
-			Main Menu
-		</div>
-		
-		
-		<div id="Page3" class="page" style="display:none">
-			<p>Options</p>
-			<table class="options">
-				<tr>
-					<td>
-						<p>Background</p>
-					</td>
-				<div class="back">
-					<td>
-					<a href="options.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-					<img src="optionsthumbnail.jpg" border="1"></a>
-					<a href="kitten.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-					<img src="kittenthumbnail.jpg" border="1"></a>
-					<a href="anim.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-					<img src="animthumbnail.jpg" border="1"></a>
-					</td>
-				</div>
-				</tr>
-				<tr>
-					<td>
-						<p>Computer</p>
-					</td>
-					<td>
-						<form action="">
-							<input type="radio" name="Difficulty" value="1">Easy
-							<input type="radio" name="Difficulty" value="2">Medium
-							<input type="radio" name="Difficulty" value="3">Hard
-						</form>
-					</td>
-				</tr>
-			</table>
-		</div>
+function FP_preloadImgs() {//v1.0
+ var d=document,a=arguments; if(!d.FP_imgs) d.FP_imgs=new Array();
+ for(var i=0; i<a.length; i++) { d.FP_imgs[i]=new Image; d.FP_imgs[i].src=a[i]; }
+}
 
-		<div class="footer">
-		<p>
-			
-            <span onclick="show('Page1');">Game</span>, 
-            <span onclick="show('Page2');">Main</span>, 
-            <span onclick="show('Page3');">Options</span>.
-		</p>
-		</div>
-		
-		
-		
-        <script type="text/javascript">
-			var player = play_game(game); 
-			window.onload = player.init;
-		</script>
-	</div>
-	</body>
+function FP_getObjectByID(id,o) {//v1.0
+ var c,el,els,f,m,n; if(!o)o=document; if(o.getElementById) el=o.getElementById(id);
+ else if(o.layers) c=o.layers; else if(o.all) el=o.all[id]; if(el) return el;
+ if(o.id==id || o.name==id) return o; if(o.childNodes) c=o.childNodes; if(c)
+ for(n=0; n<c.length; n++) { el=FP_getObjectByID(id,c[n]); if(el) return el; }
+ f=o.forms; if(f) for(n=0; n<f.length; n++) { els=f[n].elements;
+ for(m=0; m<els.length; m++){ el=FP_getObjectByID(id,els[n]); if(el) return el; } }
+ return null;
+}
+// -->
+</script>
+</head>
+
+<body onload="FP_preloadImgs(/*url*/'InfobuttonDOWN.png')" onmousedown="FP_preloadImgs(/*url*/'StartbuttonDOWN.png')">
+
+<div id="container" style="position: relative; width: 800px; height: 100px; z-index: 2; margin-left: auto; margin-right: auto; top: 0px; left: 0px">
+	<div id="layer4" style="position: absolute; width: 216px; height: 62px; z-index: 5; left: 287px; top: 341px">
+		<a href="flightmap1.html">
+		<img id="img2" alt="Information" class="auto-style2" height="56" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'InfobuttonDOWN.png')" src="Infobutton.png" width="211" /></a></div>
+	<div id="layer3" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'StartbuttonDOWN.png')" style="position: absolute; width: 216px; height: 62px; z-index: 4; left: 286px; top: 272px">
+		<a href="game.html">
+		<img id="img1" alt="Start" class="auto-style2" height="55" src="Startbutton.png" width="210" /></a></div>
+	<div id="layer2" class="auto-style1" style="position: absolute; width: 445px; height: 80px; z-index: 3; left: 167px; top: 176px">
+		<img alt="" height="61" src="mancalatitle2.png" width="441" /></div>
+	<div id="layer1" style="position: absolute; width: 800px; height: 600px; z-index: 1; top: 0px; left: 0px">
+		<img alt="" height="600" src="mainbackground.jpg" width="800" /></div>
+</div>
+
+</body>
+
 </html>

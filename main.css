@@ -1,10 +1,11 @@
 body {
 	margin-left: auto;
 	margin-right: auto;
-	background: url("options.jpg");
+	background: url("mainbackground.jpg");
 	background-repeat: no-repeat;
     background-position: top;
 	z-index: 0;
+
 }
 
 
@@ -15,9 +16,10 @@ body {
 	text-align:center;
 }
 
-td {
-	padding-right: 10px;
-	padding-left: 10px;
+
+
+.indicator {
+	padding:0px;
 }
 
 table {
@@ -25,15 +27,65 @@ table {
 	text-align:center;
 	margin-left: auto;
 	margin-right: auto;
-	padding-right:10px;
-	padding-left:10px;
 }
 
-.options tr td {
-	padding:0px;
-	padding-right:5px;
-}
 
 .page1 {
 	margin-top: 100px;
 }
+
+#page3, #page4 {
+	font-family: 'Chewy', cursive;
+}
+
+.options td {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.avatar {
+	height: 100px;
+}
+
+.avatar img	{
+	border:solid 1px red; 
+	margin:10px;
+}
+
+.avatar .selected{
+   box-shadow:-1px -1px 15px 4px #333;
+}
+
+.score {
+	background-color: #8DAAD1;
+}
+
+.multiplayer {
+	margin-top:10px;
+}
+
+table.choose {
+    margin: 0;
+}
+
+.choose td {
+	margin-top: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	width: 13px;
+	height: 22px;
+	border: black solid;
+}
+
+.choose .no {
+	width: 10px;
+	padding: 0px;
+	border: none;
+}
+
+.choose .gap {
+	width: 15px;
+	border: none;
+}
+
+
