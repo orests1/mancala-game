@@ -24,7 +24,10 @@
         }
     </style>
     <script language="JavaScript">
+		var sndloop = new Audio("loop.mp3");
+		var snd = new Audio("cartoon019.mp3"); // buffers automatically when created
 		var avat = 0;
+		
 		
 		function getAvatar(i) {
 			avat = i;
@@ -68,6 +71,12 @@
         Level[1] = 0;
 
         function Init() {
+			sndloop.addEventListener('ended', function() {
+				this.currentTime = 0;
+				this.play();
+			}, false);
+			sndloop.play();
+
             var ii, jj;
             for (ii = 0; ii < 2; ii++) {
                 Fld[ii][0][0] = 0;
@@ -253,6 +262,8 @@
             if (nn > 10) nn = 10 + nn % 2;
             if ((ii == 0) || (jj == 0)) document.images[7 * ii + jj].src = Pic[nn].src;
             else document.images[14 - jj].src = Pic[nn].src;
+			snd.play();
+
         }
 
         function UpdateMoveCount(avat) {
@@ -468,8 +479,8 @@
                     </div>
 				</td>
                 <td class="back">
-                    <a href="mainbackground.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="optionsthumbnail.jpg" border="1">
+                    <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="girls1thumbnail.png" border="1">
                     </a>
 				</td>
             </tr>
@@ -497,8 +508,8 @@
                     </div>
                 </td>
 				<td class="back">
-					<a href="kitten.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="kittenthumbnail.jpg" border="1">
+					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="girls2thumbnail.png" border="1">
                     </a>
 				</td>
             </tr>
@@ -510,15 +521,15 @@
                     </div>
                 </td>
 				<td class="back">
-                    <a href="anim.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="animthumbnail.jpg" border="1">
+                    <a href="boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="boy1thumbnail.png" border="1">
                     </a>	
 				</td>
             </tr>
             <tr>
 				<td>
 					
-						<span onclick="show('Page1'); Init();">
+						<span onclick="show('Page1');">
 						<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="50" height="50" /></a></span>
                 <td>
                     <div id="fourth" class="avatar">
@@ -526,6 +537,13 @@
                             <img src="4face.jpg" border="1" height=100>
                     </div>
                 </td>
+				<td>
+					<div class="back">
+						<a href="boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+						<img src="boy2thumbnail.png" border="1">
+						</a>	
+					</div>
+				</td>	
 <!--- back button
 				<td>
 					<a href="index.html">
@@ -561,8 +579,8 @@
                     </div>
 				</td>
                 <td class="back">
-                    <a href="mainbackground.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="optionsthumbnail.jpg" border="1">
+                    <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="girls1thumbnail.png" border="1">
                     </a>
 				</td>
             </tr>
@@ -662,8 +680,8 @@
                     </div>
                 </td>
 				<td class="back">
-					<a href="kitten.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="kittenthumbnail.jpg" border="1">
+					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="girls2thumbnail.png" border="1">
                     </a>
 				</td>
             </tr>
@@ -675,15 +693,15 @@
                     </div>
                 </td>
 				<td class="back">
-                    <a href="anim.jpg" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="animthumbnail.jpg" border="1">
+                    <a href="boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="boy1thumbnail.png" border="1">
                     </a>	
 				</td>
             </tr>
             <tr>
 				<td>
 					
-						<span onclick="show('Page1'); Init();">
+						<span onclick="show('Page1');">
 						<img id="img1" alt="play" class="auto-style2" height="60" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="211" height="56" /></a></span>
                 <td>
                     <div id="fourth" class="avatar">
@@ -691,6 +709,13 @@
                             <img src="4face.jpg" border="1" height=100>
                     </div>
                 </td>
+				<td>
+					<div class="back">
+						<a href="boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+						<img src="boy2thumbnail.png" border="1">
+						</a>	
+					</div>
+				</td>						
 <!--- back button
 				<td>
 					<a href="index.html">
@@ -714,7 +739,7 @@
         SetSize(4);
         SetLevel(1, 0);
         SetLevel(0, 1);
-        setInterval("Timer()", 200);
+        setInterval("Timer()", 500);
     </script>
 </body>
 </html>											
