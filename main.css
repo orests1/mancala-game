@@ -88,4 +88,7 @@ table.choose {
 	border: none;
 }
 
-
+#layer2 {
+	border: 1 solid;
+	border-color: black;
+}

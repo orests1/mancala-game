@@ -31,7 +31,13 @@
 			return false;
 		}
 		
-		
+		var data = { 
+			11 : "green.png", 
+			12 : "green.png", 
+			13 : "green.png", 
+			14 : "green.png", 
+			15 : "green.png", 
+			16 : "green.png", 21 : "green.png" };
 		
 		
         var i, j, IsOver = true, I_Sel, J_Sel, N_Mov, IsStart0, Start, Size = 4, MoveCount;
@@ -289,7 +295,9 @@
         }
 		
 		function changeImage() {
-			document.getElementById("img").src="white.png";
+			for (var id in data) {
+				document.getElementById(id).src = data[id];
+			}
 		}
     </script>
 
@@ -584,13 +592,13 @@
 						</tr>
 						<tr>
 							<td class="no">1</td>
-							<td class="plane"><img src='green.png' onclick="changeImage();"></td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
+							<td class="plane"><img id="11" src='white.png' onclick="changeImage();"></td>
+							<td class="plane"><img id="12" src='white.png' onclick="changeImage();"></td>
+							<td class="plane"><img id="13" src='white.png' onclick="changeImage();"></td>
 							<td class="gap">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
+							<td class="plane"><img id="14" src='white.png' onclick="changeImage();"></td>
+							<td class="plane"><img id="15" src='white.png' onclick="changeImage();"></td>
+							<td class="plane"><img id="16" src='white.png' onclick="changeImage();"></td>
 						</tr>
 						<tr>
 							<td class="no">2</td>
