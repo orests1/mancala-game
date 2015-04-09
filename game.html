@@ -24,6 +24,30 @@
         }
     </style>
     <script language="JavaScript">
+	
+		mLeft = 20;		
+		var mId = setInterval(message, 1000);
+		
+		function message() {
+			if (mLeft == 0) {
+				timeLeft=-1;
+				myWindow = window.open("", "myWindow", "width=200, height=100, left=500, top=250");
+				myWindow.document.write("<p>Please fasten your seatbelts!</p>");
+				var btn = myWindow.document.createElement("BUTTON");        
+				var t = myWindow.document.createTextNode("Close");   
+				btn.appendChild(t);     
+				btn.onclick = function() { myWindow.close(); timeLeft=60};
+				myWindow.document.body.appendChild(btn);          
+				clearTimeout(mId);
+			} else {
+				console.log(mLeft);
+				mLeft--;
+			}
+		}
+		
+		var sndloop = new Audio("loop.mp3");
+		var snd = new Audio("cartoon019.mp3");
+		
 		var avat = 0;
 		
 		function getAvatar(i) {
@@ -68,6 +92,12 @@
         Level[1] = 0;
 
         function Init() {
+			sndloop.addEventListener('ended', function() {
+				this.currentTime = 0;
+				this.play();
+			}, false);
+			sndloop.play();
+		
             var ii, jj;
             for (ii = 0; ii < 2; ii++) {
                 Fld[ii][0][0] = 0;
@@ -99,7 +129,22 @@
         function SetSize(ss) {
             Size = parseInt(ss);
         }
+		var timeLeft = -1;		
+			
+		var timerId = setInterval(countdown, 1000);
+		
+		function countdown() {
 
+			if (timeLeft == 0) {
+				SetLevel(1, 5);
+				Timer();
+				SetLevel(1, 0);
+				timeLeft = 60;
+			} else {
+				timeLeft--;
+			}
+		}
+		
         function Timer() {
             if (IsOver) return;
             var mmove = (MoveCount + Start) % 2;
@@ -140,10 +185,11 @@
                     OverTest();
                 }
                 return;
-            }
-            var ll = Level[mmove] + 1;
-            if (ll > 1) GetBestMove(mmove, 1, ll);
-        }
+            } 
+
+			var ll = Level[mmove] + 1;
+			if (ll > 1) GetBestMove(mmove, 1, ll);
+		}
 
         function MakeVirtualMove(mmove, tt, kk) {
             var ii, jj, ll, mm, nn;
@@ -253,16 +299,31 @@
             if (nn > 10) nn = 10 + nn % 2;
             if ((ii == 0) || (jj == 0)) document.images[7 * ii + jj].src = Pic[nn].src;
             else document.images[14 - jj].src = Pic[nn].src;
+			snd.play();			
         }
+		
+		function changeClass()
+		{
+			if ( document.getElementById("left").className.match(/(?:^|\s)turn(?!\S)/) )
+			{
+				document.getElementById("left").className =  document.getElementById("MyElement").className.replace( /(?:^|\s)turn(?!\S)/g , '' );
+				document.getElementById("right") += "turn";
+			} else {
+				document.getElementById("right").className =  document.getElementById("MyElement").className.replace( /(?:^|\s)turn(?!\S)/g , '' );
+				document.getElementById("left") += "turn";
+			}
+		}
+
 
         function UpdateMoveCount(avat) {
             if ((MoveCount + Start) % 2 == 1) {
-                document.images[14].src = Pic[0].src;
+                document.images[14].src = 'computer.png';
                 document.images[15].src = Avatar[avat].src
+				countdown();
             }
             else {
-                document.images[14].src = 'computer.png';
-                document.images[15].src = Pic[0].src;
+                document.images[14].src = 'computerturn.png';
+                document.images[15].src = Avatar[avat].src;
             }
         }
 
@@ -299,6 +360,15 @@
 				document.getElementById(id).src = data[id];
 			}
 		}
+		
+		document.getElementById('mute').addEventListener('click', function (e)
+		{
+			e = e || window.event;
+			sndloop.muted = !sndloop.muted;
+			e.preventDefault();
+		}, false);
+		
+
     </script>
 
 
@@ -364,9 +434,7 @@
                 <th width=66><input name="i04" readonly size=3></th>
                 <th width=67><input name="i05" readonly size=3></th>
                 <th width=68><input name="i06" readonly size=3></th>
-
-                </th>
-            </tr>
+             </tr>
             <tr class="space">
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -414,11 +482,10 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td id="timer">&nbsp;</td>
             </tr>
             <tr>
-                <th>
-
+				<th></th>
                 <th><input name="i16" readonly size=3></th>
                 <th><input name="i15" readonly size=3></th>
                 <th><input name="i14" readonly size=3></th>
@@ -426,21 +493,36 @@
                 <th><input name="i12" readonly size=3></th>
                 <th><input name="i11" readonly size=3></th>
                 <th><input name="i10" readonly size=5 class="score">&nbsp;</th>
-            </tr></table>
-            </td>
-            <td width=10px class="indicator">
-                <br><br><br><img src="0.png"><br><br><br><br><img src="0.png">
+            </tr>
+			<tr>
+				<td></td>
+				<td colspan=2 width=10px id="left" class="indicator">
+					<br><img src="0.png">
+				</td>
+				<td colspan=2><h2>Turn</h2></td>
+				<td colspan=2 width=10px id="right" class="indicator">
+					<br><img src="0.png">
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+
+			</tr>
+
+			</table>
             </td>
             </tr>
             </table>
-            <table noborder cellpadding=4 cellspacing=1>
-                <tr>
 
-				<span onclick="javascript:Init()"><img src="restart button.png" style="z-index:5;"> <!-- onclick="javascript:Init()"> -->
-				<span onclick="javascript:Help()"><img src="help button.png" style="z-index:5;">
+			<table margin-top=20>
 
-                </tr>
-            </table>
+				<tr>
+					<a href="index.html"><img src ="menu button.png" height =50 width=50 "> </a>
+					<span onclick="show('Page3'), sndloop.stop();"><img src="options button.png"></span>
+					<span onclick="javascript:Init()"><img src="restart button.png" style="z-index:5;"></span> <!-- onclick="javascript:Init()"> -->
+					<span onclick="javascript:message()"><img src="help button.png" style="z-index:5;"></span>
+				</tr>
+			</table>
         </form>
     </div>
 
@@ -448,14 +530,26 @@
         <table class="options">
             <tr>
                 <td colspan=2>
-                    <h1>Avatar</h1>
+                    <h1>Background</h1>
                 </td>
 				<td class="gap"></td>
                 <td colspan=2>
-                    <h1>Background</h1>
+                    <h1>Avatars</h1>
                 </td>
             </tr>
             <tr>
+                <td class="back">
+                    <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="girls1thumbnail.png" border="1">
+                    </a>
+				</td>
+				<td class="back">
+					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="girls2thumbnail.png" border="1">
+                    </a>
+				</td>
+				<td class="gap"></td>
+
                 <td>
                     <div id="first" class="avatar">
                         <a href="1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
@@ -467,33 +561,9 @@
                         <a href="2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
                         <img src="2face.jpg" border="1" height=100>
                     </div>
-				</td>
-				<td class="gap"></td>
-                <td class="back">
-                    <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="girls1thumbnail.png" border="1">
-                    </a>
-				</td>
-				<td class="back">
-					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="girls2thumbnail.png" border="1">
-                    </a>
-				</td>
+				</td>				
             </tr>
             <tr>
-                <td>
-                    <div id="third" class="avatar">
-                        <a href="3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
-                            <img src="3face.jpg" border="1" height=100>
-                    </div>
-                </td>
-				<td>
-                    <div id="fourth" class="avatar">
-                        <a href="4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
-                            <img src="4face.jpg" border="1" height=100>
-                    </div>
-                </td>
-				<td class="gap"></td>
 				<td class="back">
                     <a href="boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="boy1thumbnail.png" border="1">
@@ -506,223 +576,139 @@
 						</a>	
 					</div>
 				</td>	
-				
-				
-            </tr>
-            <tr>
+				<td class="gap"></td>
+
 				<td>
-					
-						<span onclick="show('Page1');">
-						<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="50" height="50" /></a></span>
-
-
-<!--- back button
-				<td>
-					<a href="index.html">
-					<img id="img1" alt="back" class="auto-style2" height="60" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'backbuttonDOWN.png')" src="backbuttonUP.png" width="64" /></a>
-				</td>
---->				
-            </tr>
-        </table>
-    </div>
-
-	
-	<!--- Options for single player			
-                <td rowspan=2 id="difficulty">
-                    <form action="">
-                        <h3><input type="radio" name="Difficulty" value="1" checked="checked" onchange="SetLevel(1, this.options[selectedIndex].value)">Easy</h3>
-                        <h3><input type="radio" name="Difficulty" value="3" onchange="SetLevel(1, this.options[selectedIndex].value)">Medium</h3>
-                        <h3><input type="radio" name="Difficulty" value="5" onchange="SetLevel(1, this.options[selectedIndex].value)">Hard</h3>
-                    </form>
-                </td>
-				
-				
- Options for multi player 
-				<td id="plane" style="display:none">
-					<img src="planeseats.gif">
-				</td>
-				
-	
-	
-	
-	                <td class="mode">
-                    <h2><input type="radio" name="players" value="0" checked="checked" onchange="show('Page3')">Single player</h2>
-                    <h2><input type="radio" name="players" value="1" onchange="show('Page4')">Multi player</h2>
-                </td>
-				--->
-	
-	   <div id="Page4" class="page" style="display:none">
-        <table class="options">
-            <tr>
-                <td>
-                    <h1>Players</h1>
-                </td>
-                <td>
-                    <h1>Avatar</h1>
-                </td>
-                <td>
-                    <h1>Background</h1>
-                </td>
-            </tr>
-            <tr>
-                <td class="mode">
-                    <h2><input type="radio" name="players" value="0" onchange="show('Page3')">Single player</h2>
-                    <h2><input type="radio" name="players" value="1" checked="checked" onchange="show('Page4')">Multi player</h2>
-                </td>
-                <td>
-                    <div id="first" class="avatar">
-                        <a href="1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(0); return false;">
-                            <img src="1face.jpg" border="1" height=100>
-                    </div>
-				</td>
-                <td class="back">
-                    <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="girls1thumbnail.png" border="1">
-                    </a>
-				</td>
-            </tr>
-            <tr>
-<!--- Options for single player --->			
-                <td rowspan=2 id="difficulty" style="display:none">
-                    <form action="">
-                        <h3><input type="radio" name="Difficulty" value="1" checked="checked" onchange="SetLevel(1, this.options[selectedIndex].value)">Easy</h3>
-                        <h3><input type="radio" name="Difficulty" value="3" onchange="SetLevel(1, this.options[selectedIndex].value)">Medium</h3>
-                        <h3><input type="radio" name="Difficulty" value="5" onchange="SetLevel(1, this.options[selectedIndex].value)">Hard</h3>
-                    </form>
-                </td>
-				
-				
-<!--- Options for multi player --->
-<div class="multiplayer">
-				<td rowspan=2 style="">
-
-					<table class="choose">
-						<tr>
-							<td>
-								<p>Row</p>
-							</td>
-							<td colspan=7>
-								<p>Seats</p>
-							</td>
-						</tr>
-						<tr>
-							<td class="no">1</td>
-							<td class="plane"><img id="11" src='white.png' onclick="changeImage();"></td>
-							<td class="plane"><img id="12" src='white.png' onclick="changeImage();"></td>
-							<td class="plane"><img id="13" src='white.png' onclick="changeImage();"></td>
-							<td class="gap">&nbsp;</td>
-							<td class="plane"><img id="14" src='white.png' onclick="changeImage();"></td>
-							<td class="plane"><img id="15" src='white.png' onclick="changeImage();"></td>
-							<td class="plane"><img id="16" src='white.png' onclick="changeImage();"></td>
-						</tr>
-						<tr>
-							<td class="no">2</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="gap">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="no">3</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="gap">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="no">4</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="gap">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="no">5</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="gap">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="no">6</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="gap">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-							<td class="plane">&nbsp;</td>
-						</tr>
-
-					</table>
-				</td>
-</div>
-				
-                <td>
-                    <div id="second" class="avatar">
-                        <a href="2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(1); return false;">
-                            <img src="2face.jpg" border="1" height=100>
-                    </div>
-                </td>
-				<td class="back">
-					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="girls2thumbnail.png" border="1">
-                    </a>
-				</td>
-            </tr>
-            <tr>
-                <td>
                     <div id="third" class="avatar">
-                        <a href="3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2)l return false;">
+                        <a href="3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
                             <img src="3face.jpg" border="1" height=100>
                     </div>
                 </td>
-				<td class="back">
-                    <a href="boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="boy1thumbnail.png" border="1">
-                    </a>	
-				</td>
-            </tr>
-            <tr>
 				<td>
-					
-						<span onclick="show('Page1');">
-						<img id="img1" alt="play" class="auto-style2" height="60" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="211" height="56" /></a></span>
-                <td>
                     <div id="fourth" class="avatar">
                         <a href="4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
                             <img src="4face.jpg" border="1" height=100>
                     </div>
                 </td>
+            </tr>
+			<tr height=50px></tr>
+			<tr>
+				<td colspan=2 class="mode">
+	                
+                    <h1><input type="radio" name="players" value="0" checked="checked" onchange="show('Page3')">Single player</h1>
+                    <h1><input type="radio" name="players" value="1" onchange="show('Page4')">Multi player</h1>
+                </td>
+				<td colspan=3 class="difficulty">
+					<form action="">
+					<h1>Difficulty</h1>
+                        <h2><input type="radio" name="Difficulty" value="1" checked="checked" onchange="SetLevel(1, this.options[selectedIndex].value)">Easy
+                        <input type="radio" name="Difficulty" value="3" onchange="SetLevel(1, this.options[selectedIndex].value)">Medium
+                        <input type="radio" name="Difficulty" value="5" onchange="SetLevel(1, this.options[selectedIndex].value)">Hard</h2>
+                    </form>
+                </td>
+			</tr>
+            <tr>
+				<td colspan=5>
+					<a href="index.html"><img src ="menu button.png" height =50 width=50 "> </a>
+					<span onclick="show('Page1'); Init(); timeLeft=60;">
+					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="50" height="50" /></a></span>
+				</td>
+            </tr>
+        </table>
+    </div>
+
+
+	   <div id="Page4" class="page" style="display:none">
+        <table class="options">
+            <tr>
+                <td colspan=2>
+                    <h1>Background</h1>
+                </td>
+				<td class="gap"></td>
+                <td colspan=2>
+                    <h1>Avatars</h1>
+                </td>
+            </tr>
+            <tr>
+                <td class="back">
+                    <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="girls1thumbnail.png" border="1">
+                    </a>
+				</td>
+				<td class="back">
+					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="girls2thumbnail.png" border="1">
+                    </a>
+				</td>
+				<td class="gap"></td>
+
+                <td>
+                    <div id="first" class="avatar">
+                        <a href="1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
+                            <img src="1face.jpg" border="1" height=100>
+                    </div>
+				</td>
+				<td>
+                    <div id="second" class="avatar">
+                        <a href="2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
+                        <img src="2face.jpg" border="1" height=100>
+                    </div>
+				</td>				
+            </tr>
+            <tr>
+				<td class="back">
+                    <a href="boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="boy1thumbnail.png" border="1">
+                    </a>	
+				</td>
 				<td>
 					<div class="back">
 						<a href="boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
 						<img src="boy2thumbnail.png" border="1">
 						</a>	
 					</div>
-				</td>						
-<!--- back button
+				</td>	
+				<td class="gap"></td>
+
 				<td>
-					<a href="index.html">
-					<img id="img1" alt="back" class="auto-style2" height="60" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'backbuttonDOWN.png')" src="backbuttonUP.png" width="64" /></a>
+                    <div id="third" class="avatar">
+                        <a href="3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
+                            <img src="3face.jpg" border="1" height=100>
+                    </div>
+                </td>
+				<td>
+                    <div id="fourth" class="avatar">
+                        <a href="4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
+                            <img src="4face.jpg" border="1" height=100>
+                    </div>
+                </td>
+            </tr>
+			<tr height=50px></tr>
+			<tr>
+				<td colspan=2 class="mode">
+	                
+                    <h1><input type="radio" name="players" value="0" onchange="show('Page3')">Single player</h1>
+                    <h1><input type="radio" name="players" value="1" onchange='window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'>Multi player</h1>
+                </td>
+				<td colspan=3><h1 id="plane"></h1>
+					
+                </td>
+			</tr>
+            <tr>
+				<td colspan=5>
+					<a href="index.html"><img src ="menu button.png" height =50 width=50 "></a>
+					<span onclick="show('Page1'); Init(); timeLeft=60;">
+					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="50" height="50" /></a></span>
 				</td>
---->				
             </tr>
 
         </table>
     </div>
+				
+<!--- Options for multi player --->
+
+</div>
+<!---
 
     <div class="footer">
         <p>
@@ -730,12 +716,13 @@
             <span onclick="show('Page3');"><img src="options button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'options clickedbutton.png')" style="position:absolute; left:31%; top:-180%; z-index:5;">Options</span>.
             <a href="index.html"><img src ="menu button.png" height =50 width=50 style="position:absolute; left:38%; top:-180%; z-index:5;"> Main Menu</a>				        </p>
     </div>
+	--->
     <script language="JavaScript">
         SetStart(1);
         SetSize(4);
         SetLevel(1, 0);
         SetLevel(0, 1);
-        setInterval("Timer()", 200);
+        setInterval("Timer()", 500);
     </script>
 </body>
 </html>											

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+    <link rel="stylesheet" type="text/css" href="plane.css">
+	    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script>
+
+$(function () {
+    $('td').click(function () {
+        $('td').removeAttr('style');
+        $(this).css('background', '#3da428');
+		document.getElementById("message").innerHTML = "Connecting...";
+		setTimeout(function(){self.close();},2000);
+    });
+});
+</script>
+</HEAD>
+<body>
+	<table>
+		<tr class="info"> <td colspan=8><h3>Please choose a seat you want to connect to</h3><td></tr>
+		<tr class="info">
+			<td>
+				<h3>Row</h3>
+			</td>
+			<td colspan=7>
+				<h3>Seats</h3>
+			</td>
+		</tr>
+		<tr>
+			<td class="row">1</td>
+			<td class="seat" onclick="function()">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+				<tr>
+			<td class="row">2</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+				<tr>
+			<td class="row">3</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+				<tr>
+			<td class="row">4</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+				<tr>
+			<td class="row">5</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+		<tr class="space"></tr>
+		<tr>
+			<td class="row">6</td>
+			<td class="seat" onclick="function()">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+				<tr>
+			<td class="row">7</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+				<tr>
+			<td class="row">8</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+				<tr>
+			<td class="row">9</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+				<tr>
+			<td class="row">10</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="gap">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+			<td class="seat">&nbsp;</td>
+		</tr>
+		<tr class="nothing"><td>&nbsp;</td><td colspan=7 id="message"></td></tr>
+	</table>
+</body>
