@@ -34,7 +34,7 @@ table {
 	margin-top: 100px;
 }
 
-#page3, #page4 {
+#page3, #page4, #page1 {
 	font-family: 'Chewy', cursive;
 }
 
@@ -92,4 +92,8 @@ table.choose {
 
 .gap {
 	width: 100px;
+}
+
+.turn {
+	background-color:yellow;
 }
