@@ -31,8 +31,8 @@
 		function message() {
 			if (mLeft == 0) {
 				timeLeft=-1;
-				myWindow = window.open("", "myWindow", "width=200, height=100, left=500, top=250");
-				myWindow.document.write("<p>Please fasten your seatbelts!</p>");
+				myWindow = window.open("", "myWindow", "width=300, height=200, left=500, top=250");
+				myWindow.document.write("<h1>Please fasten your seatbelts!</h1>");
 				var btn = myWindow.document.createElement("BUTTON");        
 				var t = myWindow.document.createTextNode("Close");   
 				btn.appendChild(t);     
@@ -141,6 +141,7 @@
 				SetLevel(1, 0);
 				timeLeft = 60;
 			} else {
+				console.log(timeLeft);
 				timeLeft--;
 			}
 		}
@@ -316,6 +317,7 @@
 
 
         function UpdateMoveCount(avat) {
+			timeLeft = 60;
             if ((MoveCount + Start) % 2 == 1) {
                 document.images[14].src = 'computer.png';
                 document.images[15].src = Avatar[avat].src
