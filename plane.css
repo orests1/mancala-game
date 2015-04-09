@@ -1,0 +1,45 @@
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+td {
+	width: 15px;
+	height: 15px;
+	border: black solid;
+	background-color: white;
+	cursor:pointer;
+}
+
+.row {
+	width: 15px;
+	height: 15px;
+	padding-right: 10px;
+	text-align: right;
+	border: none;
+	background-color: white;
+}
+
+.gap {
+	width: 15px;
+	height: 15px;
+	border: none;
+	background-color: white;
+}
+
+.info td{
+	text-align: center;
+	border: none;
+	background-color: white;
+}
+
+.space {
+	height: 15px;
+}
+
+.nothing td{
+	font-weight: bold;
+	font-size: 25px;
+	border:none;
+	text-align: center;
+}
