@@ -81,6 +81,15 @@ function FP_getObjectByID(id,o) {//v1.0
 			return false;
 		}
 		
+		var data = { 
+			11 : "green.png", 
+			12 : "green.png", 
+			13 : "green.png", 
+			14 : "green.png", 
+			15 : "green.png", 
+			16 : "green.png", 21 : "green.png" };
+		
+		
         var i, j, IsOver = true, I_Sel, J_Sel, N_Mov, IsStart0, Start, Size = 4, MoveCount;
         Level = new Array(2);
         Fld = new Array(2);
@@ -91,17 +100,17 @@ function FP_getObjectByID(id,o) {//v1.0
                 Fld[i][j] = new Array(7);
         }
 		
-		Avatar = new Array(8);
-		for (i=0; i<8; i++) {
+		Avatar = new Array(4);
+		for (i=0; i<4; i++) {
 			Avatar[i] = new Image();
 			var n = i+1;
-			Avatar[i].src = "avatars/" + n + "face.png";
+			Avatar[i].src = "avatars/" +n + "face.png";
 		}
 
-        Pic = new Array(36);
-        for (i = 0; i < 36; i++) {
+        Pic = new Array(16);
+        for (i = 0; i < 16; i++) {
             Pic[i] = new Image();
-            Pic[i].src = "blobs/" + i + ".png";
+            Pic[i].src = "blobs/"+i + ".png";
         }
 
         IsStart0 = false;
@@ -319,7 +328,7 @@ function FP_getObjectByID(id,o) {//v1.0
             var oo = eval("document.OptionsForm.i" + ii + jj);
             oo.value = Fld[ii][jj][0];
             var nn = Fld[ii][jj][0];
-            if (nn > 35) nn = 35 + nn % 2;
+            if (nn > 14) nn = 14 + nn % 2;
             if ((ii == 0) || (jj == 0)) document.images[7 * ii + jj].src = Pic[nn].src;
             else document.images[14 - jj].src = Pic[nn].src;
 			snd.play();			
@@ -341,9 +350,8 @@ function FP_getObjectByID(id,o) {//v1.0
         function UpdateMoveCount(avat) {
 			timeLeft = 60;
             if ((MoveCount + Start) % 2 == 1) {
-				var n = avat + 4;
                 document.images[14].src = 'avatars/computer.png';
-                document.images[15].src = Avatar[n].src
+                document.images[15].src = Avatar[avat].src
 				countdown();
             }
             else {
@@ -532,11 +540,11 @@ function FP_getObjectByID(id,o) {//v1.0
 			<tr>
 				<td></td>
 				<td colspan=2 width=10px id="left" class="indicator">
-					<br><img src="0.png">
+					<br><img src="blobs/0.png">
 				</td>
 				<td colspan=2><h2>Turn</h2></td>
 				<td colspan=2 width=10px id="right" class="indicator">
-					<br><img src="0.png">
+					<br><img src="blobs/0.png">
 				</td>
 				<td></td>
 			</tr>
@@ -546,33 +554,18 @@ function FP_getObjectByID(id,o) {//v1.0
 
 			</table>
             </td>
-
             </tr>
-			
             </table>
-			
+
 			<table margin-top=20>
-<<<<<<< HEAD
 
 				<tr>
-					<a href="index.html"><img id="img3" src ="menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img3',/*url*/'menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img3',/*url*/'menu button.png')"> </a>
-					<span onclick="show('Page3'), sndloop.stop();"><img id="img2" src="options button.png" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'options clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'options button.png')"></span>
-					<span onclick="javascript:Init()"><img id="img4" src="restart button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'img4',/*url*/'restart clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img4',/*url*/'restart button.png')"></span> <!-- onclick="javascript:Init()"> -->
-					<span onclick="javascript:message()"><img id="help" src="help button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'help',/*url*/'help clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'help',/*url*/'help button.png')" ></span>
-					<span><img id="volume" src="volume.png"  onclick="mute(this);"></span>
-=======
-			<!---
-					<div id="tutavatar" class="tutavatar" ><img src='tutavatar.png'></div>
-			--->
-				<tr style="position:absolute">
-					<a href="index.html"><img src ="buttons/menu button.png" height =50 width=50 "> </a>
-					<span onClick="show('Page3'), sndloop.stop();"><img src="buttons/options button.png"></span>
-					<span onClick="javascript:Init()"><img src="buttons/restart button.png" style="z-index:5;"></span> <!-- onclick="javascript:Init()"> -->
-					<span onClick="javascript:message()"><img src="buttons/help button.png" style="z-index:5;"></span>
-					<img id="volume" src="buttons/volume.png"  onclick="mute(this);">
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
+					<a href="index.html"><img id="img3" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu button.png')"> </a>
+					<span onclick="show('Page3'), sndloop.stop();"><img id="img2" src="buttons/options button.png" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options button.png')"></span>
+					<span onclick="javascript:Init()"><img id="img4" src="buttons/restart button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart button.png')"></span> <!-- onclick="javascript:Init()"> -->
+					<span onclick="javascript:message()"><img id="help" src="buttons/help button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'help',/*url*/'buttons/help clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'help',/*url*/'buttons/help button.png')" ></span>
+					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>
 					<img id="ratios" src="blobratio.png" style="height: 70; width: 200; position: relative; left:170; top: 10;">
-
 				</tr>
 			</table>
         </form>
@@ -591,16 +584,6 @@ function FP_getObjectByID(id,o) {//v1.0
             </tr>
             <tr>
                 <td class="back">
-<<<<<<< HEAD
-                    <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="girls1thumbnail.png" border="1">
-                    </a>
-				</td>
-				<td class="back">
-					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="girls2thumbnail.png" border="1">
-=======
-
                     <a href="backgrounds/girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="backgrounds/girls1thumbnail.png" border="1">
                     </a>
@@ -608,8 +591,6 @@ function FP_getObjectByID(id,o) {//v1.0
 				<td class="back">
 					<a href="backgrounds/girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="backgrounds/girls2thumbnail.png" border="1">
-
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
                     </a>
 				</td>
 				<td class="gap"></td>
@@ -629,28 +610,14 @@ function FP_getObjectByID(id,o) {//v1.0
             </tr>
             <tr>
 				<td class="back">
-<<<<<<< HEAD
-                    <a href="boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="boy1thumbnail.png" border="1">
-=======
-
                     <a href="backgrounds/boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="backgrounds/boy1thumbnail.png" border="1">
-
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
                     </a>	
 				</td>
 				<td>
 					<div class="back">
-<<<<<<< HEAD
-						<a href="boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-						<img src="boy2thumbnail.png" border="1">
-=======
-
 						<a href="backgrounds/boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
 						<img src="backgrounds/boy2thumbnail.png" border="1">
-
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
 						</a>	
 					</div>
 				</td>	
@@ -687,15 +654,9 @@ function FP_getObjectByID(id,o) {//v1.0
 			</tr>
             <tr>
 				<td colspan=5>
-<<<<<<< HEAD
-					<a href="index.html"><img id="imgmenu2" src ="menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'menu button.png')"> </a>
+					<a href="index.html"><img id="imgmenu2" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu button.png')"> </a>
 					<span onclick="show('Page1'); Init(); timeLeft=60;">
-					<img id="img0" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttondown.png')" src="button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img0',/*url*/'button.png')"></a></span>
-=======
-					<a href="index.html"><img src ="buttons/menu button.png" height =50 width=50 "> </a>
-					<span onClick="show('Page1'); Init(); timeLeft=60;">
-					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" /></a></span>
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
+					<img id="img0" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttons/button.png')"></a></span>
 				</td>
             </tr>
         </table>
@@ -715,7 +676,6 @@ function FP_getObjectByID(id,o) {//v1.0
             </tr>
             <tr>
                 <td class="back">
-<<<<<<< HEAD
                     <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="girls1thumbnail.png" border="1">
                     </a>
@@ -723,52 +683,33 @@ function FP_getObjectByID(id,o) {//v1.0
 				<td class="back">
 					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="girls2thumbnail.png" border="1">
-=======
-                    <a href="backgrounds/girls1.png" onClick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/girls1thumbnail.png" border="1">
-                    </a>
-				</td>
-				<td class="back">
-					<a href="backgrounds/girls2.png" onClick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/girls2thumbnail.png" border="1">
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
                     </a>
 				</td>
 				<td class="gap"></td>
 
                 <td>
                     <div id="first" class="avatar">
-                        <a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
-                            <img src="avatars/1face.jpg" border="1" height=100>
+                        <a href="1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
+                            <img src="1face.jpg" border="1" height=100>
                     </div>
 				</td>
 				<td>
                     <div id="second" class="avatar">
-                        <a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
-                        <img src="avatars/2face.jpg" border="1" height=100>
+                        <a href="2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
+                        <img src="2face.jpg" border="1" height=100>
                     </div>
 				</td>				
             </tr>
             <tr>
 				<td class="back">
-<<<<<<< HEAD
                     <a href="boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="boy1thumbnail.png" border="1">
-=======
-                    <a href="backgrounds/boy1.png" onClick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/boy1thumbnail.png" border="1">
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
                     </a>	
 				</td>
 				<td>
 					<div class="back">
-<<<<<<< HEAD
 						<a href="boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
 						<img src="boy2thumbnail.png" border="1">
-=======
-						<a href="backgrounds/boy2.png" onClick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-						<img src="backgrounds/boy2thumbnail.png" border="1">
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
 						</a>	
 					</div>
 				</td>	
@@ -776,14 +717,14 @@ function FP_getObjectByID(id,o) {//v1.0
 
 				<td>
                     <div id="third" class="avatar">
-                        <a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
-                            <img src="avatars/3face.jpg" border="1" height=100>
+                        <a href="3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
+                            <img src="3face.jpg" border="1" height=100>
                     </div>
                 </td>
 				<td>
                     <div id="fourth" class="avatar">
-                        <a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
-                            <img src="avatars/4face.jpg" border="1" height=100>
+                        <a href="4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
+                            <img src="4face.jpg" border="1" height=100>
                     </div>
                 </td>
             </tr>
@@ -800,23 +741,27 @@ function FP_getObjectByID(id,o) {//v1.0
 			</tr>
             <tr>
 				<td colspan=5>
-<<<<<<< HEAD
-					<a href="index.html"><img id="imgmenu" src ="menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'menu button.png')"></a>
+					<a href="index.html"><img id="imgmenu" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'buttons/menu button.png')"></a>
 					<span onclick="show('Page1'); Init(); timeLeft=60;">
-					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img1',/*url*/'button.png')" ></a></span>
-=======
-					<a href="index.html"><img src ="buttons/menu button.png" height =50 width=50 "></a>
-					<span onClick="show('Page1'); Init(); timeLeft=60;">
-					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" /></a></span>
->>>>>>> c8ca0a15dec392836a93b90b916680221b3d074d
+					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/button.png')" ></a></span>
 				</td>
             </tr>
 
         </table>
     </div>
 				
+<!--- Options for multi player --->
 
 </div>
+<!---
+
+    <div class="footer">
+        <p>
+            <span onclick="show('Page1');"><img src="play.png" height=70 width=70 style="position:absolute; left:25%; top:-180%; z-index:5;">game</span>,
+            <span onclick="show('Page3');"><img src="options button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'options clickedbutton.png')" style="position:absolute; left:31%; top:-180%; z-index:5;">Options</span>.
+            <a href="index.html"><img src ="menu button.png" height =50 width=50 style="position:absolute; left:38%; top:-180%; z-index:5;"> Main Menu</a>				        </p>
+    </div>
+	--->
     <script language="JavaScript">
         SetStart(1);
         SetSize(4);
