@@ -45,6 +45,7 @@
 			}
 		}
 		
+		var won = new Audio("won.wav");
 		var sndloop = new Audio("loop.mp3");
 		var snd = new Audio("cartoon019.mp3");
 		
@@ -269,11 +270,16 @@
             }
             if (Fld[0][0][0] == Fld[1][0][0]) setTimeout("alert(\"Game over !\\nIt's a draw !\")", 100);
             else {
-                if (Fld[0][0][0] > Fld[1][0][0])
+                if (Fld[0][0][0] > Fld[1][0][0]) {
+
                     setTimeout("alert(\"Game over !\\nThe player at top has won !\")", 100);
-                else
+					}
+                else {
+					sndloop.pause();
+					won.play();
                     setTimeout("alert(\"Game over !\\nThe player at bottom has won !\")", 100);
-            }
+				}
+			}
             for (ii = 0; ii < 2; ii++) {
                 for (jj = 0; jj < 7; jj++)
                     RefreshFld(ii, jj);
@@ -352,6 +358,16 @@
               "\nlonger has beans in his small bowls. The other player" +
               "\ntakes all remaining beans into his own mancala.");
         }
+		
+		function mute(element) {
+			if (element.src.indexOf("volume-mute") != -1) {
+				sndloop.play();
+				element.src = "volume.png";
+			} else {
+				sndloop.pause();
+				element.src = "volume-mute.png";
+			}
+		}
 
         function Resize() {
             if (navigator.appName == "Netscape") history.go(0);
@@ -523,6 +539,7 @@
 					<span onclick="show('Page3'), sndloop.stop();"><img src="options button.png"></span>
 					<span onclick="javascript:Init()"><img src="restart button.png" style="z-index:5;"></span> <!-- onclick="javascript:Init()"> -->
 					<span onclick="javascript:message()"><img src="help button.png" style="z-index:5;"></span>
+					<img id="volume" src="volume.png"  onclick="mute(this);">
 				</tr>
 			</table>
         </form>
@@ -722,7 +739,6 @@
     <script language="JavaScript">
         SetStart(1);
         SetSize(4);
-        SetLevel(1, 0);
         SetLevel(0, 1);
         setInterval("Timer()", 500);
     </script>
