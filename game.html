@@ -100,15 +100,15 @@ function FP_getObjectByID(id,o) {//v1.0
                 Fld[i][j] = new Array(7);
         }
 		
-		Avatar = new Array(4);
-		for (i=0; i<4; i++) {
+		Avatar = new Array(8);
+		for (i=0; i<8; i++) {
 			Avatar[i] = new Image();
 			var n = i+1;
 			Avatar[i].src = "avatars/" +n + "face.png";
 		}
 
-        Pic = new Array(16);
-        for (i = 0; i < 16; i++) {
+        Pic = new Array(36);
+        for (i = 0; i < 36; i++) {
             Pic[i] = new Image();
             Pic[i].src = "blobs/"+i + ".png";
         }
@@ -328,7 +328,7 @@ function FP_getObjectByID(id,o) {//v1.0
             var oo = eval("document.OptionsForm.i" + ii + jj);
             oo.value = Fld[ii][jj][0];
             var nn = Fld[ii][jj][0];
-            if (nn > 14) nn = 14 + nn % 2;
+            if (nn > 35) nn = 35 + nn % 2;
             if ((ii == 0) || (jj == 0)) document.images[7 * ii + jj].src = Pic[nn].src;
             else document.images[14 - jj].src = Pic[nn].src;
 			snd.play();			
@@ -348,10 +348,11 @@ function FP_getObjectByID(id,o) {//v1.0
 
 
         function UpdateMoveCount(avat) {
+			var n = avat+4;
 			timeLeft = 60;
             if ((MoveCount + Start) % 2 == 1) {
                 document.images[14].src = 'avatars/computer.png';
-                document.images[15].src = Avatar[avat].src
+                document.images[15].src = Avatar[n].src
 				countdown();
             }
             else {
@@ -449,6 +450,11 @@ function FP_getObjectByID(id,o) {//v1.0
 					$('.selected').removeClass('selected');
 					$(this).addClass('selected');
             });
+			
+			$('#help').on('click', function () { 
+				$('#Page1, #tutavatar').fadeIn(500); 
+			});
+
         });
 
     </script>
@@ -563,7 +569,7 @@ function FP_getObjectByID(id,o) {//v1.0
 					<a href="index.html"><img id="img3" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu button.png')"> </a>
 					<span onclick="show('Page3'), sndloop.stop();"><img id="img2" src="buttons/options button.png" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options button.png')"></span>
 					<span onclick="javascript:Init()"><img id="img4" src="buttons/restart button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart button.png')"></span> <!-- onclick="javascript:Init()"> -->
-					<span onclick="javascript:message()"><img id="help" src="buttons/help button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'help',/*url*/'buttons/help clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'help',/*url*/'buttons/help button.png')" ></span>
+					<span id="help"><img id="help" src="buttons/help button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'help',/*url*/'buttons/help clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'help',/*url*/'buttons/help button.png')" ></span>
 					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>
 					<img id="ratios" src="blobratio.png" style="height: 70; width: 200; position: relative; left:170; top: 10;">
 				</tr>
@@ -749,19 +755,9 @@ function FP_getObjectByID(id,o) {//v1.0
 
         </table>
     </div>
-				
-<!--- Options for multi player --->
 
 </div>
-<!---
 
-    <div class="footer">
-        <p>
-            <span onclick="show('Page1');"><img src="play.png" height=70 width=70 style="position:absolute; left:25%; top:-180%; z-index:5;">game</span>,
-            <span onclick="show('Page3');"><img src="options button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'options clickedbutton.png')" style="position:absolute; left:31%; top:-180%; z-index:5;">Options</span>.
-            <a href="index.html"><img src ="menu button.png" height =50 width=50 style="position:absolute; left:38%; top:-180%; z-index:5;"> Main Menu</a>				        </p>
-    </div>
-	--->
     <script language="JavaScript">
         SetStart(1);
         SetSize(4);
