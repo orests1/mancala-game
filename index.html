@@ -1,19 +1,12 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 <meta content="en-gb" http-equiv="Content-Language" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <link rel="stylesheet" type="text/css" href="main.css">
+<link href="main.css" rel="stylesheet" type="text/css">
 <title>Mancala</title>
 <style type="text/css">
-.auto-style1 {
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-.auto-style2 {
-	border-width: 0px;
-}
 </style>
 <script type="text/javascript">
 <!--
@@ -37,23 +30,33 @@ function FP_getObjectByID(id,o) {//v1.0
  for(m=0; m<els.length; m++){ el=FP_getObjectByID(id,els[n]); if(el) return el; } }
  return null;
 }
-// -->
 </script>
 </head>
 
 <body onload="FP_preloadImgs(/*url*/'InfobuttonDOWN.png')" onmousedown="FP_preloadImgs(/*url*/'StartbuttonDOWN.png')">
 
-<div id="container" style="position: relative; width: 800px; height: 100px; z-index: 2; margin-left: auto; margin-right: auto; top: 0px; left: 0px">
-	<div id="layer4" style="position: absolute; width: 216px; height: 62px; z-index: 5; left: 287px; top: 341px">
-		<a href="flightmap1.html">
-		<img id="img2" alt="Information" class="auto-style2" height="56" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'InfobuttonDOWN.png')" src="Infobutton.png" width="211" /></a></div>
-	<div id="layer3" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'StartbuttonDOWN.png')" style="position: absolute; width: 216px; height: 62px; z-index: 4; left: 286px; top: 272px">
-		<a href="game.html">
-		<img id="img1" alt="Start" class="auto-style2" height="55" src="Startbutton.png" width="210" /></a></div>
-	<div id="layer2" class="auto-style1" style="position: absolute; width: 445px; height: 80px; z-index: 3; left: 167px; top: 176px">
-		<img alt="" height="61" src="mancalatitle2.png" width="441" /></div>
-	<div id="layer1" style="position: absolute; width: 800px; height: 600px; z-index: 1; top: 0px; left: 0px">
-		<img alt="" height="600" src="mainbackground.jpg" width="800" /></div>
+<div class="b">
+
+	<div class="leftdiv">
+	</div>
+
+	<div class="container">
+			<div class="movingplane1"></div>
+						<div class="movingplane2">
+		</div>
+		<div class="buttonholder">
+			<img alt="" class="title" height="61" src="mancalatitle2.png" width="441" />
+			<br />
+			<a href="game.html">
+			<img id="img1" alt="Start" class="auto-style2" height="55" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'StartbuttonDOWN.png')" src="Startbutton.png" width="210" /></a>
+			<br />
+			<a class="info" href="flightmap1.html">
+			<img id="img2" alt="Information" height="56" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'InfobuttonDOWN.png')" src="Infobutton.png" width="211" /></a>
+			<br />
+		</div>
+	</div>
+	<div class="rightdiv">
+	</div>
 </div>
 
 </body>
