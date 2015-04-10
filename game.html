@@ -56,15 +56,6 @@
 			return false;
 		}
 		
-		var data = { 
-			11 : "green.png", 
-			12 : "green.png", 
-			13 : "green.png", 
-			14 : "green.png", 
-			15 : "green.png", 
-			16 : "green.png", 21 : "green.png" };
-		
-		
         var i, j, IsOver = true, I_Sel, J_Sel, N_Mov, IsStart0, Start, Size = 4, MoveCount;
         Level = new Array(2);
         Fld = new Array(2);
@@ -75,17 +66,17 @@
                 Fld[i][j] = new Array(7);
         }
 		
-		Avatar = new Array(4);
-		for (i=0; i<4; i++) {
+		Avatar = new Array(8);
+		for (i=0; i<8; i++) {
 			Avatar[i] = new Image();
 			var n = i+1;
-			Avatar[i].src = n + "face.png";
+			Avatar[i].src = "avatars/" + n + "face.png";
 		}
 
-        Pic = new Array(16);
-        for (i = 0; i < 16; i++) {
+        Pic = new Array(36);
+        for (i = 0; i < 36; i++) {
             Pic[i] = new Image();
-            Pic[i].src = i + ".png";
+            Pic[i].src = "blobs/" + i + ".png";
         }
 
         IsStart0 = false;
@@ -303,7 +294,7 @@
             var oo = eval("document.OptionsForm.i" + ii + jj);
             oo.value = Fld[ii][jj][0];
             var nn = Fld[ii][jj][0];
-            if (nn > 14) nn = 14 + nn % 2;
+            if (nn > 35) nn = 35 + nn % 2;
             if ((ii == 0) || (jj == 0)) document.images[7 * ii + jj].src = Pic[nn].src;
             else document.images[14 - jj].src = Pic[nn].src;
 			snd.play();			
@@ -325,12 +316,13 @@
         function UpdateMoveCount(avat) {
 			timeLeft = 60;
             if ((MoveCount + Start) % 2 == 1) {
-                document.images[14].src = 'computer.png';
-                document.images[15].src = Avatar[avat].src
+				var n = avat + 4;
+                document.images[14].src = 'avatars/computer.png';
+                document.images[15].src = Avatar[n].src
 				countdown();
             }
             else {
-                document.images[14].src = 'computerturn.png';
+                document.images[14].src = 'avatars/computerturn.png';
                 document.images[15].src = Avatar[avat].src;
             }
         }
@@ -362,10 +354,10 @@
 		function mute(element) {
 			if (element.src.indexOf("volume-mute") != -1) {
 				sndloop.play();
-				element.src = "volume.png";
+				element.src = "buttons/volume.png";
 			} else {
 				sndloop.pause();
-				element.src = "volume-mute.png";
+				element.src = "buttons/volume-mute.png";
 			}
 		}
 
@@ -465,12 +457,12 @@
             </tr>
             <tr>
                 <td rowspan=3 align=right><img src="0.png" border=0></td>
-                <td align=right><img src="0.png" border=0 onmousedown="MouseDown(0,1)"></td>
-                <td align=right><img src="0.png" border=0 onmousedown="MouseDown(0,2)"></td>
-                <td align=middle><img src="0.png" border=0 onmousedown="MouseDown(0,3)"></td>
-                <td align=middle><img src="0.png" border=0 onmousedown="MouseDown(0,4)"></td>
-                <td align=rigth><img src="0.png" border=0 onmousedown="MouseDown(0,5)"></td>
-                <td align=right><img src="0.png" border=0 onmousedown="MouseDown(0,6)"></td>
+                <td align=right><img src="0.png" border=0 onMouseDown="MouseDown(0,1)"></td>
+                <td align=right><img src="0.png" border=0 onMouseDown="MouseDown(0,2)"></td>
+                <td align=middle><img src="0.png" border=0 onMouseDown="MouseDown(0,3)"></td>
+                <td align=middle><img src="0.png" border=0 onMouseDown="MouseDown(0,4)"></td>
+                <td align=rigth><img src="0.png" border=0 onMouseDown="MouseDown(0,5)"></td>
+                <td align=right><img src="0.png" border=0 onMouseDown="MouseDown(0,6)"></td>
                 <td rowspan=3 align=left><img src="0.png" border=0></td>
             </tr>
             <tr>
@@ -485,12 +477,12 @@
             </tr>
 
             <tr>
-                <td align=left><img src="0.png" border=0 onmousedown="MouseDown(1,6)"></td>
-                <td align=left><img src="0.png" border=0 onmousedown="MouseDown(1,5)"></td>
-                <td align=middle><img src="0.png" border=0 onmousedown="MouseDown(1,4)"></td>
-                <td align=middle><img src="0.png" border=0 onmousedown="MouseDown(1,3)"></td>
-                <td align=right><img src="0.png" border=0 onmousedown="MouseDown(1,2)"></td>
-                <td align=right><img src="0.png" border=0 onmousedown="MouseDown(1,1)"></td>
+                <td align=left><img src="0.png" border=0 onMouseDown="MouseDown(1,6)"></td>
+                <td align=left><img src="0.png" border=0 onMouseDown="MouseDown(1,5)"></td>
+                <td align=middle><img src="0.png" border=0 onMouseDown="MouseDown(1,4)"></td>
+                <td align=middle><img src="0.png" border=0 onMouseDown="MouseDown(1,3)"></td>
+                <td align=right><img src="0.png" border=0 onMouseDown="MouseDown(1,2)"></td>
+                <td align=right><img src="0.png" border=0 onMouseDown="MouseDown(1,1)"></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -535,15 +527,16 @@
             </table>
 			
 			<table margin-top=20>
+			<!---
 					<div id="tutavatar" class="tutavatar" ><img src='tutavatar.png'></div>
-
+			--->
 				<tr style="position:absolute">
-					<a href="index.html"><img src ="menu button.png" height =50 width=50 "> </a>
-					<span onclick="show('Page3'), sndloop.stop();"><img src="options button.png"></span>
-					<span onclick="javascript:Init()"><img src="restart button.png" style="z-index:5;"></span> <!-- onclick="javascript:Init()"> -->
-					<span onclick="show('tutavatar')"><img src="help button.png" style="z-index:5;"></span>
-					<img id="volume" src="volume.png"  onclick="mute(this);">
-
+					<a href="index.html"><img src ="buttons/menu button.png" height =50 width=50 "> </a>
+					<span onClick="show('Page3'), sndloop.stop();"><img src="buttons/options button.png"></span>
+					<span onClick="javascript:Init()"><img src="buttons/restart button.png" style="z-index:5;"></span> <!-- onclick="javascript:Init()"> -->
+					<span onClick="javascript:message()"><img src="buttons/help button.png" style="z-index:5;"></span>
+					<img id="volume" src="buttons/volume.png"  onclick="mute(this);">
+					<img id="ratios" src="blobratio.png" style="height: 70; width: 200; position: relative; left:170; top: 10;">
 
 				</tr>
 			</table>
@@ -563,6 +556,7 @@
             </tr>
             <tr>
                 <td class="back">
+
                     <a href="backgrounds/girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="backgrounds/girls1thumbnail.png" border="1">
                     </a>
@@ -570,33 +564,38 @@
 				<td class="back">
 					<a href="backgrounds/girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="backgrounds/girls2thumbnail.png" border="1">
+
                     </a>
 				</td>
 				<td class="gap"></td>
 
                 <td>
                     <div id="first" class="avatar">
-                        <a href="1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
-                            <img src="1face.jpg" border="1" height=100>
+                        <a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
+                            <img src="avatars/1face.jpg" border="1" height=100>
                     </div>
 				</td>
 				<td>
                     <div id="second" class="avatar">
-                        <a href="2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
-                        <img src="2face.jpg" border="1" height=100>
+                        <a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
+                        <img src="avatars/2face.jpg" border="1" height=100>
                     </div>
 				</td>				
             </tr>
             <tr>
 				<td class="back">
+
                     <a href="backgrounds/boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="backgrounds/boy1thumbnail.png" border="1">
+
                     </a>	
 				</td>
 				<td>
 					<div class="back">
+
 						<a href="backgrounds/boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
 						<img src="backgrounds/boy2thumbnail.png" border="1">
+
 						</a>	
 					</div>
 				</td>	
@@ -604,14 +603,14 @@
 
 				<td>
                     <div id="third" class="avatar">
-                        <a href="3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
-                            <img src="3face.jpg" border="1" height=100>
+                        <a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
+                            <img src="avatars/3face.jpg" border="1" height=100>
                     </div>
                 </td>
 				<td>
                     <div id="fourth" class="avatar">
-                        <a href="4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
-                            <img src="4face.jpg" border="1" height=100>
+                        <a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
+                            <img src="avatars/4face.jpg" border="1" height=100>
                     </div>
                 </td>
             </tr>
@@ -619,23 +618,23 @@
 			<tr>
 				<td colspan=2 class="mode">
 	                
-                    <h1><input type="radio" name="players" value="0" checked="checked" onchange="show('Page3')">Single player</h1>
-                    <h1><input type="radio" name="players" value="1" onchange="show('Page4')">Multi player</h1>
+                    <h1><input type="radio" name="players" value="0" checked="checked" onChange="show('Page3')">Single player</h1>
+                    <h1><input type="radio" name="players" value="1" onChange="show('Page4')">Multi player</h1>
                 </td>
 				<td colspan=3 class="difficulty">
 					<form action="">
 					<h1>Difficulty</h1>
-                        <h2><input type="radio" name="Difficulty" value="1" checked="checked" onchange="SetLevel(1, this.options[selectedIndex].value)">Easy
-                        <input type="radio" name="Difficulty" value="3" onchange="SetLevel(1, this.options[selectedIndex].value)">Medium
-                        <input type="radio" name="Difficulty" value="5" onchange="SetLevel(1, this.options[selectedIndex].value)">Hard</h2>
+                        <h2><input type="radio" name="Difficulty" value="1" checked="checked" onChange="SetLevel(1, this.options[selectedIndex].value)">Easy
+                        <input type="radio" name="Difficulty" value="3" onChange="SetLevel(1, this.options[selectedIndex].value)">Medium
+                        <input type="radio" name="Difficulty" value="5" onChange="SetLevel(1, this.options[selectedIndex].value)">Hard</h2>
                     </form>
                 </td>
 			</tr>
             <tr>
 				<td colspan=5>
-					<a href="index.html"><img src ="menu button.png" height =50 width=50 "> </a>
-					<span onclick="show('Page1'); Init(); timeLeft=60;">
-					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="50" height="50" /></a></span>
+					<a href="index.html"><img src ="buttons/menu button.png" height =50 width=50 "> </a>
+					<span onClick="show('Page1'); Init(); timeLeft=60;">
+					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" /></a></span>
 				</td>
             </tr>
         </table>
@@ -655,40 +654,40 @@
             </tr>
             <tr>
                 <td class="back">
-                    <a href="girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="girls1thumbnail.png" border="1">
+                    <a href="backgrounds/girls1.png" onClick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="backgrounds/girls1thumbnail.png" border="1">
                     </a>
 				</td>
 				<td class="back">
-					<a href="girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="girls2thumbnail.png" border="1">
+					<a href="backgrounds/girls2.png" onClick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="backgrounds/girls2thumbnail.png" border="1">
                     </a>
 				</td>
 				<td class="gap"></td>
 
                 <td>
                     <div id="first" class="avatar">
-                        <a href="1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
-                            <img src="1face.jpg" border="1" height=100>
+                        <a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
+                            <img src="avatars/1face.jpg" border="1" height=100>
                     </div>
 				</td>
 				<td>
                     <div id="second" class="avatar">
-                        <a href="2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
-                        <img src="2face.jpg" border="1" height=100>
+                        <a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
+                        <img src="avatars/2face.jpg" border="1" height=100>
                     </div>
 				</td>				
             </tr>
             <tr>
 				<td class="back">
-                    <a href="boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="boy1thumbnail.png" border="1">
+                    <a href="backgrounds/boy1.png" onClick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="backgrounds/boy1thumbnail.png" border="1">
                     </a>	
 				</td>
 				<td>
 					<div class="back">
-						<a href="boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-						<img src="boy2thumbnail.png" border="1">
+						<a href="backgrounds/boy2.png" onClick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+						<img src="backgrounds/boy2thumbnail.png" border="1">
 						</a>	
 					</div>
 				</td>	
@@ -696,14 +695,14 @@
 
 				<td>
                     <div id="third" class="avatar">
-                        <a href="3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
-                            <img src="3face.jpg" border="1" height=100>
+                        <a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
+                            <img src="avatars/3face.jpg" border="1" height=100>
                     </div>
                 </td>
 				<td>
                     <div id="fourth" class="avatar">
-                        <a href="4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
-                            <img src="4face.jpg" border="1" height=100>
+                        <a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
+                            <img src="avatars/4face.jpg" border="1" height=100>
                     </div>
                 </td>
             </tr>
@@ -711,7 +710,7 @@
 			<tr>
 				<td colspan=2 class="mode">
 	                
-                    <h1><input type="radio" name="players" value="0" onchange="show('Page3')">Single player</h1>
+                    <h1><input type="radio" name="players" value="0" onChange="show('Page3')">Single player</h1>
                     <h1><input type="radio" name="players" value="1" onchange='window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'>Multi player</h1>
                 </td>
 				<td colspan=3><h1 id="plane"></h1>
@@ -720,9 +719,9 @@
 			</tr>
             <tr>
 				<td colspan=5>
-					<a href="index.html"><img src ="menu button.png" height =50 width=50 "></a>
-					<span onclick="show('Page1'); Init(); timeLeft=60;">
-					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttondown.png')" src="button.png" width="50" height="50" /></a></span>
+					<a href="index.html"><img src ="buttons/menu button.png" height =50 width=50 "></a>
+					<span onClick="show('Page1'); Init(); timeLeft=60;">
+					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" /></a></span>
 				</td>
             </tr>
 
