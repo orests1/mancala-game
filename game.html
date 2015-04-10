@@ -82,8 +82,8 @@
 			Avatar[i].src = n + "face.png";
 		}
 
-        Pic = new Array(12);
-        for (i = 0; i < 12; i++) {
+        Pic = new Array(16);
+        for (i = 0; i < 16; i++) {
             Pic[i] = new Image();
             Pic[i].src = i + ".png";
         }
@@ -303,7 +303,7 @@
             var oo = eval("document.OptionsForm.i" + ii + jj);
             oo.value = Fld[ii][jj][0];
             var nn = Fld[ii][jj][0];
-            if (nn > 10) nn = 10 + nn % 2;
+            if (nn > 14) nn = 14 + nn % 2;
             if ((ii == 0) || (jj == 0)) document.images[7 * ii + jj].src = Pic[nn].src;
             else document.images[14 - jj].src = Pic[nn].src;
 			snd.play();			

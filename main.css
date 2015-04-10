@@ -13,6 +13,12 @@
 	100% {left:0px; top: 250px;}
 }
 
+@keyframes rightleft {
+	0% {left: 750px; top: 150px;}
+	100% {left:0px; top: 250px;}
+}
+
+
 .movingplane1 {
     width: 50px;
     height: 34px;
