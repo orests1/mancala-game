@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<HTML>
+</head>
+<style type="text/css">
+@-webkit-keyframes move {
+    0%   {left:0px; top:0px;}
+    25%  {left:200px; top:400px;}
+    50%  {left:200px; top:800px;}
+    75%  {left:0px; top:200px;}
+    100% {left:0px; top:0px;}
+}
+
+.plane {
+    width: 50px;
+    height: 34px;
+    background: url('plane.png');
+    position: relative;
+    -webkit-animation-name: move; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+    animation-name: move;
+    animation-duration: 4s;
+}
+	
+
+</style>
+</head>
+<body>
+<div>
+<div class='plane'></div>
+<div class='bla'><h1>this is the header</h1></div>
+</div>
+</body>
+</html>

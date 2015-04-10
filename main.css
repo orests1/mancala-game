@@ -1,3 +1,48 @@
+﻿@-webkit-keyframes move {
+    0%   {left:0px; top:300px;}
+    100% {left:750px; top:400px;}
+}
+
+@keyframes move {
+    0%   {left:0px; top:300px;}
+    100% {left:750px; top:400px;}
+}
+
+@-webkit-keyframes rightleft {
+	0% {left: 750px; top: 150px;}
+	100% {left:0px; top: 250px;}
+}
+
+.movingplane1 {
+    width: 50px;
+    height: 34px;
+    background: url('plane.png');
+    position: relative;
+    -webkit-animation-name: move; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 30s; /* Chrome, Safari, Opera */
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+    animation-name: move;
+    animation-duration: 30s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+ }
+
+.movingplane2 {
+    width: 50px;
+    height: 34px;
+    background: url('plane2.png');
+    position: relative;
+    -webkit-animation-name: rightleft; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 30s; /* Chrome, Safari, Opera */
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+    animation-name: rightleft;
+    animation-duration: 30s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+ }
+ 
 body {
 	margin-left: auto;
 	margin-right: auto;
@@ -5,10 +50,45 @@ body {
 	background-repeat: no-repeat;
     background-position: top;
 	z-index: 0;
+	display: relative;
+	width:100%;
+}
+
+.b {
+	left: 0px;
+	width: 100%;
+	height: 600px;
+	display: inline-block;
+}
+
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 800px;
+	height: 600px;
+	top: 0px;
+	position: absolute;
+	display: inline-block;
+	font-family: 'Chewy', cursive;
+
+}
+
+.leftdiv {
+	width: calc((100% - 800px)/2);
+	height: 600px;
+	display: inline-block;
 
 }
 
 
+/*
+.rightdiv {
+	width: calc((100% - 800px) /2);
+	height: 600px;
+	display: inline-block;
+}
+*/
 .footer { 
 	position:absolute;
     width:100%;
@@ -97,3 +177,21 @@ table.choose {
 .turn {
 	background-color:yellow;
 }
+
+.buttonholder {
+	text-align: center;
+	margin-left:auto;
+	margin-right: auto;
+	position: relative;
+	margin-top: 200px;
+}
+
+.buttonholder img {
+	margin: 0px;
+	padding-top: 2px;
+}
+
+.buttonholder .title {
+	padding-bottom: 15px;
+}
+
