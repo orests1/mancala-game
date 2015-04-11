@@ -9,6 +9,13 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/javascript" src="jquery-1.10.1.js"></script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+    <script type="text/javascript" src="modernizr.mq.js"></script>
+    <script type="text/javascript" src="jquery.joyride-2.1.js"></script>
+	<script type="text/javascript" src="music.js"</script>
+	<link rel=" stylesheet" type="text/css" href="jquery.joyride-2.1.css">
+
     <style type="text/css">
         input {
             background-color: #ffffff;
@@ -71,7 +78,6 @@ function FP_getObjectByID(id,o) {//v1.0
 		}
 		
 		var won = new Audio("won.wav");
-		var sndloop = new Audio("loop.mp3");
 		var snd = new Audio("cartoon019.mp3");
 		
 		var avat = 0;
@@ -112,17 +118,17 @@ function FP_getObjectByID(id,o) {//v1.0
             Pic[i] = new Image();
             Pic[i].src = "blobs/"+i + ".png";
         }
-
-        IsStart0 = false;
-        Level[0] = 1;
-        Level[1] = 0;
-
-        function Init() {
 			sndloop.addEventListener('ended', function() {
 				this.currentTime = 0;
 				this.play();
 			}, false);
 			sndloop.play();
+        IsStart0 = false;
+        Level[0] = 1;
+        Level[1] = 0;
+
+        function Init() {
+
 		
             var ii, jj;
             for (ii = 0; ii < 2; ii++) {
@@ -385,13 +391,30 @@ function FP_getObjectByID(id,o) {//v1.0
               "\ntakes all remaining beans into his own mancala.");
         }
 		
+		var muted = 0;
+		function m(){
+
+			if (muted == 0) {
+				document.getElementById('volume').src="buttons/volume.png";
+			console.log(muted);
+			}
+			else {
+				document.getElementById('volume').src="buttons/volume-mute.png";
+				console.log(muted);
+				}
+		}
+		
 		function mute(element) {
 			if (element.src.indexOf("volume-mute") != -1) {
 				sndloop.play();
 				element.src = "buttons/volume.png";
+				muted = 0;
+				console.log(muted);
 			} else {
 				sndloop.pause();
 				element.src = "buttons/volume-mute.png";
+				muted = 1;
+				console.log(muted);
 			}
 		}
 
@@ -405,12 +428,7 @@ function FP_getObjectByID(id,o) {//v1.0
 			}
 		}
 		
-		document.getElementById('mute').addEventListener('click', function (e)
-		{
-			e = e || window.event;
-			sndloop.muted = !sndloop.muted;
-			e.preventDefault();
-		}, false);
+
 		
 
     </script>
@@ -454,8 +472,8 @@ function FP_getObjectByID(id,o) {//v1.0
 			$('#help').on('click', function () { 
 				$('#Page1, #tutavatar').fadeIn(500); 
 			});
-
         });
+
 
     </script>
 </head>
@@ -569,7 +587,9 @@ function FP_getObjectByID(id,o) {//v1.0
 					<a href="index.html"><img id="img3" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu button.png')"> </a>
 					<span onclick="show('Page3'), sndloop.stop();"><img id="img2" src="buttons/options button.png" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options button.png')"></span>
 					<span onclick="javascript:Init()"><img id="img4" src="buttons/restart button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart button.png')"></span> <!-- onclick="javascript:Init()"> -->
+
 					<span id="help"><img id="help1" src="buttons/help button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'help1',/*url*/'buttons/help clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'help1',/*url*/'buttons/help button.png')" ></span>
+
 					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>
 					<img id="ratios" src="blobratio.png" style="height: 70; width: 200; position: relative; left:170; top: 10;">
 				</tr>
@@ -580,7 +600,7 @@ function FP_getObjectByID(id,o) {//v1.0
     <div id="Page3" class="page" style="">
         <table class="options">
             <tr>
-                <td colspan=2>
+                <td colspan=2 id="background">
                     <h1>Background</h1>
                 </td>
 				<td class="gap"></td>
@@ -589,7 +609,7 @@ function FP_getObjectByID(id,o) {//v1.0
                 </td>
             </tr>
             <tr>
-                <td class="back">
+                <td class="back" id="one">
                     <a href="backgrounds/girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
                     <img src="backgrounds/girls1thumbnail.png" border="1">
                     </a>
@@ -644,7 +664,7 @@ function FP_getObjectByID(id,o) {//v1.0
             </tr>
 			<tr height=50px></tr>
 			<tr>
-				<td colspan=2 class="mode">
+				<td colspan=2 class="mode" >
 	                
                     <h1><input type="radio" name="players" value="0" checked="checked" onchange="show('Page3')">Single player</h1>
                     <h1><input type="radio" name="players" value="1" onchange="show('Page4')">Multi player</h1>
@@ -661,8 +681,9 @@ function FP_getObjectByID(id,o) {//v1.0
             <tr>
 				<td colspan=5>
 					<a href="index.html"><img id="imgmenu2" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu button.png')"> </a>
-					<span onclick="show('Page1'); Init(); timeLeft=60;">
+					<span onclick="show('Page1'); m(); Init(); timeLeft=60;">
 					<img id="img0" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttons/button.png')"></a></span>
+					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>
 				</td>
             </tr>
         </table>
@@ -673,7 +694,7 @@ function FP_getObjectByID(id,o) {//v1.0
         <table class="options">
             <tr>
                 <td colspan=2>
-                    <h1>Background</h1>
+                    <h1 id="one">Background</h1>
                 </td>
 				<td class="gap"></td>
                 <td colspan=2>
@@ -750,6 +771,7 @@ function FP_getObjectByID(id,o) {//v1.0
 					<a href="index.html"><img id="imgmenu" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'buttons/menu button.png')"></a>
 					<span onclick="show('Page1'); Init(); timeLeft=60;">
 					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/button.png')" ></a></span>
+					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>				
 				</td>
             </tr>
 
@@ -763,6 +785,7 @@ function FP_getObjectByID(id,o) {//v1.0
         SetSize(4);
         SetLevel(0, 1);
         setInterval("Timer()", 500);
+
     </script>
 </body>
 </html>											
