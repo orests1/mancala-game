@@ -4,9 +4,12 @@
 <head>
 <meta content="en-gb" http-equiv="Content-Language" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<link href="main.css" rel="stylesheet" type="text/css">
+<link href="main.css" rel="stylesheet" type="text/css"/>
 <title>Mancala</title>
 <style type="text/css">
+.auto-style1 {
+	border-width: 0px;
+}
 </style>
 
 <script type="text/javascript">
@@ -78,7 +81,7 @@ function FP_getObjectByID(id,o) {//v1.0
 
 
 
-	<div class="container">
+	<div class="container" style="left: 307px; top: -9px; margin-left: auto; margin-right: auto">
 			<div class="movingplane1"></div>
 			<div class="movingplane2">
 		</div>
@@ -88,8 +91,8 @@ function FP_getObjectByID(id,o) {//v1.0
 			<a href="game.html">
 			<img id="img1" alt="Start" class="auto-style2" height="55" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/StartbuttonDOWN.png')" src="buttons/Startbutton.png" width="210" onmouseup="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/Startbutton.png')"></a>
 			<br/>
-			<a class="info" href="flightmap1.html">
-			<img id="img2" alt="Information" height="56" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/InfobuttonDOWN.png')" src="buttons/Infobutton.png" width="211" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/Infobutton.png')" ></a>
+			<a class="info" href="InformationMenu.html">
+			<img id="img2" alt="Information" height="56" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/InfobuttonDOWN.png')" src="buttons/Infobutton.png" width="211" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/Infobutton.png')" class="auto-style1" ></a>
 
 			<br />
 			<div>					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span></div>
