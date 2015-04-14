@@ -9,12 +9,8 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="main.css">
-    <script type="text/javascript" src="jquery-1.10.1.js"></script>
-    <script type="text/javascript" src="jquery.cookie.js"></script>
-    <script type="text/javascript" src="modernizr.mq.js"></script>
-    <script type="text/javascript" src="jquery.joyride-2.1.js"></script>
 	<script type="text/javascript" src="music.js"</script>
-	<link rel=" stylesheet" type="text/css" href="jquery.joyride-2.1.css">
+    <link rel="stylesheet" href="joyride-2.1.css">
 
     <style type="text/css">
         input {
@@ -72,7 +68,6 @@ function FP_getObjectByID(id,o) {//v1.0
 				myWindow.document.body.appendChild(btn);          
 				clearTimeout(mId);
 			} else {
-				console.log(mLeft);
 				mLeft--;
 			}
 		}
@@ -173,7 +168,6 @@ function FP_getObjectByID(id,o) {//v1.0
 				SetLevel(1, 0);
 				timeLeft = 60;
 			} else {
-				console.log(timeLeft);
 				timeLeft--;
 			}
 		}
@@ -396,11 +390,9 @@ function FP_getObjectByID(id,o) {//v1.0
 
 			if (muted == 0) {
 				document.getElementById('volume').src="buttons/volume.png";
-			console.log(muted);
 			}
 			else {
 				document.getElementById('volume').src="buttons/volume-mute.png";
-				console.log(muted);
 				}
 		}
 		
@@ -409,12 +401,10 @@ function FP_getObjectByID(id,o) {//v1.0
 				sndloop.play();
 				element.src = "buttons/volume.png";
 				muted = 0;
-				console.log(muted);
 			} else {
 				sndloop.pause();
 				element.src = "buttons/volume-mute.png";
 				muted = 1;
-				console.log(muted);
 			}
 		}
 
@@ -694,7 +684,7 @@ function FP_getObjectByID(id,o) {//v1.0
         <table class="options">
             <tr>
                 <td colspan=2>
-                    <h1 id="one">Background</h1>
+                    <h1 id="so-awesome">Background</h1>
                 </td>
 				<td class="gap"></td>
                 <td colspan=2>
@@ -779,6 +769,34 @@ function FP_getObjectByID(id,o) {//v1.0
     </div>
 
 </div>
+
+   <ol id="joyRideTipContent">
+      <li data-class="one" data-text="Next" class="custom">
+        <h2>Stop #1</h2>
+        <p>You can control all the details for you tour stop. Any valid HTML will work inside of Joyride.</p>
+      </li>
+    </ol>
+
+    <script type="text/javascript" src="jquery-1.10.1.js"></script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+    <script type="text/javascript" src="modernizr.mq.js"></script>
+    <script type="text/javascript" src="jquery.joyride-2.1.js"></script>
+    <script>
+	 $(document).foundation().foundation('joyride', 'start');
+		console.log("joyride function");
+     $(window).load(function()  {
+        $('#joyRideTipContent').joyride({
+          autoStart : true,
+          postStepCallback : function (index, tip) {
+          if (index == 2) {
+            $(this).joyride('set_li', false, 1);
+          }
+        },
+        modal:true,
+        expose: true
+        });
+      });
+    </script>
 
     <script language="JavaScript">
         SetStart(1);
