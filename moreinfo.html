@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Flight Map</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<script type="text/javascript">
+var imagecount = 1;
+var total = 3;
+
+
+
+window.setInterval(function slideA(){
+    var Image = document.getElementById('WeatherImg');
+    imagecount = imagecount + 1;
+    if (imagecount > total){imagecount = 1;}
+    if (imagecount < 1){imagecount = total;}
+             if (imagecount == 1){document.getElementById("layer10").innerHTML = "The morning will be sunny but with rain and some clouds.";}
+    if (imagecount == 2){document.getElementById("layer10").innerHTML = "The afternoon will be hot and sunny with clear blue skies.";}
+        if (imagecount == 3){document.getElementById("layer10").innerHTML = "In the evening there will be stormy rain with heavy clouds.";}
+
+    Image.src = "MorningImg"+ imagecount +".png";
+    },4000);
+    
+   
+</script>
+<style type="text/css">
+.auto-style1 {
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.auto-style2 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.auto-style3 {
+	margin-top: 0px;
+}
+</style>
+</head>
+
+<body onload=" slideA()">
+
+  <div id="clockDisplay" class="clockStyle" style="left: 975px; top: 14px; height: 27px">
+  </div>
+<script type="text/javascript" language="javascript">
+function renderTime() {
+
+    var currentTime = new Date();
+    var diem = "AM";
+    var h = currentTime.getHours();
+    var m = currentTime.getMinutes();
+    var s = currentTime.getSeconds();
+    
+    if (h == 0) {
+        h = 12;
+    } else if (h > 12) {
+    h = h - 12;
+    diem = "PM";
+    }
+    if (h < 10) {
+        h = "0" + h;
+    }
+    if (m < 10) {
+        m = "0" + m;
+    }
+    if (s < 10) {
+        s = "0" + s;
+    }
+     
+    var myClock = document.getElementById('clockDisplay');
+    myClock.textContent = h + ":" + m + ":" + s + " " + diem;
+    myClock.innerText = h + ":" + m + ":" + s + " " + diem;
+    setTimeout('renderTime()',1000);
+
+}
+renderTime();
+</script>
+	
+  <div id="container" style="position: relative; width: 800px; height: 100px; z-index: 4; margin-left: auto; margin-right: auto; visibility: visible;">
+  
+  	  <div id="layer12" style="position: absolute; width: 100px; height: 100px; z-index: 14; left: 529px; top: 369px">
+		  <img alt="bus" height="143" src="bustour.jpg" width="253" /></div>
+	  <div id="layer11" style="position: absolute; width: 100px; height: 100px; z-index: 13; left: 304px; top: 369px">
+		  <img alt="l" class="auto-style3" height="141" src="londoneye.jpg" width="217" /></div>
+	  <div id="layer10" style="position: absolute; width: 423px; height: 111px; z-index: 12; left: 331px; top: 190px">
+		<h2 class="auto-style2">Morning: Sunny With Showers</h2>
+		<h2>&nbsp;</h2>
+	  </div>
+  
+  <div id="layer7" style="position: absolute; width: 58px; height: 53px; z-index: 11; left: 8px; top: 502px">
+   <a href="InformationMenu.html"><img alt="back to information menu" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/backbuttonDOWN.png')" src="buttons/backbuttonUP.png" /></a>
+  </div>
+  
+	  <div id="layer4" class="auto-style1" style="position: absolute; width: 185px; height: 40px; z-index: 7; left: 395px; top: 6px">
+			<h2><strong>London Time</strong></h2>
+
+	  </div>
+  
+	<div id="layer3" class="auto-style1" style="position: absolute; width: 718px; height: 187px; z-index: 6; left: 50px; top: 314px">
+		<h2><strong>London Tourist Attractions</strong></h2>
+	</div>
+
+
+<div id="layer2" style="position: absolute; width: 712px; height: 197px; z-index: 5; left: 48px; top: 109px">
+	<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<span class="auto-style2">Weather On Arrival: London - UK</span></h1>
+	<img src="MorningImg1.png" alt="weather Icon" id="WeatherImg"></img>
+	  </div>
+	
+
+
+	<div id="layer1" style="position: absolute; width: 800px; height: 600px; z-index: 4; left: 0px; top: 0px; visibility: visible;">
+		<div id="layer9" style="position: absolute; width: 231px; height: 139px; z-index: 1; left: 62px; top: 368px">
+		<img src="bigben.jpg" alt="image of big ben" height="130" width="229"></img>
+		</div>
+		&nbsp;<div id="layer8" style="position: absolute; width: 363px; height: 27px; z-index: 2; left: 396px; top: 60px">
+	   <span id="days">00</span> days
+       <span id="hours">00</span> hours
+       <span id="minutes">00</span> minutes
+       <span id="seconds">00</span> seconds until arrival.
+       
+
+		</div>
+	  </div>
+		
+
+  </div>
+
+ <script src="countdown.js"></script>
+       <script type="text/javascript">
+       countdown('04/14/2015 02:30:00 PM' , ['days', 'hours', 'minutes', 'seconds'],
+           function() {
+           console.log('Finished');
+          });
+       </script>
+
+
+
+</body>
+
+</html>
