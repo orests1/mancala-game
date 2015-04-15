@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Films</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+<style type="text/css">
+.auto-style1 {
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+
+.auto-style2 {
+	font-family: "Arial Rounded MT Bold";
+}
+.auto-style3 {
+	border-width: 0px;
+}
+
+
+</style>
+<script type="text/javascript">
+var imagecount = 1;
+var total = 3;
+
+function slide(x) {
+var Image = document.getElementById("filmimg");
+imagecount = imagecount + x;
+if(imagecount > total){ imagecount = 1;}
+if(imagecount < 1){imagecount = total;}
+Image.src = "filmimage"+ imagecount +".jpg";
+if (imagecount == 1){
+document.getElementById("textarea").innerHTML = "Run time: 1 hour 45 minutes <br><br>When her father unexpectedly passes away, young Ella finds herself at the mercy of her cruel stepmother and her daughters. Never one to give up hope, Ella's fortunes begin to change after meeting a dashing stranger."
+} else if (imagecount == 2){
+document.getElementById("textarea").innerHTML = "Run time: 1 hour 25 minutes <br><br>When Shaun decides to take the day off and have some fun, he gets a little more action than he bargained for. A mix up with the Farmer, a caravan and a very steep hill lead them all to the Big City and it's up to Shaun and the flock to return everyone safely to the green grass of home."
+} else {
+document.getElementById("textarea").innerHTML = "Run time: 1 hour 32 minutes <br><br>When a diabolical pirate above the sea steals the secret Krabby Patty formula, SpongeBob and his nemesis Plankton must team up in order to get it back."
+}
+   
+
+}
+
+</script>
+</head>
+
+<body onload=" slideA()">
+
+  <div id="clockDisplay" class="clockStyle" style="left: 952px; top: 10px; width: 135px;">
+  </div>
+
+<script type="text/javascript" language="javascript">
+function renderTime() {
+
+    var currentTime = new Date();
+    var diem = "AM";
+    var h = currentTime.getHours();
+    var m = currentTime.getMinutes();
+    var s = currentTime.getSeconds();
+    
+    if (h == 0) {
+        h = 12;
+    } else if (h > 12) {
+    h = h - 12;
+    diem = "PM";
+    }
+    if (h < 10) {
+        h = "0" + h;
+    }
+    if (m < 10) {
+        m = "0" + m;
+    }
+    if (s < 10) {
+        s = "0" + s;
+    }
+     
+    var myClock = document.getElementById('clockDisplay');
+    myClock.textContent = h + ":" + m + ":" + s + " " + diem;
+    myClock.innerText = h + ":" + m + ":" + s + " " + diem;
+    setTimeout('renderTime()',1000);
+
+}
+renderTime();
+</script>
+
+
+<p>&nbsp;</p>
+
+
+  <div id="container" style="position: relative; width: 800px; height: 514px; z-index: 1; margin-left: auto; margin-right: auto; left: -123px; top: -16px;">
+  
+  
+  
+	  <div id="layer6" style="position: absolute; width: 100px; height: 100px; z-index: 8; left: 794px; top: 424px">
+		  <a href="index.html">
+		  <img alt="PLay" class="auto-style3" height="98" src="buttons/button.png" width="98" /></a><br />
+	  </div>
+	  <div id="layer2" style="position: absolute; width: 73px; height: 79px; z-index: 6; left: 180px; top: 245px">
+	<img onClick="slide(-1)" class="left" src="FILMarrowleft.png" height="77" width="73"/></div>
+  
+  
+  
+	<div id="layer3" class="auto-style1" style="position: absolute; width: 167px; height: 34px; z-index: 5; left: 136px; top: -57px">
+
+		<div id="layer5" style="position: absolute; width: 292px; height: 42px; z-index: 12; left: 205px; top: 1px">
+		<span id="days">00</span> days <span id="hours">00</span> hours <span id="minutes">00</span> minutes <span id="seconds">00</span> seconds
+			<br />
+			until arrival</div>
+		<h2><strong>Choose A Film</strong></h2> 
+
+	</div>
+
+  
+  
+  <div id="layer4" style="position: absolute; width: 63px; height: 54px; z-index: 7; left: 139px; top: 453px">
+  <a href="InformationMenu.html"><img alt="back to information menu" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/backbuttonDOWN.png')" src="buttons/backbuttonUP.png" /></a>
+  </div>
+  
+  
+  
+<div id="filmcontainer" style="position: relative;  z-index: 4; margin-left: auto; margin-right: auto; visibility: visible; left: 158px; top: 7px; width: 600px;">
+  
+  
+  
+ <script src="countdown.js"></script>
+       <script type="text/javascript">
+       countdown('04/14/2015 02:30:00 PM' , ['days', 'hours', 'minutes', 'seconds'],
+           function() {
+           console.log('Finished');
+          });
+       </script>
+
+	<img id="filmimg" src="filmimage1.jpg" height="316"/><img onClick="slide(1)" class="right" src="FILMarrowright.png" height="87" width="83"/>
+<div id="textarea"><span class="auto-style2">Run time: 1 hour 45 minutes</span><br class="auto-style2">
+	<br class="auto-style2"></br><span class="auto-style2">When her father unexpectedly passes away, young Ella finds herself at the mercy of her cruel stepmother and her daughters. Never one to give up hope, Ella's fortunes begin to change after meeting a dashing stranger.</span></div>	
+<div id="left_holder" style="right: 0px; top: 0px; width: 100px"></div>
+<div id="right_holder" class="auto-style2">&nbsp;</div>
+</div>
+  </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Flight Map</title>
+<link rel="stylesheet" type="text/css" href="main.css"/>
+<script type="text/javascript">
+var imagecount = 1;
+var total = 50;
+
+window.setInterval(function slideA(){
+    var Image = document.getElementById('img');
+    imagecount = imagecount + 1;
+    if (imagecount > total){imagecount = 1;}
+    if (imagecount < 1){imagecount = total;}
+    Image.src = "planeflying"+ imagecount +".png";
+    },2000);
+</script>
+<style type="text/css">
+.auto-style1 {
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.auto-style2 {
+	font-size: medium;
+}
+.auto-style3 {
+	font-size: x-large;
+}
+</style>
+</head>
+
+<body onload=" slideA()">
+
+<script type="text/javascript" language="javascript">
+function renderTime() {
+
+    var currentTime = new Date();
+    var diem = "AM";
+    var h = currentTime.getHours();
+    var m = currentTime.getMinutes();
+    var s = currentTime.getSeconds();
+    
+    if (h == 0) {
+        h = 12;
+    } else if (h > 12) {
+    h = h - 12;
+    diem = "PM";
+    }
+    if (h < 10) {
+        h = "0" + h;
+    }
+    if (m < 10) {
+        m = "0" + m;
+    }
+    if (s < 10) {
+        s = "0" + s;
+    }
+     
+    var myClock = document.getElementById('clockDisplay');
+    myClock.textContent = h + ":" + m + ":" + s + " " + diem;
+    myClock.innerText = h + ":" + m + ":" + s + " " + diem;
+    setTimeout('renderTime()',1000);
+
+}
+renderTime();
+</script>
+<script type="text/javascript">
+function CanadaInfo(){
+    document.getElementById("layer5").innerHTML = "The capital city of Canada is Ottawa. Canada is the second largest country in the world, after Russia. In Canada two main languages are spoken, English and French. Canada can be very cold in winter and is home to polar bears and wolves!"
+    document.getElementById("flag").src = "Flags/CanadaFlag.png"
+    }
+function AmericaInfo(){
+    document.getElementById("layer5").innerHTML = "The capital city of America is Washington D.C. America is known for many inventions like the internet and was the first countryto travel to the moon. America is home to some of the worlds longest rivers - the Missisipi and Missouri!"
+    document.getElementById("flag").src = "Flags/AmericaFlag.png"
+    }    
+function GreenlandInfo(){
+    document.getElementById("layer5").innerHTML = "The capital city of Greenland is Nuuk. Greenland is the worlds biggest island and is not very green - most of the island is covered in ice. Greenland has a small population and the most important business for Greenland is fishing."
+    document.getElementById("flag").src = "Flags/GreenlandFlag.png"
+    }
+function UKInfo(){
+    document.getElementById("layer5").innerHTML = "The capital city of the United Kingdom is London. The United Kingdom contains four nations: England, Scotland, Wales, and Northern Ireland. The most popular sport in Britain is football, which is known as soccer in America."
+    document.getElementById("flag").src = "Flags/UKFlag.png"
+    }
+function IrelandInfo(){
+    document.getElementById("layer5").innerHTML = "Ireland's capital city is Dublin, and is home to over one quarter of the total population. The countries official first language is Gaelic, whichis also spoken in some parts of Scotland, however the most commonly spoken language is English."
+    document.getElementById("flag").src = "Flags/IrelandFlag.png"
+    }
+function NorwayInfo(){
+    document.getElementById("layer5").innerHTML = "Norway's capital city is Oslo, and the country is famous for it's majestic lakes (which are called 'fjords' and mountainous terrain). Norway can be very cold and is home to arctic animals such as wolves, puffins and polar bears."
+    document.getElementById("flag").src = "Flags/NorwayFlag.png"
+    }
+function FranceInfo(){
+    document.getElementById("layer5").innerHTML = "The capital city of France is Paris which is famous for its landmarks like the Eiffel Tower and is one of the world's most popular destinations for tourists. The Alps are France's biggest mountains and are a popular destination for skiing."
+    document.getElementById("flag").src = "Flags/FranceFlag.png"
+    }
+function SpainInfo(){
+    document.getElementById("layer5").innerHTML = "The capital city of Spain is Madrid. The mountains that divide Spain and France are called the Pyrenees. Spain has one of the biggest tourism industries in the world because of its sunny weather and many islands such as Majorca and Ibiza."
+    document.getElementById("flag").src = "Flags/SpainFlag.png"
+    }
+function PortugalInfo(){
+    document.getElementById("layer5").innerHTML = "Portugal's capital city is Lisbon, which is one of the oldest cities in the world. The cork tree (used to make corks for bottles) is one of Portugal's native trees, and the country is the world'sbiggest produces of cork products."
+    document.getElementById("flag").src = "Flags/PortugalFlag.png"
+    }
+function MoroccoInfo(){
+    document.getElementById("layer5").innerHTML = "The capital city of Morocco is Rabat. The country countains part of the Sahara desert, which is one the biggest and hottest deserts in the world and is known for its camel's, an animal which stores water in a hump on its back."
+    document.getElementById("flag").src = "Flags/MoroccoFlag.png"
+    }  
+</script>
+	
+  <div id="container" style="position: relative; width: 800px; height: 100px; z-index: 4; margin-left: auto; margin-right: auto; visibility: visible; left: 0px; top: 0px;">
+  
+  <div id="layer7" style="position: absolute; width: 58px; height: 53px; z-index: 11; left: 10px; top: 491px">
+   <a href="InformationMenu.html"><img alt="back to information menu" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/backbuttonDOWN.png')" src="buttons/backbuttonUP.png" /></a>
+  </div>
+  
+	<div id="layer6" style="position: absolute; width: 216px; height: 112px; z-index: 9; left: 539px; top: 422px">
+	<img id="flag" src="Flags/UKFlag.png" width="216px" height="112px"/>
+	</div>
+  
+	<div id="layer5" style="position: absolute; width: 480px; height: 104px; z-index: 8; left: 36px; top: 421px">
+	The capital city of the United Kingdom is London. The United Kingdom contains four nations: England, Scotland, Wales, and Northern Ireland. The most popular sport in Britain is football, which is known as soccer in America.
+
+	</div>
+  
+	  <div id="layer4" class="auto-style1" style="position: absolute; width: 185px; height: 39px; z-index: 7; left: 395px; top: -8px">
+			<h3><strong>London Time</strong></h3>
+			<h2>&nbsp;</h2>
+
+	  </div>
+  
+	<div id="layer3" class="auto-style1" style="position: absolute; width: 312px; height: 30px; z-index: 6; left: 25px; top: -11px">
+		<strong><span class="auto-style3">Flight Path</span></strong><span class="auto-style2"> 
+		(try clicking the countries!)</span></div>
+
+
+<div id="layer2" style="position: absolute; width: 736px; height: 297px; z-index: 5; left: 33px; top: 85px">
+	&nbsp;<img alt="Map route" id="img" height="305" src="planeflying1.png" usemap="#worldmap" style="left: 556px; top: 150px; " width="739" /></div>
+	<map name="worldmap">
+	<area shape="rect" alt="Canada" coords="3,31,270,178" href="#" onclick="CanadaInfo()"/>
+	<area shape="rect" alt="America" coords="3,184,178,291" href="#" onclick="AmericaInfo()"/>
+	<area shape="rect" alt="UK" coords="624,42,674,129" href="#" onclick="UKInfo()"/>
+	<area shape="rect" alt="Ireland" coords="590,95,617,120" href="#" onclick="IrelandInfo()"/>
+	<area shape="rect" alt="Norway" coords="704,4,731,53" href="#" onclick="NorwayInfo()"/>
+	<area shape="rect" alt="France" coords="635,136,712,193" href="#" onclick="FranceInfo()"/>
+	<area shape="rect" alt="Greenland" coords="276,3,345,30" href="#" onclick="GreenlandInfo()"/>
+	<area shape="rect" alt="Spain" coords="618,200,675,245" href="#" onclick="SpainInfo()"/>
+	<area shape="rect" alt="Portugal" coords="583,207,615,247" href="#" onclick="PortugalInfo()"/>
+	<area shape="rect" alt="Morocco" coords="580,253,650,279" href="#" onclick="MoroccoInfo()"/>
+	</map>
+	
+
+
+	<div id="layer1" style="position: absolute; width: 800px; height: 600px; z-index: 4; left: 0px; top: 0px; visibility: visible;">
+		&nbsp;<div id="layer8" style="position: absolute; width: 321px; height: 27px; z-index: 1; left: 396px; top: 60px">
+	   <span id="days">00</span> days
+       <span id="hours">00</span> hours 
+       <span id="minutes">00</span> minutes
+       <span id="seconds">00</span> seconds
+
+			until arrival.</div>
+	  </div>
+		
+
+  </div>
+
+
+
+
+  <div id="layer9" style="position: absolute; width: 872px; height: 100px; z-index: 5; left: 835px; top: 5px">
+
+  <div id="clockDisplay" class="clockStyle" style="left: 975px; top: 14px; height: 27px">
+  </div>
+  </div>
+
+
+
+
+</body>
+
+</html>
+
+
