@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/foundation.min.css">
     <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="elements.css">
 	<script type="text/javascript" src="music.js"</script>
 
 
@@ -55,6 +56,91 @@ function FP_getObjectByID(id,o) {//v1.0
 </script>
 	
     <script language="JavaScript">
+	
+	// Validating Empty Field
+var t = 20;
+console.log(t);
+
+function check_empty() { 
+if ((document.getElementById('option1').checked == true))
+{
+alert("Wrong answer!");
+} 
+else if (document.getElementById('option2').checked)
+{
+alert("Wrong answer!");
+} 
+else if (document.getElementById('option3').checked)
+{
+alert("CORRECT!");
+div_hide();
+} 
+else {
+
+alert("You can continue ");
+} 
+}
+//Function To Display Popup
+function div_show() {
+document.getElementById('abc').style.display = "block";
+}
+//Function to Hide Popup
+function div_hide(){
+document.getElementById('abc').style.display = "none";
+document.getElementByID('Page1').style.display = "block";
+}
+
+function random() {
+    var x = Math.floor((Math.random() * 10) + 1);
+	var y = Math.floor((Math.random() * 10) + 1);
+	var p = Math.floor((Math.random() * 3) + 1);
+	
+	
+	var R = x + y;
+	
+	var t = x*y;
+	var u = x+y+y;
+	var i = x + y; 
+	console.log("x " + x);
+	console.log("y " + y);
+	console.log("t " + t);
+	console.log("u " + u);
+	console.log("i " + i);
+	console.log("R " + R);
+	
+	document.getElementById("roption1").innerHTML = t;
+	document.getElementById("roption2").innerHTML = u;
+	document.getElementById("roption3").innerHTML = i;
+	/*
+	switch(p) {
+	case 1: 
+	document.getElementById("option1").innerHTML = t;
+	document.getElementById("option2").innerHTML = u;
+	document.getElementById("option3").innerHTML = i;        
+	
+	break;
+	case 2:
+	
+	document.getElementById("option1").innerHTML = u;
+	document.getElementById("option2").innerHTML = i;
+	document.getElementById("option3").innerHTML = t;
+	break;
+	case 3: 
+	
+	document.getElementById("option1").innerHTML = i;
+	document.getElementById("option2").innerHTML = t;
+	document.getElementById("option3").innerHTML = u;
+	break;
+	} */
+    document.getElementById("no1").innerHTML = x;
+    document.getElementById("no2").innerHTML = y;
+ //   document.getElementById("result").innerHTML = R;
+	//document.getElementById('abc').style.display = "block";
+   // document.getElementById("question").innerHTML = text;
+	
+}
+
+	
 	
 		mLeft = 20;		
 		var mId = setInterval(message, 1000);
@@ -349,15 +435,19 @@ function FP_getObjectByID(id,o) {//v1.0
 			}
 		}
 
-
+		var count = 0;
         function UpdateMoveCount(avat) {
 			var n = avat+4;
 			timeLeft = 60;
             if ((MoveCount + Start) % 2 == 1) {
                 document.images[14].src = 'avatars/computer.png';
                 document.images[15].src = Avatar[n].src
-				countdown();
-            }
+				count ++;
+				if (count > 1) {
+					countdown();
+					div_show(); random();
+				}
+			}
             else {
                 document.images[14].src = 'avatars/computerturn.png';
                 document.images[15].src = Avatar[avat].src;
@@ -670,12 +760,12 @@ function FP_getObjectByID(id,o) {//v1.0
                     <h1><input type="radio" name="players" value="1" onchange="show('Page4')">Multi player</h1>
                 </td>
 				<td colspan=3 class="difficulty">
-					<form action="">
+
 					<h1>Difficulty</h1>
                         <h2><input type="radio" name="Difficulty" value="1" checked="checked" onchange="SetLevel(1, this.options[selectedIndex].value)">Easy
                         <input type="radio" name="Difficulty" value="3" onchange="SetLevel(1, this.options[selectedIndex].value)">Medium
                         <input type="radio" name="Difficulty" value="5" onchange="SetLevel(1, this.options[selectedIndex].value)">Hard</h2>
-                    </form>
+
                 </td>
 			</tr>
             <tr>
@@ -780,6 +870,28 @@ function FP_getObjectByID(id,o) {//v1.0
 
 </div>
 
+
+		<div id="abc"name="abc" style="display:none">
+			<!-- Popup Div Starts Here -->
+			<div id="popupContact">
+				<!-- Contact Us Form -->
+				<form action="#" id="win" method="post" name="form">
+					<img id="close" src="images/3.png" onclick ="div_hide()">
+					<h2>Educational Break</h2>
+					<hr>
+					<h1> <text id="no1"> </text> + <text id="no2"> </text> = ? </h1>
+					<td colspan=9 class="answer" >
+					<form id="answer">
+					<input name="options" type="radio" id="option1" value="1" alt="Submit"><label for="option1" id="roption1"></label><br>
+					<input name="options" type="radio" id="option2" value="2" alt="Submit"><label for="option2" id="roption2"></label><br>
+					<input name="options" type="radio" id="option3" value="3" alt="Submit"><label for="option3" id="roption3"></label><br>
+					</form>
+					</td>
+					<a href="javascript: check_empty()" id="submit">Send</a>
+				</form>
+			</div>
+			<!-- Popup Div Ends Here -->
+		</div>
    <ol id="joyride-list" data-joyride style="display:none">
       <li data-id="firstStop" data-options="tip_location: bottom; nub_position:top; prev_button: false">
         <h2>Board</h2>

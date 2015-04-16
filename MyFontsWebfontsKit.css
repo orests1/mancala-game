@@ -1,0 +1,28 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3010192, 2015-04-16T06:30:05-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: MailRayStuff-Regular by Typodermic
+ * URL: http://www.myfonts.com/fonts/typodermic/mail-ray-stuff/regular/
+ * Copyright: (c) 1999 Ray Larabie. See attached license agreement for more information. If EULA is missing, visit www.larabiefonts.com for an updated version of this font.
+ * Licensed pageviews: 20,000
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=3010192
+ * 
+ * © 2015 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/2dee90");
+
+  
+@font-face {font-family: 'MailRayStuff-Regular';src: url('webfonts/2DEE90_0_0.eot');src: url('webfonts/2DEE90_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2DEE90_0_0.woff2') format('woff2'),url('webfonts/2DEE90_0_0.woff') format('woff'),url('webfonts/2DEE90_0_0.ttf') format('truetype');}
+ 
