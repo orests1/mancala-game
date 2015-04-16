@@ -1,147 +1,171 @@
 <html>
-<head>
-
-    <meta name="description" content="Mancala is a PC-Game written in HTML and JavaScript">
-    <meta name="author" content="Lutz Tautenhahn">
-    <meta name="keywords" content="Game, Mancala, JavaScript">
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    <title>Mancala</title>
-	<script src="js/vendor/modernizr.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	
-    <link rel="stylesheet" href="css/foundation.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="main.css">
-	<link rel="stylesheet" type="text/css" href="elements.css">
+	<head>
+		
+		<meta name="description" content="Mancala is a PC-Game written in HTML and JavaScript">
+		<meta name="author" content="Lutz Tautenhahn">
+		<meta name="keywords" content="Game, Mancala, JavaScript">
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Mancala</title>
+		<script src="js/vendor/modernizr.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		
+		<link rel="stylesheet" href="css/foundation.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Chewy' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" type="text/css" href="elements.css">
 	<script type="text/javascript" src="music.js"</script>
-
-
+	
+	
     <style type="text/css">
         input {
-            background-color: #ffffff;
-            text-align: center;
-            font-weight: bold;
-            font-size: 15px;
+		background-color: #ffffff;
+		text-align: center;
+		font-weight: bold;
+		font-size: 15px;
         }
-
+		
         select {
-            background-color: #eeddaa;
-            font-weight: bold;
-            font-size: 15px;
+		background-color: #eeddaa;
+		font-weight: bold;
+		font-size: 15px;
         }
-    </style>
+	</style>
 	
 	<script type="text/javascript">
-<!--
-function FP_swapImg() {//v1.0
- var doc=document,args=arguments,elm,n; doc.$imgSwaps=new Array(); for(n=2; n<args.length;
- n+=2) { elm=FP_getObjectByID(args[n]); if(elm) { doc.$imgSwaps[doc.$imgSwaps.length]=elm;
- elm.$src=elm.src; elm.src=args[n+1]; } }
-}
-
-function FP_preloadImgs() {//v1.0
- var d=document,a=arguments; if(!d.FP_imgs) d.FP_imgs=new Array();
- for(var i=0; i<a.length; i++) { d.FP_imgs[i]=new Image; d.FP_imgs[i].src=a[i]; }
-}
-
-function FP_getObjectByID(id,o) {//v1.0
- var c,el,els,f,m,n; if(!o)o=document; if(o.getElementById) el=o.getElementById(id);
- else if(o.layers) c=o.layers; else if(o.all) el=o.all[id]; if(el) return el;
- if(o.id==id || o.name==id) return o; if(o.childNodes) c=o.childNodes; if(c)
- for(n=0; n<c.length; n++) { el=FP_getObjectByID(id,c[n]); if(el) return el; }
- f=o.forms; if(f) for(n=0; n<f.length; n++) { els=f[n].elements;
- for(m=0; m<els.length; m++){ el=FP_getObjectByID(id,els[n]); if(el) return el; } }
- return null;
-}
-</script>
+		<!--
+		function FP_swapImg() {//v1.0
+			var doc=document,args=arguments,elm,n; doc.$imgSwaps=new Array(); for(n=2; n<args.length;
+			n+=2) { elm=FP_getObjectByID(args[n]); if(elm) { doc.$imgSwaps[doc.$imgSwaps.length]=elm;
+			elm.$src=elm.src; elm.src=args[n+1]; } }
+		}
+		
+		function FP_preloadImgs() {//v1.0
+			var d=document,a=arguments; if(!d.FP_imgs) d.FP_imgs=new Array();
+			for(var i=0; i<a.length; i++) { d.FP_imgs[i]=new Image; d.FP_imgs[i].src=a[i]; }
+		}
+		
+		function FP_getObjectByID(id,o) {//v1.0
+			var c,el,els,f,m,n; if(!o)o=document; if(o.getElementById) el=o.getElementById(id);
+			else if(o.layers) c=o.layers; else if(o.all) el=o.all[id]; if(el) return el;
+			if(o.id==id || o.name==id) return o; if(o.childNodes) c=o.childNodes; if(c)
+			for(n=0; n<c.length; n++) { el=FP_getObjectByID(id,c[n]); if(el) return el; }
+			f=o.forms; if(f) for(n=0; n<f.length; n++) { els=f[n].elements;
+			for(m=0; m<els.length; m++){ el=FP_getObjectByID(id,els[n]); if(el) return el; } }
+			return null;
+		}
+	</script>
 	
     <script language="JavaScript">
-	
-	// Validating Empty Field
-var t = 20;
-console.log(t);
-
-function check_empty() { 
-if ((document.getElementById('option1').checked == true))
-{
-alert("Wrong answer!");
-} 
-else if (document.getElementById('option2').checked)
-{
-alert("Wrong answer!");
-} 
-else if (document.getElementById('option3').checked)
-{
-alert("CORRECT!");
-div_hide();
-} 
-else {
-
-alert("You can continue ");
-} 
-}
-//Function To Display Popup
-function div_show() {
-document.getElementById('abc').style.display = "block";
-}
-//Function to Hide Popup
-function div_hide(){
-document.getElementById('abc').style.display = "none";
-document.getElementByID('Page1').style.display = "block";
-}
-
-function random() {
-    var x = Math.floor((Math.random() * 10) + 1);
-	var y = Math.floor((Math.random() * 10) + 1);
-	var p = Math.floor((Math.random() * 3) + 1);
-	
-	
-	var R = x + y;
-	
-	var t = x*y;
-	var u = x+y+y;
-	var i = x + y; 
-	console.log("x " + x);
-	console.log("y " + y);
-	console.log("t " + t);
-	console.log("u " + u);
-	console.log("i " + i);
-	console.log("R " + R);
-	
-	document.getElementById("roption1").innerHTML = t;
-	document.getElementById("roption2").innerHTML = u;
-	document.getElementById("roption3").innerHTML = i;
-	/*
-	switch(p) {
-	case 1: 
-	document.getElementById("option1").innerHTML = t;
-	document.getElementById("option2").innerHTML = u;
-	document.getElementById("option3").innerHTML = i;        
-	
-	break;
-	case 2:
-	
-	document.getElementById("option1").innerHTML = u;
-	document.getElementById("option2").innerHTML = i;
-	document.getElementById("option3").innerHTML = t;
-	break;
-	case 3: 
-	
-	document.getElementById("option1").innerHTML = i;
-	document.getElementById("option2").innerHTML = t;
-	document.getElementById("option3").innerHTML = u;
-	break;
-	} */
-    document.getElementById("no1").innerHTML = x;
-    document.getElementById("no2").innerHTML = y;
- //   document.getElementById("result").innerHTML = R;
-	//document.getElementById('abc').style.display = "block";
-   // document.getElementById("question").innerHTML = text;
-	
-}
-
-	
-	
+		
+		// Validating Empty Field
+		var t = 20;
+		console.log(t);
+		
+		function check_empty() { 
+			if ((document.getElementById('option1').checked == true))
+			{
+				if (meow=3)
+				{
+					alert("CORRECT!");
+					div_hide();
+				}
+				else
+				{
+				alert("Wrong answer!");
+				}
+			} 
+			else if (document.getElementById('option2').checked)
+			{
+				if (meow=1)
+				{
+					alert("CORRECT!");
+					div_hide();
+				}
+				else
+				{
+				alert("Wrong answer!");
+				}
+			} 
+			else if (document.getElementById('option3').checked)
+			{
+				if (meow=2)
+				{
+				alert("CORRECT!");
+				div_hide();
+				}
+				else
+				{
+				alert("Wrong answer!");
+				}
+			} 
+			else {
+				
+				alert("You can continue ");
+			} 
+		}
+		//Function To Display Popup
+		function div_show() {
+			document.getElementById('abc').style.display = "block";
+		}
+		//Function to Hide Popup
+		function div_hide(){
+			document.getElementById('abc').style.display = "none";
+			document.getElementByID('Page1').style.display = "block";
+		}
+		
+		function random() {
+			var x = Math.floor((Math.random() * 10) + 1);
+			var y = Math.floor((Math.random() * 10) + 1);
+			var p = Math.floor((Math.random() * 3) + 1);
+			var meow;
+			
+			var R = x + y;
+			
+			var t = x*y;
+			var u = x+y+y;
+			var i = x + y; 
+			console.log("x " + x);
+			console.log("y " + y);
+			console.log("t " + t);
+			console.log("u " + u);
+			console.log("i " + i);
+			console.log("R " + R);
+			/*
+				document.getElementById("roption1").innerHTML = t;
+				document.getElementById("roption2").innerHTML = u;
+				document.getElementById("roption3").innerHTML = i;
+			*/
+			switch(p) {
+				case 1: 
+				meow=1;
+				document.getElementById("roption1").innerHTML = u;
+				document.getElementById("roption2").innerHTML = i;
+				document.getElementById("roption3").innerHTML = t;       
+				
+				break;
+				case 2:
+				meow=2;
+				document.getElementById("roption1").innerHTML = t;
+				document.getElementById("roption2").innerHTML = u;
+				document.getElementById("roption3").innerHTML = i;
+				break;
+				case 3: 
+				meow=3;
+				document.getElementById("roption1").innerHTML = i;
+				document.getElementById("roption2").innerHTML = t;
+				document.getElementById("roption3").innerHTML = u;
+				break;
+			} 
+			document.getElementById("no1").innerHTML = x;
+			document.getElementById("no2").innerHTML = y;
+			//   document.getElementById("result").innerHTML = R;
+			//document.getElementById('abc').style.display = "block";
+			// document.getElementById("question").innerHTML = text;
+			
+		}
+		
+		
+		
 		mLeft = 20;		
 		var mId = setInterval(message, 1000);
 		
@@ -156,7 +180,7 @@ function random() {
 				btn.onclick = function() { myWindow.close(); timeLeft=60};
 				myWindow.document.body.appendChild(btn);          
 				clearTimeout(mId);
-			} else {
+				} else {
 				mLeft--;
 			}
 		}
@@ -177,18 +201,18 @@ function random() {
 			13 : "green.png", 
 			14 : "green.png", 
 			15 : "green.png", 
-			16 : "green.png", 21 : "green.png" };
+		16 : "green.png", 21 : "green.png" };
 		
 		
         var i, j, IsOver = true, I_Sel, J_Sel, N_Mov, IsStart0, Start, Size = 4, MoveCount;
         Level = new Array(2);
         Fld = new Array(2);
         for (i = 0; i < 2; i++)
-            Fld[i] = new Array(7);
+		Fld[i] = new Array(7);
         for (i = 0; i < 2; i++) {
             for (j = 0; j < 7; j++)
-                Fld[i][j] = new Array(7);
-        }
+			Fld[i][j] = new Array(7);
+		}
 		
 		Avatar = new Array(8);
 		for (i=0; i<8; i++) {
@@ -196,30 +220,30 @@ function random() {
 			var n = i+1;
 			Avatar[i].src = "avatars/" +n + "face.png";
 		}
-
+		
         Pic = new Array(36);
         for (i = 0; i < 36; i++) {
             Pic[i] = new Image();
             Pic[i].src = "blobs/"+i + ".png";
-        }
-			sndloop.addEventListener('ended', function() {
-				this.currentTime = 0;
-				this.play();
-			}, false);
-			sndloop.play();
+		}
+		sndloop.addEventListener('ended', function() {
+			this.currentTime = 0;
+			this.play();
+		}, false);
+		sndloop.play();
         IsStart0 = false;
         Level[0] = 1;
         Level[1] = 0;
-
-        function Init() {
-
 		
+        function Init() {
+			
+			
             var ii, jj;
             for (ii = 0; ii < 2; ii++) {
                 Fld[ii][0][0] = 0;
                 for (jj = 1; jj < 7; jj++)
-                    Fld[ii][jj][0] = Size;
-            }
+				Fld[ii][jj][0] = Size;
+			}
             if (IsStart0) Start = 0;
             else Start = 1;
             I_Sel = -1;
@@ -228,35 +252,35 @@ function random() {
             UpdateMoveCount(avat);
             for (ii = 0; ii < 2; ii++) {
                 for (jj = 0; jj < 7; jj++)
-                    RefreshFld(ii, jj);
-            }
+				RefreshFld(ii, jj);
+			}
             IsMoving = false;
             IsOver = false;
-        }
-
+		}
+		
         function SetLevel(nn, mm) {
             Level[nn] = parseInt(mm);
-        }
-
+		}
+		
         function SetStart(nn) {
             IsStart0 = 1 - nn;
-        }
-
+		}
+		
         function SetSize(ss) {
             Size = parseInt(ss);
-        }
+		}
 		var timeLeft = -1;		
-			
+		
 		var timerId = setInterval(countdown, 1000);
 		
 		function countdown() {
-
+			
 			if (timeLeft == 0) {
 				SetLevel(1, 5);
 				Timer();
 				SetLevel(1, 0);
 				timeLeft = 60;
-			} else {
+				} else {
 				timeLeft--;
 			}
 		}
@@ -270,7 +294,7 @@ function random() {
                     Fld[I_Sel][J_Sel][0] = 0;
                     RefreshFld(I_Sel, J_Sel);
                     return;
-                }
+				}
                 if (N_Mov > 0) {
                     J_Sel--;
                     if ((J_Sel == 0) && (mmove != I_Sel)) J_Sel--;
@@ -279,13 +303,13 @@ function random() {
                     RefreshFld(I_Sel, J_Sel);
                     N_Mov--;
                     return;
-                }
+				}
                 else {
                     if ((I_Sel == mmove) && (J_Sel == 0)) {
                         IsMoving = false;
                         OverTest();
                         return;
-                    }
+					}
                     if ((Fld[I_Sel][J_Sel][0] == 1) && (I_Sel == mmove) && (J_Sel != 0)) {
                         Fld[I_Sel][0][0] += Fld[I_Sel][J_Sel][0] + Fld[1 - I_Sel][7 - J_Sel][0];
                         Fld[I_Sel][J_Sel][0] = 0;
@@ -294,25 +318,25 @@ function random() {
                         RefreshFld(I_Sel, J_Sel);
                         RefreshFld(1 - I_Sel, 7 - J_Sel);
                         return;
-                    }
+					}
                     MoveCount++;
                     UpdateMoveCount(avat);
                     IsMoving = false;
                     OverTest();
-                }
+				}
                 return;
-            } 
-
+			} 
+			
 			var ll = Level[mmove] + 1;
 			if (ll > 1) GetBestMove(mmove, 1, ll);
 		}
-
+		
         function MakeVirtualMove(mmove, tt, kk) {
             var ii, jj, ll, mm, nn;
             for (ii = 0; ii < 2; ii++) {
                 for (jj = 0; jj < 7; jj++)
-                    Fld[ii][jj][tt] = Fld[ii][jj][tt - 1];
-            }
+				Fld[ii][jj][tt] = Fld[ii][jj][tt - 1];
+			}
             ii = mmove;
             jj = kk;
             nn = Fld[ii][jj][tt];
@@ -323,71 +347,71 @@ function random() {
                 if (jj < 0) { jj = 6; ii = 1 - ii; }
                 Fld[ii][jj][tt]++;
                 nn--;
-            }
+			}
             if ((Fld[ii][jj][tt] == 1) && (ii == mmove) && (jj != 0)) {
                 Fld[ii][0][tt] += Fld[ii][jj][tt] + Fld[1 - ii][7 - jj][tt];
                 Fld[ii][jj][tt] = 0;
                 Fld[1 - ii][7 - jj][tt] = 0;
-            }
+			}
             for (ll = 0; ll < 2; ll++) {
                 nn = 0;
                 for (mm = 1; mm < 7; mm++) nn += Fld[ll][mm][tt];
                 if (nn == 0) {
                     for (mm = 1; mm < 7; mm++)
-                        Fld[1 - ll][0][tt] += Fld[1 - ll][mm][tt];
-                }
-            }
+					Fld[1 - ll][0][tt] += Fld[1 - ll][mm][tt];
+				}
+			}
             if ((ii == mmove) && (jj == 0)) return (1);
             return (-1);
-        }
-
+		}
+		
         function GetBestMove(mmove, tt, ll) {
             var ii, jj, jj_best, vv, vv_best = -1000, mm = mmove, mm1 = 1 - mmove, tt1 = tt + 1;
             if (tt == ll) return (Fld[mmove][0][tt - 1] - Fld[1 - mmove][0][tt - 1] - Math.random());
             for (jj = 1; jj < 7; jj++) {
                 if (Fld[mmove][jj][tt - 1] > 0) {
                     if (MakeVirtualMove(mm, tt, jj) > 0)
-                        vv = GetBestMove(mm, tt1, ll);
+					vv = GetBestMove(mm, tt1, ll);
                     else
-                        vv = -GetBestMove(mm1, tt1, ll);
+					vv = -GetBestMove(mm1, tt1, ll);
                     if (vv_best <= vv) {
                         vv_best = vv;
                         jj_best = jj;
-                    }
-                }
-            }
+					}
+				}
+			}
             if (tt > 1) {
                 if (vv_best > -1000) return (vv_best);
                 return (Fld[mmove][0][tt - 1] - Fld[1 - mmove][0][tt - 1] - Math.random());
-            }
+			}
             I_Sel = mmove;
             J_Sel = jj_best;
             N_Mov = -1;
             IsMoving = true;
-        }
-
+		}
+		
         function OverTest() {
             var ii, jj, nn;
             IsOver = false;
             for (ii = 0; ii < 2; ii++) {
                 nn = 0;
                 for (jj = 1; jj < 7; jj++)
-                    nn += Fld[ii][jj][0];
+				nn += Fld[ii][jj][0];
                 if (nn == 0) IsOver = true;
-            }
+			}
             if (!IsOver) return;
             for (ii = 0; ii < 2; ii++) {
                 for (jj = 1; jj < 7; jj++) {
                     Fld[ii][0][0] += Fld[ii][jj][0];
                     Fld[ii][jj][0] = 0;
-                }
-            }
+				}
+			}
             if (Fld[0][0][0] == Fld[1][0][0]) setTimeout("alert(\"Game over !\\nIt's a draw !\")", 100);
             else {
                 if (Fld[0][0][0] > Fld[1][0][0]) {
-
+					
                     setTimeout("alert(\"Game over !\\nThe player at top has won !\")", 100);
-					}
+				}
                 else {
 					sndloop.pause();
 					won.play();
@@ -396,10 +420,10 @@ function random() {
 			}
             for (ii = 0; ii < 2; ii++) {
                 for (jj = 0; jj < 7; jj++)
-                    RefreshFld(ii, jj);
-            }
-        }
-
+				RefreshFld(ii, jj);
+			}
+		}
+		
         function MouseDown(ii, jj) {
             if (IsOver) return;
             if (IsMoving) return;
@@ -411,8 +435,8 @@ function random() {
             J_Sel = jj;
             N_Mov = -1;
             IsMoving = true;
-        }
-
+		}
+		
         function RefreshFld(ii, jj) {
             var oo = eval("document.OptionsForm.i" + ii + jj);
             oo.value = Fld[ii][jj][0];
@@ -421,7 +445,7 @@ function random() {
             if ((ii == 0) || (jj == 0)) document.images[7 * ii + jj].src = Pic[nn].src;
             else document.images[14 - jj].src = Pic[nn].src;
 			snd.play();			
-        }
+		}
 		
 		function changeClass()
 		{
@@ -429,12 +453,12 @@ function random() {
 			{
 				document.getElementById("left").className =  document.getElementById("MyElement").className.replace( /(?:^|\s)turn(?!\S)/g , '' );
 				document.getElementById("right") += "turn";
-			} else {
+				} else {
 				document.getElementById("right").className =  document.getElementById("MyElement").className.replace( /(?:^|\s)turn(?!\S)/g , '' );
 				document.getElementById("left") += "turn";
 			}
 		}
-
+		
 		var count = 0;
         function UpdateMoveCount(avat) {
 			var n = avat+4;
@@ -451,42 +475,42 @@ function random() {
             else {
                 document.images[14].src = 'avatars/computerturn.png';
                 document.images[15].src = Avatar[avat].src;
-            }
-        }
-
+			}
+		}
+		
         function Help() {
             alert("Mancala is an ancient African game. There" +
-              "\nexist many variations with slightly different rules." +
-              "\nEach player owns the mancala on his right" +
-              "\nside and the six small bowls closest to him." +
-              "\nA player starts by taking all the beans from" +
-              "\none of his small bowls and drops one bean" +
-              "\ninto the next bowl on the right, continuing around" +
-              "\nthe board counterclockwise until he has no more" +
-              "\nbeans to drop. If a player reaches his own" +
-              "\nmancala, he drops a bean into it, but he never" +
-              "\ndrops a bean into the opponents' mancala." +
-              "\nThe player with the most beans in his mancala wins." +
-              "\nThe following are the so-called Egyptian rules:" +
-              "\nIf a player drops the last bean from his hand into his" +
-              "\nmancala, he gets to move again. If a player drops the" +
-              "\nlast bean into one of the empty bowls on his side," +
-              "\nhe takes that bean, and all the beans in the" +
-              "\nopponent's bowl directly across and puts them in" +
-              "\nhis mancala. The game ends when one player no" +
-              "\nlonger has beans in his small bowls. The other player" +
-              "\ntakes all remaining beans into his own mancala.");
-        }
+			"\nexist many variations with slightly different rules." +
+			"\nEach player owns the mancala on his right" +
+			"\nside and the six small bowls closest to him." +
+			"\nA player starts by taking all the beans from" +
+			"\none of his small bowls and drops one bean" +
+			"\ninto the next bowl on the right, continuing around" +
+			"\nthe board counterclockwise until he has no more" +
+			"\nbeans to drop. If a player reaches his own" +
+			"\nmancala, he drops a bean into it, but he never" +
+			"\ndrops a bean into the opponents' mancala." +
+			"\nThe player with the most beans in his mancala wins." +
+			"\nThe following are the so-called Egyptian rules:" +
+			"\nIf a player drops the last bean from his hand into his" +
+			"\nmancala, he gets to move again. If a player drops the" +
+			"\nlast bean into one of the empty bowls on his side," +
+			"\nhe takes that bean, and all the beans in the" +
+			"\nopponent's bowl directly across and puts them in" +
+			"\nhis mancala. The game ends when one player no" +
+			"\nlonger has beans in his small bowls. The other player" +
+			"\ntakes all remaining beans into his own mancala.");
+		}
 		
 		var muted = 0;
 		function m(){
-
+			
 			if (muted == 0) {
 				document.getElementById('volume').src="buttons/volume.png";
 			}
 			else {
 				document.getElementById('volume').src="buttons/volume-mute.png";
-				}
+			}
 		}
 		
 		function mute(element) {
@@ -494,16 +518,16 @@ function random() {
 				sndloop.play();
 				element.src = "buttons/volume.png";
 				muted = 0;
-			} else {
+				} else {
 				sndloop.pause();
 				element.src = "buttons/volume-mute.png";
 				muted = 1;
 			}
 		}
-
+		
         function Resize() {
             if (navigator.appName == "Netscape") history.go(0);
-        }
+		}
 		
 		function changeImage() {
 			for (var id in data) {
@@ -511,19 +535,19 @@ function random() {
 			}
 		}
 		
-
 		
-
-    </script>
-
-
+		
+		
+	</script>
+	
+	
     <style type='text/css'>
         span {
-            text-decoration: underline;
-            color: blue;
-            cursor: pointer;
+		text-decoration: underline;
+		color: blue;
+		cursor: pointer;
         }
-    </style>
+	</style>
     <script>
         // show the given page, hide the rest
         function show(elementID) {
@@ -532,50 +556,50 @@ function random() {
             if (!ele) {
                 alert("no such element");
                 return;
-            }
-
+			}
+			
             // get all pages, loop through them and hide them
             var pages = document.getElementsByClassName('page');
             for (var i = 0; i < pages.length; i++) {
                 pages[i].style.display = 'none';
-            }
-
+			}
+			
             // then show the requested page
             ele.style.display = 'block';
-        }
+		}
 		
 		
-
+		
         $(document).ready(function () {
             $('img').click(function () {
-					$('.selected').removeClass('selected');
-					$(this).addClass('selected');
-            });
+				$('.selected').removeClass('selected');
+				$(this).addClass('selected');
+			});
 			
 			$('#help1').on('click', function () { 
 				$('#Page1, #tutavatar').fadeIn(500); 
 			});
-        });
-
-
-    </script>
+		});
+		
+		
+	</script>
 </head>
 <body>
-
-
+	
+	
     <div id="Page1" class="page" style="display:none" onresize="javascript:Resize()" align=center>
-
-
-
+		
+		
+		
         <form name="OptionsForm">
             <script language="JavaScript">
                 document.open();
                 if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) < 5))
-                    document.writeln("<table noborder><tr><td><table border cellpadding=20 cellspacing=20>");
+				document.writeln("<table noborder><tr><td><table border cellpadding=20 cellspacing=20>");
                 else
-                    document.writeln("<table noborder><tr><td background='boarddefinitive.png'><table noborder cellpadding=5 cellspacing=2>");
+				document.writeln("<table noborder><tr><td background='boarddefinitive.png'><table noborder cellpadding=5 cellspacing=2>");
                 document.close();
-            </script>
+			</script>
             <tr>
                 <th width=80>&nbsp;<input name="i00" readonly size=5 class="score"></th>
                 <th width=68><input name="i01" readonly size=3></th>
@@ -584,7 +608,7 @@ function random() {
                 <th width=66><input name="i04" readonly size=3></th>
                 <th width=67><input name="i05" readonly size=3></th>
                 <th width=68><input name="i06" readonly size=3></th>
-             </tr>
+			</tr>
             <tr class="space">
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -594,7 +618,7 @@ function random() {
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-            </tr>
+			</tr>
             <tr>
                 <td id="secondStop" rowspan=3 align=right><img src="0.png" border=0></td>
                 <td align=right><img src="0.png" border=0 onmousedown="MouseDown(0,1)"></td>
@@ -604,7 +628,7 @@ function random() {
                 <td align=rigth><img src="0.png" border=0 onmousedown="MouseDown(0,5)"></td>
                 <td align=right><img src="0.png" border=0 onmousedown="MouseDown(0,6)"></td>
                 <td id="thirdStop" rowspan=3 align=left><img src="0.png" border=0></td>
-            </tr>
+			</tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -614,8 +638,8 @@ function random() {
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-            </tr>
-
+			</tr>
+			
             <tr>
                 <td align=left><img src="0.png" border=0 onmousedown="MouseDown(1,6)"></td>
                 <td align=left><img src="0.png" border=0 onmousedown="MouseDown(1,5)"></td>
@@ -623,7 +647,7 @@ function random() {
                 <td align=middle><img src="0.png" border=0 onmousedown="MouseDown(1,3)"></td>
                 <td align=right><img src="0.png" border=0 onmousedown="MouseDown(1,2)"></td>
                 <td align=right><img src="0.png" border=0 onmousedown="MouseDown(1,1)"></td>
-            </tr>
+			</tr>
             <tr id="firstStop">
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -633,7 +657,7 @@ function random() {
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td id="timer">&nbsp;</td>
-            </tr>
+			</tr>
             <tr>
 				<th></th>
                 <th><input name="i16" readonly size=3></th>
@@ -643,7 +667,7 @@ function random() {
                 <th><input name="i12" readonly size=3></th>
                 <th><input name="i11" readonly size=3></th>
                 <th><input name="i10" readonly size=5 class="score">&nbsp;</th>
-            </tr>
+			</tr>
 			<tr>
 				<td></td>
 				<td colspan=2 width=10px id="left" class="indicator">
@@ -656,268 +680,268 @@ function random() {
 				<td></td>
 			</tr>
 			<tr>
-
-			</tr>
-
-			</table>
-            </td>
-            </tr>
-            </table>
-
-			<table margin-top=20>
-
-				<tr>
-				<td><div class="tutavatar">
-				</div>
 				
-				</td>
-				<td colspan=4>
-					<a href="index.html"><img id="img3" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu button.png')"> </a>
-					<span onclick="show('Page3'), sndloop.stop();"><img id="img2" src="buttons/options button.png" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options button.png')"></span>
-					<span onclick="javascript:Init()"><img id="img4" src="buttons/restart button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart button.png')"></span> <!-- onclick="javascript:Init()"> -->
-
-					<span id="help"><img id="help1" src="buttons/help button.png" onclick="$(document).foundation('joyride', 'start');" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'help1',/*url*/'buttons/help clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'help1',/*url*/'buttons/help button.png')" ></span>
-
-					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>
-
-					<img id="ratios" src="blobratio.png" style="height: 70; width: 200; position: relative; left:170; top: 10;">
-					</td>
-				</tr>
-			</table>
-        </form>
-    </div>
-
-    <div id="Page3" class="page" style="">
-        <table class="options">
-            <tr>
-                <td colspan=2 id="background">
-                    <h1>Background</h1>
-                </td>
-				<td class="gap"></td>
-                <td colspan=2>
-                    <h1>Avatars</h1>
-                </td>
-            </tr>
-            <tr>
-                <td class="back" id="one">
-                    <a href="backgrounds/girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/girls1thumbnail.png" border="1">
-                    </a>
-				</td>
-				<td class="back">
-					<a href="backgrounds/girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/girls2thumbnail.png" border="1">
-                    </a>
-				</td>
-				<td class="gap"></td>
-
-                <td>
-                    <div id="first" class="avatar">
-                        <a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
-                            <img src="avatars/1face.jpg" border="1" height=100>
-                    </div>
-				</td>
-				<td>
-                    <div id="second" class="avatar">
-                        <a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
-                        <img src="avatars/2face.jpg" border="1" height=100>
-                    </div>
-				</td>				
-            </tr>
-            <tr>
-				<td class="back">
-                    <a href="backgrounds/boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/boy1thumbnail.png" border="1">
-                    </a>	
-				</td>
-				<td>
-					<div class="back">
-						<a href="backgrounds/boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-						<img src="backgrounds/boy2thumbnail.png" border="1">
-						</a>	
-					</div>
-				</td>	
-				<td class="gap"></td>
-
-				<td>
-                    <div id="third" class="avatar">
-                        <a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
-                            <img src="avatars/3face.jpg" border="1" height=100>
-                    </div>
-                </td>
-				<td>
-                    <div id="fourth" class="avatar">
-                        <a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
-                            <img src="avatars/4face.jpg" border="1" height=100>
-                    </div>
-                </td>
-            </tr>
-			<tr height=50px></tr>
-			<tr>
-				<td colspan=2 class="mode" >
-	                
-                    <h1><input type="radio" name="players" value="0" checked="checked" onchange="show('Page3')">Single player</h1>
-                    <h1><input type="radio" name="players" value="1" onchange="show('Page4')">Multi player</h1>
-                </td>
-				<td colspan=3 class="difficulty">
-
-					<h1>Difficulty</h1>
-                        <h2><input type="radio" name="Difficulty" value="1" checked="checked" onchange="SetLevel(1, this.options[selectedIndex].value)">Easy
-                        <input type="radio" name="Difficulty" value="3" onchange="SetLevel(1, this.options[selectedIndex].value)">Medium
-                        <input type="radio" name="Difficulty" value="5" onchange="SetLevel(1, this.options[selectedIndex].value)">Hard</h2>
-
-                </td>
 			</tr>
-            <tr>
-				<td colspan=5>
-					<a href="index.html"><img id="imgmenu2" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu button.png')"> </a>
-					<span onclick="show('Page1'); m(); Init(); timeLeft=60;">
-					<img id="img0" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttons/button.png')"></a></span>
-					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>
-				</td>
-            </tr>
-        </table>
-    </div>
+			
+		</table>
+	</td>
+</tr>
+</table>
 
-
-	   <div id="Page4" class="page" style="display:none">
-        <table class="options">
-            <tr>
-                <td colspan=2>
-                    <h1 id="so-awesome">Background</h1>
-                </td>
-				<td class="gap"></td>
-                <td colspan=2>
-                    <h1>Avatars</h1>
-                </td>
-            </tr>
-            <tr>
-                <td class="back">
-                    <a href="backgrounds/girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/girls1thumbnail.png" border="1">
-                    </a>
-				</td>
-				<td class="back">
-					<a href="backgrounds/girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/girls2thumbnail.png" border="1">
-                    </a>
-				</td>
-				<td class="gap"></td>
-
-                <td>
-                    <div id="first" class="avatar">
-                        <a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
-                            <img src="avatars/1face.jpg" border="1" height=100>
-                    </div>
-				</td>
-				<td>
-                    <div id="second" class="avatar">
-                        <a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
-                        <img src="avatars/2face.jpg" border="1" height=100>
-                    </div>
-				</td>				
-            </tr>
-            <tr>
-				<td class="back">
-                    <a href="backgrounds/boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-                    <img src="backgrounds/boy1thumbnail.png" border="1">
-                    </a>	
-				</td>
-				<td>
-					<div class="back">
-						<a href="backgrounds/boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
-						<img src="backgrounds/boy2thumbnail.png" border="1">
-						</a>	
-					</div>
-				</td>	
-				<td class="gap"></td>
-
-				<td>
-                    <div id="third" class="avatar">
-                        <a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
-                            <img src="avatars/3face.jpg" border="1" height=100>
-                    </div>
-                </td>
-				<td>
-                    <div id="fourth" class="avatar">
-                        <a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
-                            <img src="avatars/4face.jpg" border="1" height=100>
-                    </div>
-                </td>
-            </tr>
-			<tr height=50px></tr>
-			<tr>
-				<td colspan=2 class="mode">
-	                
-                    <h1><input type="radio" name="players" value="0" onchange="show('Page3')">Single player</h1>
-                    <h1><input type="radio" name="players" value="1" onchange='window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'>Multi player</h1>
-                </td>
-				<td colspan=3><h1 id="plane"></h1>
-					
-                </td>
-			</tr>
-            <tr>
-				<td colspan=5>
-					<a href="index.html"><img id="imgmenu" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'buttons/menu button.png')"></a>
-					<span onclick="show('Page1'); Init(); timeLeft=60;">
-					<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/button.png')" ></a></span>
-					<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>				
-				</td>
-            </tr>
-
-        </table>
-    </div>
-
+<table margin-top=20>
+	
+	<tr>
+		<td><div class="tutavatar">
+		</div>
+		
+		</td>
+		<td colspan=4>
+			<a href="index.html"><img id="img3" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img3',/*url*/'buttons/menu button.png')"> </a>
+			<span onclick="show('Page3'), sndloop.stop();"><img id="img2" src="buttons/options button.png" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/options button.png')"></span>
+			<span onclick="javascript:Init()"><img id="img4" src="buttons/restart button.png" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/restart button.png')"></span> <!-- onclick="javascript:Init()"> -->
+			
+			<span id="help"><img id="help1" src="buttons/help button.png" onclick="$(document).foundation('joyride', 'start');" style="z-index:5;" onmousedown="FP_swapImg(1,0,/*id*/'help1',/*url*/'buttons/help clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'help1',/*url*/'buttons/help button.png')" ></span>
+			
+			<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>
+			
+			<img id="ratios" src="blobratio.png" style="height: 70; width: 200; position: relative; left:170; top: 10;">
+		</td>
+	</tr>
+</table>
+</form>
 </div>
 
-
-		<div id="abc"name="abc" style="display:none">
-			<!-- Popup Div Starts Here -->
-			<div id="popupContact">
-				<!-- Contact Us Form -->
-				<form action="#" id="win" method="post" name="form">
-					<img id="close" src="images/3.png" onclick ="div_hide()">
-					<h2>Educational Break</h2>
-					<hr>
-					<h1> <text id="no1"> </text> + <text id="no2"> </text> = ? </h1>
-					<td colspan=9 class="answer" >
-					<form id="answer">
-					<input name="options" type="radio" id="option1" value="1" alt="Submit"><label for="option1" id="roption1"></label><br>
-					<input name="options" type="radio" id="option2" value="2" alt="Submit"><label for="option2" id="roption2"></label><br>
-					<input name="options" type="radio" id="option3" value="3" alt="Submit"><label for="option3" id="roption3"></label><br>
-					</form>
+<div id="Page3" class="page" style="">
+	<table class="options">
+		<tr>
+			<td colspan=2 id="background">
+				<h1>Background</h1>
+			</td>
+			<td class="gap"></td>
+			<td colspan=2>
+				<h1>Avatars</h1>
+			</td>
+		</tr>
+		<tr>
+			<td class="back" id="one">
+				<a href="backgrounds/girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="backgrounds/girls1thumbnail.png" border="1">
+				</a>
+			</td>
+			<td class="back">
+				<a href="backgrounds/girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+                    <img src="backgrounds/girls2thumbnail.png" border="1">
+				</a>
+			</td>
+			<td class="gap"></td>
+			
+			<td>
+				<div id="first" class="avatar">
+					<a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
+						<img src="avatars/1face.jpg" border="1" height=100>
+					</div>
+				</td>
+				<td>
+                    <div id="second" class="avatar">
+                        <a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
+							<img src="avatars/2face.jpg" border="1" height=100>
+						</div>
+					</td>				
+				</tr>
+				<tr>
+					<td class="back">
+						<a href="backgrounds/boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+							<img src="backgrounds/boy1thumbnail.png" border="1">
+						</a>	
 					</td>
-					<a href="javascript: check_empty()" id="submit">Send</a>
-				</form>
+					<td>
+						<div class="back">
+							<a href="backgrounds/boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+								<img src="backgrounds/boy2thumbnail.png" border="1">
+							</a>	
+						</div>
+					</td>	
+					<td class="gap"></td>
+					
+					<td>
+						<div id="third" class="avatar">
+							<a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
+								<img src="avatars/3face.jpg" border="1" height=100>
+							</div>
+						</td>
+						<td>
+							<div id="fourth" class="avatar">
+								<a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
+									<img src="avatars/4face.jpg" border="1" height=100>
+								</div>
+							</td>
+						</tr>
+						<tr height=50px></tr>
+						<tr>
+							<td colspan=2 class="mode" >
+								
+								<h1><input type="radio" name="players" value="0" checked="checked" onchange="show('Page3')">Single player</h1>
+								<h1><input type="radio" name="players" value="1" onchange="show('Page4')">Multi player</h1>
+							</td>
+							<td colspan=3 class="difficulty">
+								
+								<h1>Difficulty</h1>
+								<h2><input type="radio" name="Difficulty" value="1" checked="checked" onchange="SetLevel(1, this.options[selectedIndex].value)">Easy
+									<input type="radio" name="Difficulty" value="3" onchange="SetLevel(1, this.options[selectedIndex].value)">Medium
+								<input type="radio" name="Difficulty" value="5" onchange="SetLevel(1, this.options[selectedIndex].value)">Hard</h2>
+								
+							</td>
+						</tr>
+						<tr>
+							<td colspan=5>
+								<a href="index.html"><img id="imgmenu2" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu button.png')"> </a>
+								<span onclick="show('Page1'); m(); Init(); timeLeft=60;">
+								<img id="img0" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img0',/*url*/'buttons/button.png')"></a></span>
+								<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>
+						</td>
+					</tr>
+				</table>
 			</div>
-			<!-- Popup Div Ends Here -->
-		</div>
-   <ol id="joyride-list" data-joyride style="display:none">
-      <li data-id="firstStop" data-options="tip_location: bottom; nub_position:top; prev_button: false">
-        <h2>Board</h2>
-        <p>This is a Mancala board. The bottom row is yours and top yours opponent</p>
-      </li>
-	        <li data-id="secondStop" data-options="tip_location: bottom; nub_position:top; prev_button: false">
-
-        <p>This is a your opponent scoring pot</p>
-      </li>
-	  	        <li data-id="thirdStop" data-options="tip_location: bottom; nub_position:top; prev_button: false tipContainer:table ">
-        <p>And this is yours scoring pot</p>
-      </li>
-    </ol>
-
-	<script src="js/vendor/jquery.js"></script>
-<script src="js/vendor/fastclick.js"></script>
-<script src="js/foundation.min.js"></script>
-
-
-    <script language="JavaScript">
-	$(document).foundation();
-        SetStart(1);
-        SetSize(4);
-        SetLevel(0, 1);
-        setInterval("Timer()", 500);
-
-    </script>
-</body>
-</html>											
+			
+			
+			<div id="Page4" class="page" style="display:none">
+				<table class="options">
+					<tr>
+						<td colspan=2>
+							<h1 id="so-awesome">Background</h1>
+						</td>
+						<td class="gap"></td>
+						<td colspan=2>
+							<h1>Avatars</h1>
+						</td>
+					</tr>
+					<tr>
+						<td class="back">
+							<a href="backgrounds/girls1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+								<img src="backgrounds/girls1thumbnail.png" border="1">
+							</a>
+						</td>
+						<td class="back">
+							<a href="backgrounds/girls2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+								<img src="backgrounds/girls2thumbnail.png" border="1">
+							</a>
+						</td>
+						<td class="gap"></td>
+						
+						<td>
+							<div id="first" class="avatar">
+								<a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
+									<img src="avatars/1face.jpg" border="1" height=100>
+								</div>
+							</td>
+							<td>
+								<div id="second" class="avatar">
+									<a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
+										<img src="avatars/2face.jpg" border="1" height=100>
+									</div>
+								</td>				
+							</tr>
+							<tr>
+								<td class="back">
+									<a href="backgrounds/boy1.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+										<img src="backgrounds/boy1thumbnail.png" border="1">
+									</a>	
+								</td>
+								<td>
+									<div class="back">
+										<a href="backgrounds/boy2.png" onclick="document.body.style.backgroundImage = 'url(' + this.href + ')'; return false;">
+											<img src="backgrounds/boy2thumbnail.png" border="1">
+										</a>	
+									</div>
+								</td>	
+								<td class="gap"></td>
+								
+								<td>
+									<div id="third" class="avatar">
+										<a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
+											<img src="avatars/3face.jpg" border="1" height=100>
+										</div>
+									</td>
+									<td>
+										<div id="fourth" class="avatar">
+											<a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
+												<img src="avatars/4face.jpg" border="1" height=100>
+											</div>
+										</td>
+									</tr>
+									<tr height=50px></tr>
+									<tr>
+										<td colspan=2 class="mode">
+											
+											<h1><input type="radio" name="players" value="0" onchange="show('Page3')">Single player</h1>
+											<h1><input type="radio" name="players" value="1" onchange='window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'>Multi player</h1>
+										</td>
+										<td colspan=3><h1 id="plane"></h1>
+											
+										</td>
+									</tr>
+									<tr>
+										<td colspan=5>
+											<a href="index.html"><img id="imgmenu" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu',/*url*/'buttons/menu button.png')"></a>
+											<span onclick="show('Page1'); Init(); timeLeft=60;">
+											<img id="img1" alt="play" class="auto-style2" height="50" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/buttondown.png')" src="buttons/button.png" width="50" height="50" onmouseup="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/button.png')" ></a></span>
+											<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span>				
+									</td>
+								</tr>
+								
+							</table>
+						</div>
+						
+					</div>
+					
+					
+					<div id="abc"name="abc" style="display:none">
+						<!-- Popup Div Starts Here -->
+						<div id="popupContact">
+							<!-- Contact Us Form -->
+							<form action="#" id="win" method="post" name="form">
+								<img id="close" src="images/3.png" onclick ="div_hide()">
+								<h2>Educational Break</h2>
+								<hr>
+								<h1> <text id="no1"> </text> + <text id="no2"> </text> = ? </h1>
+								<td colspan=9 class="answer" >
+									<form id="answer">
+										<input name="options" type="radio" id="option1" value="1" alt="Submit"><label for="option1" id="roption1"></label><br>
+										<input name="options" type="radio" id="option2" value="2" alt="Submit"><label for="option2" id="roption2"></label><br>
+										<input name="options" type="radio" id="option3" value="3" alt="Submit"><label for="option3" id="roption3"></label><br>
+									</form>
+								</td>
+								<a href="javascript: check_empty()" id="submit">Send</a>
+							</form>
+						</div>
+						<!-- Popup Div Ends Here -->
+					</div>
+					<ol id="joyride-list" data-joyride style="display:none">
+						<li data-id="firstStop" data-options="tip_location: bottom; nub_position:top; prev_button: false">
+							<h2>Board</h2>
+							<p>This is a Mancala board. The bottom row is yours and top yours opponent</p>
+						</li>
+						<li data-id="secondStop" data-options="tip_location: bottom; nub_position:top; prev_button: false">
+							
+							<p>This is a your opponent scoring pot</p>
+						</li>
+						<li data-id="thirdStop" data-options="tip_location: bottom; nub_position:top; prev_button: false tipContainer:table ">
+							<p>And this is yours scoring pot</p>
+						</li>
+					</ol>
+					
+					<script src="js/vendor/jquery.js"></script>
+					<script src="js/vendor/fastclick.js"></script>
+					<script src="js/foundation.min.js"></script>
+					
+					
+					<script language="JavaScript">
+					$(document).foundation();
+					SetStart(1);
+					SetSize(4);
+					SetLevel(0, 1);
+					setInterval("Timer()", 500);
+					
+					</script>
+					</body>
+					</html>																
