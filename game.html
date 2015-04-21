@@ -56,12 +56,12 @@
 	</script>
 	
     <script language="JavaScript">
-		
+		var meow;
 	
 		function check_empty() { 
 			if ((document.getElementById('option1').checked == true))
 			{
-				if (meow=3)
+				if (meow==3)
 				{
 					alert("CORRECT!");
 					div_hide();
@@ -73,7 +73,7 @@
 			} 
 			else if (document.getElementById('option2').checked)
 			{
-				if (meow=1)
+				if (meow==1)
 				{
 					alert("CORRECT!");
 					div_hide();
@@ -85,7 +85,7 @@
 			} 
 			else if (document.getElementById('option3').checked)
 			{
-				if (meow=2)
+				if (meow==2)
 				{
 				alert("CORRECT!");
 				div_hide();
@@ -122,7 +122,7 @@
 			var x = Math.floor((Math.random() * 10) + 1);
 			var y = Math.floor((Math.random() * 10) + 1);
 			var p = Math.floor((Math.random() * 3) + 1);
-			var meow;
+			
 			
 			var R = x + y;
 			
