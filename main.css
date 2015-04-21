@@ -142,6 +142,7 @@ table {
 }
 
 .avatar {
+	cursor: pointer;
 }
 
 .avatar img	{
