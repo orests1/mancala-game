@@ -121,6 +121,7 @@ table {
 
 .page1 {
 	margin-top: -50px;
+		font-family: 'Chewy', cursive;
 }
 
 #page3, #page4, #page1 {
@@ -130,6 +131,9 @@ table {
 #WeatherImg{
 	height:150px;
 	width:150px;
+}
+.back img {
+	border: solid 1px black;
 }
 
 #layer10{
