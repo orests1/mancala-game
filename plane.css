@@ -8,6 +8,8 @@ td {
 	height: 15px;
 	border: black solid;
 	background-color: white;
+	    border-radius: 5px;
+    -moz-border-radius: 5px;
 	cursor:pointer;
 }
 
