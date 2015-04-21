@@ -27,13 +27,14 @@ window.setInterval(function slideA(){
 </script>
 <style type="text/css">
 .auto-style1 {
-	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+	font-family: "Chewy";
 }
 .auto-style2 {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Chewy;
 }
 .auto-style3 {
 	margin-top: 0px;
+	font-family: Chewy;
 }
 </style>
 </head>
@@ -76,7 +77,7 @@ function renderTime() {
 renderTime();
 </script>
 	
-  <div id="container" style="position: relative; width: 800px; height: 100px; z-index: 4; margin-left: auto; margin-right: auto; visibility: visible;">
+  <div id="container" style="position: relative; width: 800px; height: 100px; z-index: 4; margin-left: auto; margin-right: auto; visibility: visible; font-family: Chewy;" class="auto-style3">
   
   	  <div id="layer12" style="position: absolute; width: 100px; height: 100px; z-index: 14; left: 529px; top: 369px">
 		  <img alt="bus" height="143" src="bustour.jpg" width="253" /></div>
@@ -113,10 +114,16 @@ renderTime();
 		<img src="bigben.jpg" alt="image of big ben" height="130" width="229"></img>
 		</div>
 		&nbsp;<div id="layer8" style="position: absolute; width: 363px; height: 27px; z-index: 2; left: 396px; top: 60px">
-	   <span id="days">00</span> days
-       <span id="hours">00</span> hours
-       <span id="minutes">00</span> minutes
-       <span id="seconds">00</span> seconds until arrival.
+	   <span id="days" class="auto-style1">00</span><span class="auto-style1"> days
+       	 </span>
+       <span id="hours" class="auto-style1">00</span><span class="auto-style1"> hours
+       	 </span>
+       <span id="minutes" class="auto-style1">00</span><span class="auto-style1"> minutes
+       	 </span>
+       <span id="seconds" class="auto-style1">00</span><span class="auto-style1"> seconds until arrival.
+       
+
+			</span>
        
 
 		</div>
