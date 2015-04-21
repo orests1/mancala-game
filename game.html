@@ -129,17 +129,7 @@
 			var t = x*y;
 			var u = x+y+y;
 			var i = x + y; 
-			console.log("x " + x);
-			console.log("y " + y);
-			console.log("t " + t);
-			console.log("u " + u);
-			console.log("i " + i);
-			console.log("R " + R);
-			/*
-				document.getElementById("roption1").innerHTML = t;
-				document.getElementById("roption2").innerHTML = u;
-				document.getElementById("roption3").innerHTML = i;
-			*/
+
 			switch(p) {
 				case 1: 
 				meow=1;
@@ -163,10 +153,6 @@
 			} 
 			document.getElementById("no1").innerHTML = x;
 			document.getElementById("no2").innerHTML = y;
-			//   document.getElementById("result").innerHTML = R;
-			//document.getElementById('abc').style.display = "block";
-			// document.getElementById("question").innerHTML = text;
-			
 		}
 		
 		
@@ -532,13 +518,35 @@
             ele.style.display = 'block';
 		}
 		
-		
+		function avatarShadow(avat) {
+			var elems0 = document.getElementsByClassName(0);
+			for(var i = 0; i < elems0.length; i++) {
+				elems0[i].style.boxShadow = "none";
+			}
+			var elems1 = document.getElementsByClassName(1);
+			for(var i = 0; i < elems1.length; i++) {
+				elems1[i].style.boxShadow = "none";
+			}
+			var elems2 = document.getElementsByClassName(2);
+			for(var i = 0; i < elems2.length; i++) {
+				elems2[i].style.boxShadow = "none";
+			}
+			var elems3 = document.getElementsByClassName(3);
+			for(var i = 0; i < elems3.length; i++) {
+				elems3[i].style.boxShadow = "none";
+			}
+			console.log("avatarShadow");
+			console.log(avat);
+			var a = avat.toString();
+			console.log(a);
+			var elems = document.getElementsByClassName(a);
+			for(var i = 0; i < elems.length; i++) {
+				elems[i].style.boxShadow = "-1px -1px 15px 4px #333";
+			}
+		}
 		
         $(document).ready(function () {
-            $('img').click(function () {
-				$('.selected').removeClass('selected');
-				$(this).addClass('selected');
-			});
+
 			
 			$('#help1').on('click', function () { 
 				$('#Page1, #tutavatar').fadeIn(500); 
@@ -701,16 +709,14 @@
 			
 			<td>
 				<div id="first" class="avatar">
-					<a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
-						<img src="avatars/1face.jpg" border="1" height=100>
+						<img src="avatars/1face.jpg" class="0" border="1" height=100 onclick="avat=0 ; avatarShadow(0); return false;">
 					</div>
 				</td>
 				<td>
                     <div id="second" class="avatar">
-                        <a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
-							<img src="avatars/2face.jpg" border="1" height=100>
-						</div>
-					</td>				
+						<img src="avatars/2face.jpg" class="1" border="1" height=100 onclick="avat=1; avatarShadow(1); return false;">
+					</div>
+				</td>				
 				</tr>
 				<tr>
 					<td class="back">
@@ -729,14 +735,12 @@
 					
 					<td>
 						<div id="third" class="avatar">
-							<a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
-								<img src="avatars/3face.jpg" border="1" height=100>
+								<img  src="avatars/3face.jpg" class="2" border="1" height=100 onclick="avat=2; getAvatar(2); avatarShadow(2); return false;">
 							</div>
 						</td>
 						<td>
 							<div id="fourth" class="avatar">
-								<a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
-									<img src="avatars/4face.jpg" border="1" height=100>
+									<img  src="avatars/4face.jpg" class="3" border="1" height=100 onclick="avat=3; getAvatar(3); avatarShadow(3); return false;">
 								</div>
 							</td>
 						</tr>
@@ -793,15 +797,13 @@
 						<td class="gap"></td>
 						
 						<td>
-							<div id="first" class="avatar">
-								<a href="avatars/1face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat=0 ; return false;">
-									<img src="avatars/1face.jpg" border="1" height=100>
+							<div id="first" >
+									<img src="avatars/1face.jpg" class="0" border="1" height=100 onclick="avat=0 ; avatarShadow(0); return false;">
 								</div>
 							</td>
 							<td>
 								<div id="second" class="avatar">
-									<a href="avatars/2face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; avat = 1; return false;">
-										<img src="avatars/2face.jpg" border="1" height=100>
+									<img src="avatars/2face.jpg" class="1" border="1" height=100 onclick="avat=1; avatarShadow(1); return false;">
 									</div>
 								</td>				
 							</tr>
@@ -822,14 +824,12 @@
 								
 								<td>
 									<div id="third" class="avatar">
-										<a href="avatars/3face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(2); return false;">
-											<img src="avatars/3face.jpg" border="1" height=100>
+											<img  src="avatars/3face.jpg" class="2" border="1" height=100 onclick="avat=2; getAvatar(2); avatarShadow(2); return false;">
 										</div>
 									</td>
 									<td>
 										<div id="fourth" class="avatar">
-											<a href="avatars/4face_blu.jpg" onclick="document.body.style.first = 'url(' + this.href + ')'; getAvatar(3); return false;">
-												<img src="avatars/4face.jpg" border="1" height=100>
+												<img  src="avatars/4face.jpg" class="3" border="1" height=100 onclick="avat=3; getAvatar(3); avatarShadow(3); return false;">
 											</div>
 										</td>
 									</tr>
