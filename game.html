@@ -57,10 +57,7 @@
 	
     <script language="JavaScript">
 		
-		// Validating Empty Field
-		var t = 20;
-		console.log(t);
-		
+	
 		function check_empty() { 
 			if ((document.getElementById('option1').checked == true))
 			{
@@ -105,10 +102,12 @@
 		}
 		//Function To Display Popup
 		function div_show() {
-			document.getElementById('abc').style.display = "block";
-			document.getElementById('option1').checked = false;
-			document.getElementById('option2').checked = false;
-			document.getElementById('option3').checked = false;
+			if (IsOver == false) {
+				document.getElementById('abc').style.display = "block";
+				document.getElementById('option1').checked = false;
+				document.getElementById('option2').checked = false;
+				document.getElementById('option3').checked = false;
+			}
 		}
 		//Function to Hide Popup
 		function div_hide(){
@@ -172,7 +171,7 @@
 		
 		
 		
-		mLeft = 20;		
+		mLeft = 60;		
 		var mId = setInterval(message, 1000);
 		
 		function message() {
@@ -200,15 +199,6 @@
 			avat = i;
 			return false;
 		}
-		
-		var data = { 
-			11 : "green.png", 
-			12 : "green.png", 
-			13 : "green.png", 
-			14 : "green.png", 
-			15 : "green.png", 
-		16 : "green.png", 21 : "green.png" };
-		
 		
         var i, j, IsOver = true, I_Sel, J_Sel, N_Mov, IsStart0, Start, Size = 4, MoveCount;
         Level = new Array(2);
@@ -243,7 +233,7 @@
 		
         function Init() {
 			
-			
+			count = 0;
             var ii, jj;
             for (ii = 0; ii < 2; ii++) {
                 Fld[ii][0][0] = 0;
@@ -483,31 +473,7 @@
                 document.images[15].src = Avatar[avat].src;
 			}
 		}
-		
-        function Help() {
-            alert("Mancala is an ancient African game. There" +
-			"\nexist many variations with slightly different rules." +
-			"\nEach player owns the mancala on his right" +
-			"\nside and the six small bowls closest to him." +
-			"\nA player starts by taking all the beans from" +
-			"\none of his small bowls and drops one bean" +
-			"\ninto the next bowl on the right, continuing around" +
-			"\nthe board counterclockwise until he has no more" +
-			"\nbeans to drop. If a player reaches his own" +
-			"\nmancala, he drops a bean into it, but he never" +
-			"\ndrops a bean into the opponents' mancala." +
-			"\nThe player with the most beans in his mancala wins." +
-			"\nThe following are the so-called Egyptian rules:" +
-			"\nIf a player drops the last bean from his hand into his" +
-			"\nmancala, he gets to move again. If a player drops the" +
-			"\nlast bean into one of the empty bowls on his side," +
-			"\nhe takes that bean, and all the beans in the" +
-			"\nopponent's bowl directly across and puts them in" +
-			"\nhis mancala. The game ends when one player no" +
-			"\nlonger has beans in his small bowls. The other player" +
-			"\ntakes all remaining beans into his own mancala.");
-		}
-		
+
 		var muted = 0;
 		function m(){
 			
@@ -545,15 +511,7 @@
 		
 		
 	</script>
-	
-	
-    <style type='text/css'>
-        span {
-		text-decoration: underline;
-		color: blue;
-		cursor: pointer;
-        }
-	</style>
+
     <script>
         // show the given page, hide the rest
         function show(elementID) {
@@ -679,7 +637,7 @@
 				<td colspan=2 width=10px id="left" class="indicator">
 					<br><img src="blobs/0.png">
 				</td>
-				<td colspan=2><h2>Turn</h2></td>
+				<td colspan=2 id="fourthStop"><h2>Turn</h2></td>
 				<td colspan=2 width=10px id="right" class="indicator">
 					<br><img src="blobs/0.png">
 				</td>
@@ -786,8 +744,8 @@
 						<tr>
 							<td colspan=2 class="mode" >
 								
-								<h1><input type="radio" name="players" value="0" checked="checked" onchange="show('Page3')">Single player</h1>
-								<h1><input type="radio" name="players" value="1" onchange="show('Page4')">Multi player</h1>
+											<span onclick="show('Page3')"><h1>Single Player</h1></span>
+											<span onclick='show("Page4"); window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'><h1>Multi Player</h1></span>
 							</td>
 							<td colspan=3 class="difficulty">
 								
@@ -877,10 +835,9 @@
 									</tr>
 									<tr height=50px></tr>
 									<tr>
-										<td colspan=2 class="mode">
-											
-											<h1><input type="radio" name="players" value="0" onchange="show('Page3')">Single player</h1>
-											<h1><input type="radio" name="players" value="1" onchange='window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'>Multi player</h1>
+										<td colspan=2>
+											<span onclick="show('Page3')"><h1 class="mode">Single Player</h1>
+											<span onclick='window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'><h1 class="mode">Multi player</h1></span>
 										</td>
 										<td colspan=3><h1 id="plane"></h1>
 											
@@ -925,14 +882,17 @@
 					<ol id="joyride-list" data-joyride style="display:none">
 						<li data-id="firstStop" data-options="tip_location: bottom; nub_position:top; prev_button: false">
 							<h2>Board</h2>
-							<p>This is a Mancala board. The bottom row is yours and top yours opponent</p>
+							<p>This is a Mancala board. Yours blobs are on the bottom row and your opponents on the top row.</p>
 						</li>
 						<li data-id="secondStop" data-options="tip_location: bottom; nub_position:top; prev_button: false">
 							
-							<p>This is a your opponent scoring pot</p>
+							<p>Big pot on the left belongs to your opponent.</p>
 						</li>
-						<li data-id="thirdStop" data-options="tip_location: bottom; nub_position:top; prev_button: false tipContainer:table ">
-							<p>And this is yours scoring pot</p>
+						<li data-id="thirdStop" data-options="tip_location: left; nub_position:right; prev_button: false tipContainer:table ">
+							<p>The one on the right is yours. </p>
+						</li>
+						<li data-id="fourthStop" data-options="tip_location: top; nub_position: bottom; prev_button: false tipContainer:table">
+							<p>This is the turn indicator. </p>
 						</li>
 					</ol>
 					
