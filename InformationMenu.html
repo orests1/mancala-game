@@ -45,7 +45,7 @@ function FP_getObjectByID(id,o) {//v1.0
 </script>
 </head>
 
-<body onload="FP_preloadImgs(/*url*/'FlightMapDown.png',/*url*/'FilmsDown.png',/*url*/'MoreInfoDown.png')" onmousedown="FP_preloadImgs(/*url*/'FilmsDown.png')">
+<body onload="FP_preloadImgs(/*url*/'FlightMapDown.png',/*url*/'FilmsDown.png',/*url*/'MoreInfoDown.png',/*url*/'buttons/backbuttonDOWN.png')" onmousedown="FP_preloadImgs(/*url*/'FilmsDown.png')">
 
 <div class="mainmenu">
 
@@ -54,30 +54,31 @@ function FP_getObjectByID(id,o) {//v1.0
 
 			<div id="layer2" style="position: absolute; width: 325px; height: 41px; z-index: 8; top: -100px">
 			<span id="days">00</span> days 
-       <span id="hours">24</span> hours
+       <span id="hours">00</span> hours
        <span id="minutes">00</span> minutes
        <span id="seconds">00</span> seconds until arrival.
 
 		
 			</div>
 
-	<div id="layer1" style="position: absolute; width: 110px; height: 56px; z-index: 7;  top: 541px">
-	<a href="index.html"><img alt="back to main menu" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/backbuttonDOWN.png')" src="buttons/backbuttonUP.png" /></a>
+	<div id="layer1" style="position: absolute; width: 110px; height: 56px; z-index: 7;top: 541px">
+	<a href="index.html">
+		<img alt="back to main menu" src="buttons/backbuttonUP.png" id="img4" onclick="FP_swapImg(1,0,/*id*/'img4',/*url*/'buttons/backbuttonDOWN.png')" /></a>
 	</div>
 
-	<div class="auto-style1" style="z-index: 6; top: 195px;">
+	<div class="auto-style1" style="z-index: 6;top: 195px;">
 
-	<div class="buttonholder2" style="left: 200px; top: -243px; height: 635px; z-index: 4;">
+	<div class="buttonholder2" style="top: -243px; height: 635px; z-index: 4;">
 
 			<img alt="" class="title" height="61" src="mancalatitle2.png" width="441" />
 			<br />
 			<a href="films.html">
-			<img id="img1" alt="Films" class="auto-style2" height="55" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'FilmsDown.png')" src="FilmsUp.png" width="210" /></a>
+			<img id="img1" alt="Films" class="auto-style2" height="55" src="FilmsUp.png" width="210" onclick="FP_swapImg(1,0,/*id*/'img1',/*url*/'FilmsDown.png')" /></a>
 			<br />
 			<a href="flightmap1.html">
-			<img id="img2" alt="Flight Map" height="56" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'FlightMapDown.png')" src="FlightMapUP.png" width="211" /></a>
+			<img id="img2" alt="Flight Map" height="56" src="FlightMapUp.png" width="211" onclick="FP_swapImg(1,0,/*id*/'img2',/*url*/'FlightMapDown.png')" /></a>
 			<br />
-			&nbsp;<a href="moreinfo.html"><img id="img3" alt="More Information" height="55" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'MoreInfoDown.png')" src="MoreInfoUp.png" width="210" /></a></div>
+			&nbsp;<a href="moreinfo.html"><img id="img3" alt="More Information" height="55" src="MoreInfoUp.png" width="210" onclick="FP_swapImg(1,0,/*id*/'img3',/*url*/'MoreInfoDown.png')" /></a></div>
 
 					</div>
 	</div>
