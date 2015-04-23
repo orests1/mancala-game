@@ -74,41 +74,41 @@ function FP_getObjectByID(id,o) {//v1.0
 			{
 				if (meow==3)
 				{
-					alert("CORRECT!");
+					alert("Yay! You Did it!");
 					div_hide();
 				}
 				else
 				{
-				alert("Wrong answer!");
+				alert("Wrong answer! Try again.");
 				}
 			} 
 			else if (document.getElementById('option2').checked)
 			{
 				if (meow==1)
 				{
-					alert("CORRECT!");
+					alert("Yay! You Did it!");
 					div_hide();
 				}
 				else
 				{
-				alert("Wrong answer!");
+				alert("Wrong answer! Try again.");
 				}
 			} 
 			else if (document.getElementById('option3').checked)
 			{
 				if (meow==2)
 				{
-				alert("CORRECT!");
+				alert("Yay! You Did it!");
 				div_hide();
 				}
 				else
 				{
-				alert("Wrong answer!");
+				alert("Wrong answer! Try again.");
 				}
 			} 
 			else {
 				
-				alert("You can continue ");
+				alert("Choose an answer please.");
 			} 
 		}
 		//Function To Display Popup
@@ -804,7 +804,7 @@ function FP_getObjectByID(id,o) {//v1.0
 							<!-- Contact Us Form -->
 							<form action="#" id="win" method="post" name="form">
 							<!--	<img id="close" src="images/3.png" onclick ="div_hide()">  -->
-								<h2>Educational Break</h2>
+								<h2>Pop quiz!</h2>
 								<hr>
 								<h1> <text id="no1"> </text> + <text id="no2"> </text> = ? </h1>
 								<td colspan=9 class="answer" >
@@ -814,7 +814,7 @@ function FP_getObjectByID(id,o) {//v1.0
 										<input name="options" type="radio" id="option3" value="3" alt="Submit"><label for="option3" id="roption3"></label><br>
 									</form>
 								</td>
-								<a href="javascript: check_empty()" id="submit">Send</a>
+								<a href="javascript: check_empty()" id="submit">Okay!</a>
 							</form>
 						</div>
 						<!-- Popup Div Ends Here -->
