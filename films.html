@@ -7,25 +7,31 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 <style type="text/css">
 .auto-style1 {
-	font-family: Chewy;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
+
+
 .auto-style2 {
-	font-family: Chewy;
+	font-family: "Arial Rounded MT Bold";
 }
 .auto-style3 {
 	border-width: 0px;
-	font-family: Chewy;
 }
-.auto-style4 {
-	font-family: Chewy;
+#layer5{
+    font: 24px chewy;
 }
-.auto-style5 {
-	font-family: Chewy;
-	font-size: xx-large;
+.runtime{
+    font: 20px chewy;
 }
-
 
 </style>
+ <script src="arrivaltime.js"></script>
+       <script type="text/javascript">
+       countdown('04/24/2015 11:00:00 AM' , ['hours', 'minutes',],
+           function() {
+           console.log('Finished');
+          });
+       </script>
 <script type="text/javascript">
 var imagecount = 1;
 var total = 3;
@@ -37,11 +43,14 @@ if(imagecount > total){ imagecount = 1;}
 if(imagecount < 1){imagecount = total;}
 Image.src = "filmimage"+ imagecount +".jpg";
 if (imagecount == 1){
-document.getElementById("textarea").innerHTML = "Run time: 1 hour 45 minutes <br><br>When her father unexpectedly passes away, young Ella finds herself at the mercy of her cruel stepmother and her daughters. Never one to give up hope, Ella's fortunes begin to change after meeting a dashing stranger."
+document.getElementById("textarea").innerHTML = "Run time: 1 hour 45 minutes"
+document.getElementById("filmlogo").src = "logoimage1.png"
 } else if (imagecount == 2){
-document.getElementById("textarea").innerHTML = "Run time: 1 hour 25 minutes <br><br>When Shaun decides to take the day off and have some fun, he gets a little more action than he bargained for. A mix up with the Farmer, a caravan and a very steep hill lead them all to the Big City and it's up to Shaun and the flock to return everyone safely to the green grass of home."
+document.getElementById("textarea").innerHTML = "Run time: 1 hour 25 minutes"
+document.getElementById("filmlogo").src = "logoimage2.png"
 } else {
-document.getElementById("textarea").innerHTML = "Run time: 1 hour 32 minutes <br><br>When a diabolical pirate above the sea steals the secret Krabby Patty formula, SpongeBob and his nemesis Plankton must team up in order to get it back."
+document.getElementById("textarea").innerHTML = "Run time: 1 hour 32 minutes"
+document.getElementById("filmlogo").src = "logoimage3.png"
 }
    
 
@@ -52,7 +61,7 @@ document.getElementById("textarea").innerHTML = "Run time: 1 hour 32 minutes <br
 
 <body onload=" slideA()">
 
-  <div id="clockDisplay" class="clockStyle" style="left: 952px; top: 10px; width: 135px;">
+  <div style="left: 952px; top: 10px; width: 135px;">
   </div>
 
 <script type="text/javascript" language="javascript">
@@ -97,50 +106,45 @@ renderTime();
   
   
   
-	  <div id="layer6" style="position: absolute; width: 100px; height: 100px; z-index: 8; left: 822px; top: 432px">
+	  <div id="layer6" style="position: absolute; width: 100px; height: 100px; z-index: 8; left: 500px; top: 380px">
 		  <a href="index.html">
-		  <img alt="PLay" class="auto-style3" height="73" src="buttons/button.png" width="77" /></a><br />
+		  <img alt="PLay" class="auto-style3"  src="PlayMovie.png" /></a><br />
 	  </div>
 	  <div id="layer2" style="position: absolute; width: 73px; height: 79px; z-index: 6; left: 180px; top: 245px">
 	<img onClick="slide(-1)" class="left" src="FILMarrowleft.png" height="77" width="73"/></div>
   
   
   
-	<div id="layer3" class="auto-style1" style="position: absolute; width: 167px; height: 34px; z-index: 5; left: 137px; top: -64px">
+	<div id="layer3" class="auto-style1" style="position: absolute; width: 167px; height: 34px; z-index: 5; left: 136px; top: -57px">
 
-		<div id="layer5" style="position: absolute; width: 292px; height: 42px; z-index: 12; left: 223px; top: 16px">
-		<span id="days" class="auto-style4">00</span><span class="auto-style4"> days <span id="hours">00</span> hours <span id="minutes">00</span> minutes <span id="seconds">00</span> seconds
-			<br />
-			until arrival</span></div>
-		<h2 class="auto-style5" style="width: 190px"><strong>Choose A Film</strong></h2> 
+		<div id="layer5" style="position: absolute; width: 800px; height: 42px; z-index: 12; left: 0px; top: 25px">
+		<img src="filmpagetitle.png"/>&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span id="hours">00</span> hours <span id="minutes">00</span> minutes until arrival</div>
+		
 
 	</div>
 
   
   
-  <div id="layer4" style="position: absolute; width: 63px; height: 54px; z-index: 7; left: 139px; top: 453px">
-  <a href="index.html"><img alt="back to information menu" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/menu clickedbutton.png')" src="buttons/menu button.png" /></a>
+  <div id="layer4" style="position: absolute; width: 63px; height: 54px; z-index: 7; left: 120px; top: 517px">
+  <a href="index.html"><img alt="back to information menu" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'buttons/menu downbutton.png')" src="buttons/menu button.png" /></a>
   </div>
   
   
   
-<div id="filmcontainer" style="position: relative;  z-index: 4; margin-left: auto; margin-right: auto; visibility: visible; left: 158px; top: 7px; width: 600px; font-family: Chewy;">
+<div id="filmcontainer" style="position: relative;  z-index: 4; margin-left: auto; margin-right: auto; visibility: visible; left: 158px; top: 7px; width: 600px;">
   
   
   
- <script src="countdown.js"></script>
-       <script type="text/javascript">
-       countdown('04/25/2015 02:30:00 PM' , ['days', 'hours', 'minutes', 'seconds'],
-           function() {
-           console.log('Finished');
-          });
-       </script>
 
-	<img id="filmimg" src="filmimage1.jpg" height="316"/><img onClick="slide(1)" class="right" src="FILMarrowright.png" height="87" width="83"/>
-<div id="textarea"><span class="auto-style2">Run time: 1 hour 45 minutes</span><br class="auto-style2">
-	<br class="auto-style2"></br><span class="auto-style2">When her father unexpectedly passes away, young Ella finds herself at the mercy of her cruel stepmother and her daughters. Never one to give up hope, Ella's fortunes begin to change after meeting a dashing stranger.</span></div>	
+
+	<img id="filmimg" src="filmimage1.jpg" height="316" width="500"/><img onClick="slide(1)" class="right" src="FILMarrowright.png" height="77" width="73"/>
+<div><span id="textarea" class="runtime">Run time: 1 hour 45 minutes</span><br class="auto-style2">
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img id="filmlogo" src="logoimage1.png" height="125" width="150"/>
+</div>	
 <div id="left_holder" style="right: 0px; top: 0px; width: 100px"></div>
-<div id="right_holder" class="auto-style2">&nbsp;</div>
+<div id="right_holder"style="left: 0px; top: 0px; width: 100px"></div>
 </div>
   </div>
 
