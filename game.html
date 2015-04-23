@@ -68,6 +68,7 @@ function FP_getObjectByID(id,o) {//v1.0
 		}
 		
 		var meow;
+		var popup = 0;
 	
 		function check_empty() { 
 			if ((document.getElementById('option1').checked == true))
@@ -112,24 +113,18 @@ function FP_getObjectByID(id,o) {//v1.0
 			} 
 		}
 		//Function To Display Popup
-		function div_show() {
-			if (IsOver == false) {
-				document.getElementById('abc').style.display = "block";
-				document.getElementById('option1').checked = false;
-				document.getElementById('option2').checked = false;
-				document.getElementById('option3').checked = false;
-			}
-		}
+
 		//Function to Hide Popup
 		function div_hide(){
 			document.getElementById('abc').style.display = "none";
 			document.getElementByID('Page1').style.display = "block";
 			
 		}
-		
+		var popup = 0;
 	
 		
 		function random() {
+			popup += 1;
 			var x = Math.floor((Math.random() * 10) + 1);
 			var y = Math.floor((Math.random() * 10) + 1);
 			var p = Math.floor((Math.random() * 3) + 1);
@@ -164,9 +159,21 @@ function FP_getObjectByID(id,o) {//v1.0
 			} 
 			document.getElementById("no1").innerHTML = x;
 			document.getElementById("no2").innerHTML = y;
+
 		}
+
 		
-		
+		function div_show(popup) {
+			console.log(popup);
+			if (IsOver == false && popup%3==0) {
+				console.log("popup");
+				document.getElementById('abc').style.display = "block";
+				document.getElementById('option1').checked = false;
+				document.getElementById('option2').checked = false;
+				document.getElementById('option3').checked = false;
+
+			}
+		}
 		
 		mLeft = 60;		
 		var mId = setInterval(message, 1000);
@@ -463,7 +470,7 @@ function FP_getObjectByID(id,o) {//v1.0
 				count ++;
 				if (count > 1) {
 					countdown();
-					div_show(); random();
+					div_show(popup); random();
 				}
 			}
             else {
