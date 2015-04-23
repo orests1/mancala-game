@@ -6,7 +6,6 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <link href="main.css" rel="stylesheet" type="text/css"/>
 
-	<script type="text/javascript" src="music.js"</script>
 <title>Mancala</title>
 <style type="text/css">
 .auto-style1 {
@@ -15,40 +14,6 @@
 </style>
 
 <script type="text/javascript">
-
-sndloop.addEventListener('ended', function() {
-	this.currentTime = 0;
-	this.play();
-}, false);
-sndloop.play();
-		var muted = 0;
-		function m(){
-
-			if (muted == 0) {
-				document.getElementById('volume').src="buttons/volume.png";
-			console.log(muted);
-			}
-			else {
-				document.getElementById('volume').src="buttons/volume-mute.png";
-				console.log(muted);
-				}
-		}
-		
-		function mute(element) {
-			if (element.src.indexOf("volume-mute") != -1) {
-				sndloop.play();
-				element.src = "buttons/volume.png";
-				muted = 0;
-				console.log(muted);
-			} else {
-				sndloop.pause();
-				element.src = "buttons/volume-mute.png";
-				muted = 1;
-				console.log(muted);
-			}
-		}			
-					
-
 
 function FP_swapImg() {//v1.0
  var doc=document,args=arguments,elm,n; doc.$imgSwaps=new Array(); for(n=2; n<args.length;
@@ -91,7 +56,8 @@ function FP_getObjectByID(id,o) {//v1.0
 			<img id="img2" alt="Information" height="56" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/InfobuttonDOWN.png')" src="buttons/Infobutton.png" width="211" onmouseup="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttons/Infobutton.png')" class="auto-style1" ></a>
 
 			<br />
-			<span><img id="volume" src="buttons/volume.png"  onclick="mute(this);"></span></div>
+			<a href="films.html">
+			<img id="img1" alt="Films" class="auto-style2" height="55" src="FilmsUp.png" width="210" onclick="FP_swapImg(1,0,/*id*/'img1',/*url*/'FilmsDown.png')" /></a>
 
 			<br/>
 
