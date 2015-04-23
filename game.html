@@ -137,7 +137,7 @@ function FP_getObjectByID(id,o) {//v1.0
 			
 			var R = x + y;
 			
-			var t = x*y;
+			var t = x+y - 2;
 			var u = x+y+y;
 			var i = x + y; 
 
@@ -784,6 +784,7 @@ function FP_getObjectByID(id,o) {//v1.0
 					<span onclick='window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'><img id="2players" src="buttons/2PlayersUp.png" onmousedown="FP_swapImg(1,0,/*id*/'2players',/*url*/'buttons/2PlayersDown.png')" onmouseup="FP_swapImg(1,0,/*id*/'2players',/*url*/'buttons/2PlayersUp.png')"></span>
 				</td>
 			</tr>
+			
 						<tr>
 							<td class="optionsbuttons">
 								<a href="index.html"><img id="imgmenu2" src ="buttons/menu button.png" height =50 width=50 onmousedown="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu clickedbutton.png')" onmouseup="FP_swapImg(1,0,/*id*/'imgmenu2',/*url*/'buttons/menu button.png')"> </a>
