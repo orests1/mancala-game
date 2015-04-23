@@ -5,6 +5,9 @@ sndloop.addEventListener('ended', function() {
 	this.play();
 }, false);
 sndloop.play();
+
+
+
 		function mute(element) {
 			if (element.src.indexOf("volume-mute") != -1) {
 				sndloop.play();
