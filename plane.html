@@ -9,26 +9,32 @@ $(function () {
     $('td').click(function () {
         $('td').removeAttr('style');
         $(this).css('background', '#3da428');
-		document.getElementById("message").innerHTML = "Connecting...";
-		setTimeout(function(){self.close();},2000);
+		setTimeout(function(){self.close();},1000);
     });
 });
 </script>
 </HEAD>
 <body>
 	<table>
-		<tr class="info"> <h3 class="text">Please choose a person you want to connect to</h3></tr>
-		<tr class="info">
+		<tr class="info"> <td><img class="bubble" src="bubble.png"></td></tr>
+		<tr class="info"><td>
 			<img class="cat" src="anim_kitty.gif">
+			</td>
 		</tr>
 		<tr>
+		<td>
 			<h3>Mother</h3>
+		</td>
 		</tr>
 		<tr>
+		<td>
 			<h3>Father</h3>
+		</td>
 		</tr>
 		<tr>
+		<td>
 			<h3>Brother</h3>
+			</td>
 		</tr>
 
 	</table>

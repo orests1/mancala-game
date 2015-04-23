@@ -624,7 +624,7 @@ function FP_getObjectByID(id,o) {//v1.0
 			
             <tr>
                 <td align=left><img src="0.png" border=0 onmousedown="MouseDown(1,6)"></td>
-                <td align=left><img src="0.png" border=0 onmousedown="MouseDown(1,5)"></td>
+                <td align=left id="fifthStop"><img src="0.png" border=0 onmousedown="MouseDown(1,5)"></td>
                 <td align=middle><img src="0.png" border=0 onmousedown="MouseDown(1,4)"></td>
                 <td align=middle><img src="0.png" border=0 onmousedown="MouseDown(1,3)"></td>
                 <td align=right><img src="0.png" border=0 onmousedown="MouseDown(1,2)"></td>
@@ -777,7 +777,10 @@ function FP_getObjectByID(id,o) {//v1.0
 			</table>
 			<table class="opbut">
 			<tr>
-				<td class="multi">
+			<td class="multi" style="text-align:right">
+				<img src="buttons/1PlayerUp.png" onclick="show('Page1');m(); Init(); timeLeft=60;">
+			</td>
+				<td class="multi" style="text-align:left">
 					<span onclick='window.open("plane.html", "seat", "width=400, height=600, left=500, top=50");document.getElementById("plane").innerHTML = "Connected!";'><img id="2players" src="buttons/2PlayersUp.png" onmousedown="FP_swapImg(1,0,/*id*/'2players',/*url*/'buttons/2PlayersDown.png')" onmouseup="FP_swapImg(1,0,/*id*/'2players',/*url*/'buttons/2PlayersUp.png')"></span>
 				</td>
 			</tr>
@@ -829,6 +832,9 @@ function FP_getObjectByID(id,o) {//v1.0
 						</li>
 						<li data-id="fourthStop" data-options="tip_location: top; nub_position: bottom; prev_button: false tipContainer:table">
 							<p>This is the turn indicator. </p>
+						</li>
+						<li data-id="fifthStop" data-options="tip_location: top; nub_position: none; prev_button: false tipContainer:table">
+							<p>Click any of the blobs to begin the game</p>
 						</li>
 					</ol>
 					
